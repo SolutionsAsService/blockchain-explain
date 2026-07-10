@@ -1507,5 +1507,609 @@ Merkle Trees allow blockchain networks to verify large amounts of data efficient
 
 </section>
 
+  <section>
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+How Blockchain Transactions Work
+
+</h2>
+
+
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+TRANSACTION FLOW
+
+</span>
+
+
+
+<h2>
+
+From User Action To Blockchain Record
+
+</h2>
+
+
+
+<p>
+
+Every blockchain interaction begins with a transaction. A transaction is simply a request to change the state of the network.
+
+</p>
+
+
+
+<p>
+
+Examples include sending cryptocurrency, deploying a smart contract, updating ownership records, or interacting with a decentralized application.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="diagram">
+
+
+<div class="diagram-row">
+
+
+
+<div class="diagram-node">
+
+1. User
+
+<br><br>
+
+Creates Request
+
+</div>
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+2. Wallet
+
+<br><br>
+
+Signs Transaction
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+3. Network
+
+<br><br>
+
+Broadcasts Data
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+4. Validators
+
+<br><br>
+
+Verify Rules
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+5. Blockchain
+
+<br><br>
+
+Stores Block
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+DIGITAL OWNERSHIP
+
+</span>
+
+
+
+<h2>
+
+Understanding Blockchain Wallets
+
+</h2>
+
+
+
+<p>
+
+A blockchain wallet does not actually store coins or digital assets. Instead, it stores the cryptographic keys required to access and control blockchain accounts.
+
+</p>
+
+
+
+<p>
+
+The blockchain itself contains ownership records. The wallet provides the ability to prove ownership and authorize actions.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div class="architecture-grid">
+
+
+<div class="arch-card">
+
+
+<div class="arch-icon">
+
+🔑
+
+</div>
+
+
+<h3>
+
+Private Key
+
+</h3>
+
+
+<p>
+
+A secret cryptographic key that proves ownership and allows transactions to be signed.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<div class="arch-icon">
+
+📜
+
+</div>
+
+
+<h3>
+
+Public Key
+
+</h3>
+
+
+<p>
+
+A cryptographic identifier derived from the private key and used to verify signatures.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<div class="arch-icon">
+
+🏷️
+
+</div>
+
+
+<h3>
+
+Wallet Address
+
+</h3>
+
+
+<p>
+
+A shortened public identifier that other users can send assets or transactions to.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+Digital Signatures
+
+</h2>
+
+
+
+
+<div class="doc-panel">
+
+
+<p>
+
+Before a transaction enters the blockchain network, it must be digitally signed.
+
+</p>
+
+
+<p>
+
+The signature proves that the transaction was created by the legitimate owner without revealing the private key.
+
+</p>
+
+
+
+<div class="flow">
+
+
+<div class="flow-box">
+
+Transaction
+
+</div>
+
+
+<div class="arrow">
+
++
+
+</div>
+
+
+<div class="flow-box">
+
+Private Key
+
+</div>
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+<div class="flow-box">
+
+Digital Signature
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="info-box">
+
+
+<strong>
+
+Security Principle:
+
+</strong>
+
+
+<br><br>
+
+
+Anyone can verify a signature using the public key, but nobody can recreate the signature without the private key.
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+Consensus Mechanisms
+
+</h2>
+
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+NETWORK AGREEMENT
+
+</span>
+
+
+
+<h2>
+
+How Does A Blockchain Agree?
+
+</h2>
+
+
+
+<p>
+
+Because blockchains do not have a central authority, computers across the network must agree on which transactions are valid.
+
+</p>
+
+
+
+<p>
+
+This process is called consensus.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="architecture-grid">
+
+
+
+<div class="arch-card">
+
+
+<h3>
+
+Proof Of Work
+
+</h3>
+
+
+<p>
+
+Computers compete to solve complex mathematical problems. The winner proposes the next block.
+
+</p>
+
+
+<ul>
+
+<li>Used by Bitcoin</li>
+
+<li>High security</li>
+
+<li>Energy intensive</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<h3>
+
+Proof Of Stake
+
+</h3>
+
+
+<p>
+
+Validators lock network tokens as collateral and participate in block creation.
+
+</p>
+
+
+<ul>
+
+<li>Energy efficient</li>
+
+<li>Used by modern chains</li>
+
+<li>Supports staking</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<h3>
+
+CometBFT Consensus
+
+</h3>
+
+
+<p>
+
+A Byzantine Fault Tolerant consensus engine used by many Cosmos-based networks.
+
+</p>
+
+
+<ul>
+
+<li>Fast finality</li>
+
+<li>Validator-based</li>
+
+<li>Designed for application chains</li>
+
+</ul>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+  
   
 
