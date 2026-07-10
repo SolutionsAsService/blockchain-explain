@@ -856,4 +856,660 @@ Interoperability does not mean all blockchains become one chain. Each blockchain
 
 </section>
 
+  <section>
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+The Cosmos Layer 0 Architecture
+
+</h2>
+
+
+
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+MODULAR BLOCKCHAIN DESIGN
+
+</span>
+
+
+
+<h2>
+
+From One Blockchain To A Network Of Blockchains
+
+</h2>
+
+
+
+<p>
+
+Traditional blockchain designs often attempt to place everything into one network: applications, execution, security, and governance.
+
+</p>
+
+
+
+<p>
+
+The Cosmos ecosystem introduced a different approach: instead of one blockchain doing everything, developers can create specialized sovereign blockchains that communicate through shared infrastructure.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="diagram">
+
+
+<h3 class="text-center">
+
+Traditional Monolithic Blockchain
+
+</h3>
+
+
+
+<div class="architecture-stack">
+
+
+
+<div class="stack-layer">
+
+
+<h3>
+
+Applications
+
+</h3>
+
+
+<p>
+
+All applications share one environment
+
+</p>
+
+
+</div>
+
+
+
+<div class="stack-arrow">
+
+↓
+
+</div>
+
+
+
+<div class="stack-layer">
+
+
+<h3>
+
+Execution
+
+</h3>
+
+
+<p>
+
+Shared transaction processing
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="stack-arrow">
+
+↓
+
+</div>
+
+
+
+
+<div class="stack-layer">
+
+
+<h3>
+
+Consensus
+
+</h3>
+
+
+<p>
+
+Shared validator network
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="divider"></div>
+
+
+
+
+
+
+<div class="diagram">
+
+
+<h3 class="text-center">
+
+Cosmos Style Modular Architecture
+
+</h3>
+
+
+
+
+<div class="network-map connected">
+
+
+<div class="network-node">
+
+DeFi Chain
+
+</div>
+
+
+<div class="network-node">
+
+Gaming Chain
+
+</div>
+
+
+<div class="network-node">
+
+Enterprise Chain
+
+</div>
+
+
+
+<div class="network-node center-node">
+
+
+Cosmos Layer 0
+
+<br><br>
+
+IBC Communication
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+<div class="info-box">
+
+
+<strong>
+
+Core Idea:
+
+</strong>
+
+
+<br><br>
+
+
+Each blockchain becomes optimized for its own purpose while still participating in a connected ecosystem.
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+Sovereign Blockchains
+
+</h2>
+
+
+
+
+<div class="doc-panel">
+
+
+<h2>
+
+What Does Sovereignty Mean?
+
+</h2>
+
+
+
+<p>
+
+A sovereign blockchain controls its own rules, governance, execution environment, and upgrades.
+
+</p>
+
+
+
+<p>
+
+Instead of competing for space on a shared chain, applications can operate their own specialized networks.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="step-grid">
+
+
+
+<div class="step-card">
+
+
+<div class="step-number">
+
+01
+
+</div>
+
+
+<h3>
+
+Custom Logic
+
+</h3>
+
+
+<p>
+
+Developers choose exactly how transactions and applications behave.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="step-card">
+
+
+<div class="step-number">
+
+02
+
+</div>
+
+
+<h3>
+
+Independent Governance
+
+</h3>
+
+
+<p>
+
+The community controls upgrades, parameters, and network decisions.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="step-card">
+
+
+<div class="step-number">
+
+03
+
+</div>
+
+
+<h3>
+
+Dedicated Security
+
+</h3>
+
+
+<p>
+
+Validators secure the chain according to its own requirements.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+Cosmos SDK: Building Custom Blockchains
+
+</h2>
+
+
+
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+DEVELOPER FRAMEWORK
+
+</span>
+
+
+
+<h2>
+
+A Modular Blockchain Toolkit
+
+</h2>
+
+
+
+<p>
+
+The Cosmos SDK is a software framework that allows developers to build application-specific blockchains using reusable modules.
+
+</p>
+
+
+
+<p>
+
+Instead of creating blockchain infrastructure from scratch, developers can combine proven components for accounts, tokens, governance, staking, and other functionality.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="diagram">
+
+
+<div class="diagram-row">
+
+
+
+<div class="diagram-node">
+
+Application
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+Cosmos SDK Modules
+
+<br><br>
+
+Accounts
+
+<br>
+
+Staking
+
+<br>
+
+Governance
+
+<br>
+
+Tokens
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+Blockchain Runtime
+
+</div>
+
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+CometBFT Consensus
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="architecture-grid">
+
+
+<div class="arch-card">
+
+
+<h3>
+
+Bank Module
+
+</h3>
+
+
+<p>
+
+Handles token balances and transfers.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<h3>
+
+Staking Module
+
+</h3>
+
+
+<p>
+
+Allows users to delegate tokens and participate in network security.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="arch-card">
+
+
+<h3>
+
+Governance Module
+
+</h3>
+
+
+<p>
+
+Allows communities to propose and vote on network changes.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
   
