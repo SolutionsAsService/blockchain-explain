@@ -1929,4 +1929,598 @@ END SECTION
 =========================================================*/
 
 
+/*=========================================================
+RESPONSIVE BREAKPOINTS
+=========================================================*/
+
+@media (max-width:1400px){
+
+    .hero{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+        gap:60px;
+
+    }
+
+    .hero-left{
+
+        align-items:center;
+
+    }
+
+    .hero-right{
+
+        justify-content:center;
+
+    }
+
+    .docs-layout{
+
+        grid-template-columns:260px 1fr;
+
+    }
+
+    .toc{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:1100px){
+
+    nav{
+
+        gap:18px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    header{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        padding:20px;
+
+    }
+
+    .docs-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .docs-sidebar{
+
+        position:relative;
+
+        top:0;
+
+        margin-bottom:40px;
+
+    }
+
+    footer{
+
+        grid-template-columns:1fr;
+
+        gap:40px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    h1{
+
+        font-size:2.8rem;
+
+        line-height:1.15;
+
+    }
+
+    h2{
+
+        font-size:2rem;
+
+    }
+
+    h3{
+
+        font-size:1.2rem;
+
+    }
+
+    .hero{
+
+        min-height:auto;
+
+        padding:70px 0;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+    .btn-primary,
+    .btn-secondary{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .hero-card{
+
+        width:100%;
+
+    }
+
+    .card-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .architecture-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .flow{
+
+        flex-direction:column;
+
+    }
+
+    .arrow{
+
+        transform:rotate(90deg);
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    body{
+
+        font-size:15px;
+
+    }
+
+    header{
+
+        padding:18px;
+
+    }
+
+    nav{
+
+        display:grid;
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:10px;
+
+        width:100%;
+
+    }
+
+    nav a{
+
+        text-align:center;
+
+        padding:8px;
+
+    }
+
+    .feature-card,
+    .doc-panel,
+    .hero-card{
+
+        padding:24px;
+
+    }
+
+}
+
+/*=========================================================
+FADE ANIMATIONS
+=========================================================*/
+
+.fade-up{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:all .8s ease;
+
+}
+
+.fade-up.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+.fade-left{
+
+    opacity:0;
+
+    transform:translateX(-40px);
+
+    transition:.8s;
+
+}
+
+.fade-left.visible{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+.fade-right{
+
+    opacity:0;
+
+    transform:translateX(40px);
+
+    transition:.8s;
+
+}
+
+.fade-right.visible{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+/*=========================================================
+FLOAT ANIMATION
+=========================================================*/
+
+.float{
+
+    animation:float 6s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+/*=========================================================
+PULSE
+=========================================================*/
+
+.pulse{
+
+    animation:pulseGlow 2.5s infinite;
+
+}
+
+@keyframes pulseGlow{
+
+0%{
+
+box-shadow:0 0 10px rgba(60,255,110,.15);
+
+}
+
+50%{
+
+box-shadow:0 0 45px rgba(60,255,110,.45);
+
+}
+
+100%{
+
+box-shadow:0 0 10px rgba(60,255,110,.15);
+
+}
+
+}
+
+/*=========================================================
+GRID GLOW ANIMATION
+=========================================================*/
+
+.grid-background{
+
+    animation:gridMove 30s linear infinite;
+
+}
+
+@keyframes gridMove{
+
+0%{
+
+background-position:0 0;
+
+}
+
+100%{
+
+background-position:60px 60px;
+
+}
+
+}
+
+/*=========================================================
+BUTTON RIPPLE
+=========================================================*/
+
+.btn-primary,
+.btn-secondary{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.btn-primary::after,
+.btn-secondary::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent);
+
+    transform:translateX(-120%);
+
+}
+
+.btn-primary:hover::after,
+.btn-secondary:hover::after{
+
+    transition:1s;
+
+    transform:translateX(120%);
+
+}
+
+/*=========================================================
+CARD HOVER GLOW
+=========================================================*/
+
+.feature-card:hover,
+.arch-card:hover,
+.stat-card:hover,
+.step-card:hover{
+
+    box-shadow:
+
+    0 0 35px rgba(60,255,110,.18);
+
+}
+
+/*=========================================================
+TEXT GRADIENT
+=========================================================*/
+
+.text-gradient{
+
+    background:linear-gradient(
+
+    90deg,
+
+    #ffffff,
+
+    #3cff6e
+
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+/*=========================================================
+DIAGRAM BLOCK
+=========================================================*/
+
+.diagram{
+
+    padding:40px;
+
+    background:#0d0d0d;
+
+    border-radius:20px;
+
+    border:1px solid rgba(60,255,110,.10);
+
+    overflow:auto;
+
+    margin:50px 0;
+
+}
+
+.diagram-row{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.diagram-node{
+
+    min-width:160px;
+
+    text-align:center;
+
+    padding:20px;
+
+    background:#111;
+
+    border-radius:16px;
+
+    border:1px solid rgba(60,255,110,.12);
+
+}
+
+/*=========================================================
+LOADING SHIMMER
+=========================================================*/
+
+.loading{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.loading::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(255,255,255,.08),
+
+    transparent);
+
+    animation:loading 2s infinite;
+
+}
+
+@keyframes loading{
+
+100%{
+
+left:120%;
+
+}
+
+}
+
+/*=========================================================
+PRINT MODE
+=========================================================*/
+
+@media print{
+
+    header,
+    footer,
+    .glow,
+    .grid-background,
+    .reading-progress{
+
+        display:none;
+
+    }
+
+    body{
+
+        background:white;
+
+        color:black;
+
+    }
+
+}
+
+/*=========================================================
+UTILITY CLASSES
+=========================================================*/
+
+.w-100{width:100%;}
+.flex{display:flex;}
+.grid{display:grid;}
+.center{justify-content:center;align-items:center;}
+.space-between{justify-content:space-between;}
+.rounded{border-radius:20px;}
+.shadow{box-shadow:0 0 30px rgba(60,255,110,.15);}
+.border{border:1px solid rgba(60,255,110,.10);}
+.text-center{text-align:center;}
+.text-left{text-align:left;}
+.uppercase{text-transform:uppercase;}
+.bold{font-weight:700;}
+.hidden{display:none;}
+.relative{position:relative;}
+.absolute{position:absolute;}
+.overflow-hidden{overflow:hidden;}
+
 
