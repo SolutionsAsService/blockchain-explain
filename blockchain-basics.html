@@ -932,3 +932,580 @@ Merkle Trees allow blockchain networks to verify large amounts of data efficient
 
 </section>
 
+  <section>
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+Understanding Blocks
+
+</h2>
+
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+BLOCK STRUCTURE
+
+</span>
+
+
+<h2>
+
+What Is A Block?
+
+</h2>
+
+
+<p>
+
+A block is a container that stores a collection of verified transactions. Once a block is approved by the network, it becomes part of the permanent blockchain history.
+
+</p>
+
+
+<p>
+
+Every blockchain organizes information differently, but most blocks contain similar core components: transaction data, timestamps, references to previous blocks, and cryptographic signatures.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="diagram">
+
+
+<h3 class="text-center">
+
+Anatomy Of A Blockchain Block
+
+</h3>
+
+
+
+<div class="block-visual">
+
+
+<div class="block-header">
+
+BLOCK #125842
+
+</div>
+
+
+<div class="block-row">
+
+<span>
+
+Timestamp
+
+</span>
+
+<span>
+
+July 10, 2026 12:00 UTC
+
+</span>
+
+</div>
+
+
+
+<div class="block-row">
+
+<span>
+
+Previous Hash
+
+</span>
+
+<span class="green">
+
+0000a83f92bc...
+
+</span>
+
+</div>
+
+
+
+<div class="block-row">
+
+<span>
+
+Merkle Root
+
+</span>
+
+<span class="green">
+
+7bf92ac81...
+
+</span>
+
+</div>
+
+
+
+<div class="block-row">
+
+<span>
+
+Validator Signature
+
+</span>
+
+<span>
+
+Verified
+
+</span>
+
+</div>
+
+
+
+<div class="block-row">
+
+<span>
+
+Transactions
+
+</span>
+
+<span>
+
+2,845
+
+</span>
+
+</div>
+
+
+
+<div class="block-row">
+
+<span>
+
+Block Hash
+
+</span>
+
+<span class="green">
+
+0000ff92aa...
+
+</span>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<div class="doc-panel">
+
+
+<span class="section-label">
+
+CRYPTOGRAPHY
+
+</span>
+
+
+<h2>
+
+How Hashing Secures Blockchain Data
+
+</h2>
+
+
+
+<p>
+
+A hash is a unique digital fingerprint created from information using a cryptographic algorithm.
+
+</p>
+
+
+
+<p>
+
+Even a tiny change to the original information creates a completely different hash. This makes unauthorized modifications easy to detect.
+
+</p>
+
+
+
+<div class="flow">
+
+
+<div class="flow-box">
+
+Transaction Data
+
+</div>
+
+
+<div class="arrow">
+
+→
+
+</div>
+
+
+<div class="flow-box">
+
+Hash Function
+
+</div>
+
+
+<div class="arrow">
+
+→
+
+</div>
+
+
+<div class="flow-box">
+
+Digital Fingerprint
+
+</div>
+
+
+</div>
+
+
+
+<div class="warning-box">
+
+
+<strong>
+
+Important:
+
+</strong>
+
+
+<br><br>
+
+
+A blockchain does not prevent someone from attempting to change data. Instead, cryptography makes changes visible because the digital fingerprints no longer match.
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+The Blockchain Chain
+
+</h2>
+
+
+
+<div class="doc-panel">
+
+
+<p>
+
+The defining feature of blockchain technology is that every block references the block before it. This creates a chronological chain of records.
+
+</p>
+
+
+<p>
+
+If someone attempted to modify an old block, every following block would become invalid because the cryptographic references would no longer match.
+
+</p>
+
+
+
+</div>
+
+
+
+
+<div class="diagram">
+
+
+<div class="diagram-row">
+
+
+<div class="diagram-node">
+
+Genesis Block
+
+<br>
+
+Hash:
+
+AAA123
+
+</div>
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+Block 1
+
+<br>
+
+Previous:
+
+AAA123
+
+</div>
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+Block 2
+
+<br>
+
+Previous:
+
+BBB456
+
+</div>
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+
+<div class="diagram-node">
+
+Block 3
+
+<br>
+
+Previous:
+
+CCC789
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<div class="container">
+
+
+<div class="doc-panel">
+
+
+<h2>
+
+What Is A Merkle Tree?
+
+</h2>
+
+
+
+<p>
+
+Large blockchain networks process thousands of transactions. Instead of storing every transaction individually when verifying data, blockchains often use a structure called a Merkle Tree.
+
+</p>
+
+
+
+<p>
+
+A Merkle Tree combines transaction hashes together into a single summary value called the Merkle Root.
+
+</p>
+
+
+
+<div class="flow">
+
+
+<div class="flow-box">
+
+Transaction A
+
+<br>
+
+Hash A
+
+</div>
+
+
+<div class="flow-box">
+
+Transaction B
+
+<br>
+
+Hash B
+
+</div>
+
+
+
+<div class="flow-box">
+
+Transaction C
+
+<br>
+
+Hash C
+
+</div>
+
+
+</div>
+
+
+
+<div class="flow">
+
+
+<div class="arrow">
+
+↓
+
+</div>
+
+
+</div>
+
+
+
+<div class="diagram-node" style="margin:auto;max-width:250px;">
+
+
+Merkle Root
+
+<br><br>
+
+ABCD892FF
+
+
+</div>
+
+
+
+<div class="info-box">
+
+
+<strong>
+
+Why It Matters
+
+</strong>
+
+
+<br><br>
+
+
+Merkle Trees allow blockchain networks to verify large amounts of data efficiently without checking every transaction individually.
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+  
+
