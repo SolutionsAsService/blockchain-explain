@@ -1440,4 +1440,493 @@ END PART 2
 =========================================================*/
 
 
+/*=========================================================
+DOCUMENTATION LAYOUT
+=========================================================*/
+
+.docs-layout{
+
+    width:92%;
+    max-width:1500px;
+
+    margin:80px auto;
+
+    display:grid;
+
+    grid-template-columns:280px 1fr 260px;
+
+    gap:45px;
+
+}
+
+.docs-sidebar{
+
+    position:sticky;
+    top:100px;
+
+    align-self:start;
+
+    background:#0d0d0d;
+
+    border:1px solid rgba(60,255,110,.10);
+
+    border-radius:22px;
+
+    padding:28px;
+
+}
+
+.docs-sidebar h3{
+
+    margin-bottom:22px;
+
+    color:var(--primary);
+
+}
+
+.docs-sidebar ul{
+
+    list-style:none;
+
+}
+
+.docs-sidebar li{
+
+    margin-bottom:8px;
+
+}
+
+.docs-sidebar a{
+
+    display:block;
+
+    padding:12px 14px;
+
+    border-radius:12px;
+
+    color:#c8c8c8;
+
+    transition:.3s;
+
+}
+
+.docs-sidebar a:hover{
+
+    background:rgba(60,255,110,.08);
+
+    color:white;
+
+    padding-left:22px;
+
+}
+
+/*=========================================================
+TABLE OF CONTENTS
+=========================================================*/
+
+.toc{
+
+    position:sticky;
+
+    top:100px;
+
+    align-self:start;
+
+    background:#0d0d0d;
+
+    border-radius:20px;
+
+    border:1px solid rgba(60,255,110,.10);
+
+    padding:25px;
+
+}
+
+.toc h4{
+
+    color:var(--primary);
+
+    margin-bottom:18px;
+
+}
+
+.toc ul{
+
+    list-style:none;
+
+}
+
+.toc li{
+
+    margin-bottom:10px;
+
+}
+
+.toc a{
+
+    color:#bbbbbb;
+
+    transition:.3s;
+
+}
+
+.toc a:hover{
+
+    color:var(--primary);
+
+}
+
+/*=========================================================
+MAIN ARTICLE
+=========================================================*/
+
+.docs-content{
+
+    min-width:0;
+
+}
+
+.docs-content section{
+
+    padding:40px 0;
+
+}
+
+.docs-content h2{
+
+    margin-bottom:25px;
+
+}
+
+.docs-content h3{
+
+    margin-top:45px;
+
+    margin-bottom:18px;
+
+}
+
+.docs-content p{
+
+    margin-bottom:20px;
+
+}
+
+/*=========================================================
+BREADCRUMBS
+=========================================================*/
+
+.breadcrumb{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:40px;
+
+    color:#999;
+
+}
+
+.breadcrumb a{
+
+    color:#aaa;
+
+}
+
+.breadcrumb span{
+
+    color:var(--primary);
+
+}
+
+/*=========================================================
+PROGRESS BAR
+=========================================================*/
+
+.reading-progress{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    height:4px;
+
+    width:0;
+
+    background:linear-gradient(
+        90deg,
+        #00ff66,
+        #3cff6e
+    );
+
+    z-index:99999;
+
+    box-shadow:0 0 18px #3cff6e;
+
+}
+
+/*=========================================================
+SECTION LABEL
+=========================================================*/
+
+.section-label{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(60,255,110,.08);
+
+    color:var(--primary);
+
+    font-size:.9rem;
+
+    margin-bottom:20px;
+
+}
+
+/*=========================================================
+INLINE CODE
+=========================================================*/
+
+code.inline{
+
+    padding:3px 8px;
+
+    border-radius:6px;
+
+    background:#121212;
+
+    color:#82ffab;
+
+}
+
+/*=========================================================
+LISTS
+=========================================================*/
+
+.docs-content ul{
+
+    margin:20px 0 30px 25px;
+
+}
+
+.docs-content li{
+
+    margin-bottom:10px;
+
+}
+
+/*=========================================================
+NUMBER CARDS
+=========================================================*/
+
+.step-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    margin-top:50px;
+
+}
+
+.step-card{
+
+    position:relative;
+
+    background:#111;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    border:1px solid rgba(60,255,110,.10);
+
+}
+
+.step-number{
+
+    position:absolute;
+
+    top:-18px;
+
+    right:20px;
+
+    font-size:3rem;
+
+    color:rgba(60,255,110,.15);
+
+    font-weight:900;
+
+}
+
+/*=========================================================
+TABS
+=========================================================*/
+
+.tabs{
+
+    margin:50px 0;
+
+}
+
+.tab-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.tab-button{
+
+    padding:12px 24px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(60,255,110,.15);
+
+    background:#101010;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.tab-button.active{
+
+    background:var(--primary);
+
+    color:black;
+
+}
+
+.tab-panel{
+
+    background:#0e0e0e;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    border:1px solid rgba(60,255,110,.10);
+
+}
+
+/*=========================================================
+ACCORDION
+=========================================================*/
+
+.accordion{
+
+    margin:50px 0;
+
+}
+
+.accordion-item{
+
+    margin-bottom:15px;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(60,255,110,.10);
+
+}
+
+.accordion-header{
+
+    background:#101010;
+
+    padding:22px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+}
+
+.accordion-content{
+
+    padding:25px;
+
+    background:#0d0d0d;
+
+}
+
+/*=========================================================
+CALLOUT CARDS
+=========================================================*/
+
+.callout{
+
+    display:flex;
+
+    gap:20px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:#111;
+
+    border:1px solid rgba(60,255,110,.10);
+
+    margin:40px 0;
+
+}
+
+.callout-icon{
+
+    font-size:2rem;
+
+    color:var(--primary);
+
+}
+
+/*=========================================================
+IMAGE FRAME
+=========================================================*/
+
+.image-frame{
+
+    padding:18px;
+
+    border-radius:24px;
+
+    background:#101010;
+
+    border:1px solid rgba(60,255,110,.12);
+
+    margin:50px 0;
+
+}
+
+.image-frame img{
+
+    border-radius:16px;
+
+}
+
+/*=========================================================
+END SECTION
+=========================================================*/
+
+
 
