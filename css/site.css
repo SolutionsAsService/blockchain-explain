@@ -288,6 +288,13 @@ p {
 
 /* ------------------------------------------------------------ the graphic */
 
+/* A cross-section built from elements rather than drawn in SVG. The reason is
+   measured: an SVG scaled by its viewBox scales its labels too, so the note
+   labels rendered at 3.5px on a 360px viewport and 20px at 1920px. Here the
+   bands are laid out by the same grid as the rest of the page and the labels
+   sit on the page's own type scale — smallest is 0.8rem, 12.8px, at every
+   width. One bit of information (which layer executes) gets one colour. */
+
 .strata-wrap {
   margin: 0 0 calc(var(--u) * 12);
   padding-inline: calc(var(--u) * 4);
@@ -300,66 +307,112 @@ p {
 }
 
 .strata {
-  display: block;
-  width: 100%;
-  height: auto;
+  position: relative;
   border: 1px solid var(--rule);
   background: var(--panel);
+  padding: calc(var(--u) * 3) calc(var(--u) * 3) calc(var(--u) * 3) calc(var(--u) * 8);
 }
 
-.strata-grid path {
-  stroke: var(--rule);
-  stroke-width: 1;
-  fill: none;
+/* The axis carries the one proposition the prose cannot: that these five are
+   stacked and read downward. It gets the ink. */
+.strata-axis {
+  position: absolute;
+  left: calc(var(--u) * 4);
+  top: calc(var(--u) * 4);
+  bottom: calc(var(--u) * 4);
+  width: 2px;
+  background: var(--accent);
 }
 
-.stratum rect {
-  fill: var(--raised);
+.strata-arrow {
+  position: absolute;
+  left: -4px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 9px solid var(--accent);
+}
+
+.strata-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: calc(var(--u) * 1.5);
+}
+
+.stratum {
+  background: var(--raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: calc(var(--u) * 2.5) calc(var(--u) * 3);
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-areas: "num name" "num note";
+  column-gap: calc(var(--u) * 2);
+  align-items: baseline;
+}
+
+@media (max-width: 30rem) {
+  .stratum {
+    grid-template-columns: 2.5rem 1fr;
+    padding: calc(var(--u) * 2);
+  }
+}
+
+.stratum-marked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.stratum-base {
+  border-bottom-width: 3px;
 }
 
 .s-num {
+  grid-area: num;
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: var(--t--1);
   font-weight: 700;
-  fill: var(--muted);
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin: 0;
 }
 
-.s-num-on {
-  fill: var(--on-accent);
-  opacity: 0.75;
+.stratum-marked .s-num {
+  color: var(--on-accent);
 }
 
 .s-name {
-  font-family: var(--font-text);
-  font-size: 21px;
-  font-weight: 700;
-  fill: var(--ink);
-}
-
-.s-name-on {
-  fill: var(--on-accent);
-}
-
-.s-note {
+  grid-area: name;
   font-family: var(--font-mono);
-  font-size: 13px;
-  fill: var(--muted);
+  font-size: clamp(1rem, 2.4vw, var(--t-1));
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 calc(var(--u) * 0.5);
 }
 
-.s-note-on {
-  fill: var(--on-accent);
-  opacity: 0.8;
+.stratum-marked .s-name {
+  color: var(--on-accent);
 }
 
-.strata-axis path {
-  stroke: var(--rule);
-  stroke-width: 1;
-  fill: none;
+/* 0.8rem = 12.8px at every viewport width. This is the floor the SVG figure
+   could not hold. */
+.s-note {
+  grid-area: note;
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  color: var(--muted);
+  margin: 0;
+  max-width: none;
 }
 
-.strata-axis .arrow {
-  stroke: var(--accent);
-  stroke-width: 2;
+.stratum-marked .s-note {
+  color: var(--on-accent);
 }
 
 .strata-wrap figcaption {
@@ -504,3 +557,12 @@ p {
   cursor: default;
   opacity: .75;
 }
+
+/* SVG shapes take their colour from CSS where var() is supported; the literal
+   hex on the element is the fallback for where it is not. Without this the
+   Layer 03 band and the brand bar can resolve to black. */
+.brand-mark .bar-accent { fill: var(--accent); }
+.brand-mark .bar-mid { fill: var(--ink); }
+.brand-mark .bar-low { fill: var(--ink); }
+#band .stop-a { stop-color: var(--accent); }
+#band .stop-b { stop-color: var(--accent-2); }

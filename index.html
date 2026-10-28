@@ -17,9 +17,9 @@
     <a class="brand" href="index.html" aria-label="Autheo, explained — home">
       <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
         <rect x="2" y="2" width="36" height="36" rx="3" fill="none" stroke="currentColor" stroke-opacity=".35"/>
-        <rect x="8" y="25" width="24" height="5" fill="var(--accent)"/>
-        <rect x="8" y="18" width="24" height="5" fill="currentColor" opacity=".55"/>
-        <rect x="8" y="11" width="24" height="5" fill="currentColor" opacity=".3"/>
+        <rect class="bar-accent" x="8" y="25" width="24" height="5" fill="#3cff6e"/>
+        <rect class="bar-mid" x="8" y="18" width="24" height="5" fill="#e8ede9" opacity=".55"/>
+        <rect class="bar-low" x="8" y="11" width="24" height="5" fill="#e8ede9" opacity=".3"/>
       </svg>
       <span>
         <span class="brand-word">Autheo</span>
@@ -51,8 +51,7 @@
       <p class="lede">
         It coordinates web applications, blockchain networks and autonomous AI
         agents through one execution and identity layer. This page explains how
-        that stack fits together — and links to the long-form pages that go
-        deeper.
+        that stack fits together.
       </p>
 
       <div class="hero-actions">
@@ -62,65 +61,46 @@
     </div>
   </section>
 
-  <!-- The graphic is the thing being explained: the stack as strata, with the
-       execution layer marked. It is drawn in the document, not loaded. -->
+  <!-- The figure is the thing being explained, drawn in the document rather
+       than loaded. Its labels are HTML text on the page's own type scale, not
+       SVG user units: a uniformly scaled SVG rendered its smallest label at
+       3.5px on a 360px viewport, which is not showing the data. -->
   <figure class="strata-wrap">
-    <svg class="strata" viewBox="0 0 1200 520" role="img"
-         aria-label="Cross-section of the Autheo stack. From the top: web applications; AI agents and services; the EVM-compatible Layer 1 execution layer, marked in the accent colour; CometBFT consensus; and the Cosmos SDK Layer 0 foundation.">
-      <defs>
-        <linearGradient id="band" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="var(--accent)"/>
-          <stop offset="1" stop-color="var(--accent-2)"/>
-        </linearGradient>
-      </defs>
+    <div class="strata">
+      <div class="strata-axis" aria-hidden="true"><span class="strata-arrow"></span></div>
 
-      <g class="strata-grid" aria-hidden="true">
-        <path d="M0 60h1200M0 150h1200M0 240h1200M0 330h1200M0 420h1200"/>
-      </g>
-
-      <g class="stratum">
-        <rect x="0" y="80" width="1200" height="62"/>
-        <text x="56" y="104" class="s-num">05</text>
-        <text x="120" y="104" class="s-name">Web applications</text>
-        <text x="120" y="126" class="s-note">Users · services · enterprise systems</text>
-      </g>
-
-      <g class="stratum">
-        <rect x="0" y="170" width="1200" height="62"/>
-        <text x="56" y="194" class="s-num">04</text>
-        <text x="120" y="194" class="s-name">AI agents &amp; services</text>
-        <text x="120" y="216" class="s-note">Autonomous software coordination</text>
-      </g>
-
-      <g class="stratum stratum-marked">
-        <rect x="0" y="260" width="1200" height="62" fill="url(#band)"/>
-        <text x="56" y="284" class="s-num s-num-on">03</text>
-        <text x="120" y="284" class="s-name s-name-on">EVM-compatible Layer 1</text>
-        <text x="120" y="306" class="s-note s-note-on">Smart contracts and dApp execution</text>
-      </g>
-
-      <g class="stratum">
-        <rect x="0" y="350" width="1200" height="62"/>
-        <text x="56" y="374" class="s-num">02</text>
-        <text x="120" y="374" class="s-name">CometBFT consensus</text>
-        <text x="120" y="396" class="s-note">Byzantine fault tolerant block finality</text>
-      </g>
-
-      <g class="stratum stratum-base">
-        <rect x="0" y="440" width="1200" height="62"/>
-        <text x="56" y="464" class="s-num">01</text>
-        <text x="120" y="464" class="s-name">Cosmos SDK Layer 0</text>
-        <text x="120" y="486" class="s-note">The foundation the rest is built on</text>
-      </g>
-
-      <g class="strata-axis" aria-hidden="true">
-        <path d="M28 80v422"/>
-        <path class="arrow" d="M22 492l6 12 6-12"/>
-      </g>
-    </svg>
+      <ol class="strata-list">
+        <li class="stratum">
+          <p class="s-num">05</p>
+          <h2 class="s-name">Web applications</h2>
+          <p class="s-note">Users · services · enterprise systems</p>
+        </li>
+        <li class="stratum">
+          <p class="s-num">04</p>
+          <h2 class="s-name">AI agents &amp; services</h2>
+          <p class="s-note">Autonomous software coordination</p>
+        </li>
+        <li class="stratum stratum-marked">
+          <p class="s-num">03</p>
+          <h2 class="s-name">EVM-compatible Layer 1</h2>
+          <p class="s-note">Smart contracts and dApp execution</p>
+        </li>
+        <li class="stratum">
+          <p class="s-num">02</p>
+          <h2 class="s-name">CometBFT consensus</h2>
+          <p class="s-note">Byzantine fault tolerant block finality</p>
+        </li>
+        <li class="stratum stratum-base">
+          <p class="s-num">01</p>
+          <h2 class="s-name">Cosmos SDK Layer 0</h2>
+          <p class="s-note">The foundation the rest is built on</p>
+        </li>
+      </ol>
+    </div>
     <figcaption>
-      The Autheo stack, drawn as a cross-section. Layer 03 is where applications
-      actually execute.
+      The stack as a cross-section, read downward. This five-layer reading is
+      this site&rsquo;s own, drawn from the architecture pages on this site; it is
+      not a quoted specification. Layer 03 is where applications execute.
     </figcaption>
   </figure>
 
@@ -177,10 +157,7 @@
 
   <section class="wrap prose">
     <h2>Read further</h2>
-    <p>
-      Three long-form pages exist today. Each one is linked below; nothing on
-      this site points at a page that does not exist.
-    </p>
+    <p>Three long-form pages go deeper.</p>
 
     <ul class="cards">
       <li>

@@ -28,6 +28,13 @@ const PAIRS = [
   ['dark: label on accent band', '#04120a', '#3cff6e', 4.5],
   ['dark: label on accent band (gradient end)', '#04120a', '#12b37a', 4.5],
   ['dark: nav link on paper', '#9ba8a0', '#0a0c0b', 4.5],
+  // The figure's labels: the pairs Tufte found unmeasured in round R1.
+  ['dark: figure note on stratum', '#9ba8a0', '#171c19', 4.5],
+  ['dark: figure name on stratum', '#e8ede9', '#171c19', 4.5],
+  ['dark: figure label on marked stratum', '#04120a', '#3cff6e', 4.5],
+  ['light: figure note on stratum', '#4d5a53', '#eef2ef', 4.5],
+  ['light: figure name on stratum', '#0a0c0b', '#eef2ef', 4.5],
+  ['light: figure label on marked stratum', '#ffffff', '#0f7a3d', 4.5],
   ['light: body ink on paper', '#0a0c0b', '#f4f6f4', 4.5],
   ['light: muted on paper', '#4d5a53', '#f4f6f4', 4.5],
   ['light: accent on paper', '#0f7a3d', '#f4f6f4', 4.5],
