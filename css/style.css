@@ -197,23 +197,6 @@ CONTAINER
 BACKGROUND
 ==========================================================*/
 
-.grid-background{
-
-    position:fixed;
-
-    inset:0;
-
-    background-image:
-
-    linear-gradient(rgba(60,255,110,.05) 1px,transparent 1px),
-
-    linear-gradient(90deg,rgba(60,255,110,.05) 1px,transparent 1px);
-
-    background-size:60px 60px;
-
-    z-index:-20;
-
-}
 
 .grid-background::after{
 
@@ -235,43 +218,8 @@ BACKGROUND
 
 }
 
-.glow{
 
-    position:fixed;
 
-    width:600px;
-
-    height:600px;
-
-    border-radius:50%;
-
-    filter:blur(140px);
-
-    opacity:.12;
-
-    z-index:-10;
-
-}
-
-.glow1{
-
-    background:#00ff66;
-
-    top:-200px;
-
-    left:-150px;
-
-}
-
-.glow2{
-
-    background:#2dff83;
-
-    bottom:-300px;
-
-    right:-150px;
-
-}
 
 
 /*=========================================================
@@ -296,7 +244,6 @@ header{
 
     background:rgba(5,5,5,.82);
 
-    backdrop-filter:blur(16px);
 
     border-bottom:1px solid rgba(60,255,110,.08);
 
@@ -572,7 +519,6 @@ HERO CARD
 
     border:1px solid rgba(60,255,110,.18);
 
-    backdrop-filter:blur(20px);
 
     box-shadow:var(--shadow);
 
@@ -1268,12 +1214,9 @@ SEARCH BAR
     color:white;
 
     font-size:1rem;
-
-    outline:none;
-
 }
 
-.search-box input:focus{
+.search-box input:focus-visible{
 
     border-color:var(--primary);
 
@@ -2274,27 +2217,7 @@ box-shadow:0 0 10px rgba(60,255,110,.15);
 GRID GLOW ANIMATION
 =========================================================*/
 
-.grid-background{
 
-    animation:gridMove 30s linear infinite;
-
-}
-
-@keyframes gridMove{
-
-0%{
-
-background-position:0 0;
-
-}
-
-100%{
-
-background-position:60px 60px;
-
-}
-
-}
 
 /*=========================================================
 BUTTON RIPPLE
@@ -2484,8 +2407,6 @@ PRINT MODE
 
     header,
     footer,
-    .glow,
-    .grid-background,
     .reading-progress{
 
         display:none;
@@ -2524,3 +2445,60 @@ UTILITY CLASSES
 .overflow-hidden{overflow:hidden;}
 
 
+
+/* --- appended by the DADA R0 resolution -------------------------------- */
+/* Mace / Holmes: one focus ring on every interactive element, in both
+   themes. The inherited sheet had exactly one :focus rule and it removed the
+   ring; there are 28 anchors on the home page. */
+:focus-visible {
+  outline: 3px solid var(--primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* Holmes: the four infinite animations had no opt-out at all. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Holmes: the sticky header occluded its own jump target
+   (scroll-padding-top / scroll-margin-top count was 0). */
+html {
+  scroll-padding-top: 6rem;
+}
+
+/* Debord: 12 classes were used in the HTML with no rule anywhere in this
+   sheet, so the centrepiece "How Autheo Is Built" stack rendered as bare text
+   with down-arrow glyphs. These are the diagram classes. */
+.architecture-stack { display: grid; gap: 0; margin: 2rem 0; }
+.stack-layer {
+  border: 1px solid var(--border, #1e1e1e);
+  background: var(--panel, #0d0d0d);
+  padding: 1.25rem 1.5rem;
+  border-radius: 3px;
+}
+.stack-layer.highlight {
+  border-color: var(--primary);
+  background: rgba(60, 255, 110, 0.08);
+}
+.stack-arrow { text-align: center; color: var(--primary); padding: 0.35rem 0; font-size: 1.1rem; }
+.network-map { display: grid; gap: 1rem; }
+.network-node { border: 1px solid var(--border, #1e1e1e); padding: 1rem; border-radius: 3px; }
+.network-node.center-node { border-color: var(--primary); }
+.network-node.connected { border-style: solid; }
+.application { border: 1px solid var(--border, #1e1e1e); padding: 1rem; border-radius: 3px; }
+.block-visual { border: 1px solid var(--border, #1e1e1e); padding: 1rem; border-radius: 3px; }
+.block-header { font-weight: 700; margin-bottom: 0.5rem; }
+.block-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.35rem 0; }
+
+/* Holmes: a topic with no page must not look like a link. */
+.not-written {
+  color: var(--muted, #888);
+  text-decoration: line-through;
+  text-decoration-color: var(--rule, #333);
+  cursor: default;
+  opacity: .75;
+}

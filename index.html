@@ -1,310 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Understanding Autheo | Learn Blockchain, Cosmos SDK, EVM, AI & Post Quantum Security</title>
-
-<meta name="description" content="Learn how the Autheo blockchain works through beginner-friendly guides covering Layer 0, Layer 1, Cosmos SDK, CometBFT, EVM, Smart Contracts, Validators, IBC, Decentralized Identity, AI Agents and Post Quantum Cryptography."/>
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/responsive.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autheo, explained — a blockchain reading room</title>
+<meta name="description" content="What Autheo is, how its stack fits together, and where to read further: Cosmos SDK Layer 0, EVM-compatible Layer 1, CometBFT consensus, identity and AI agents.">
+<link rel="stylesheet" href="css/site.css">
 </head>
 
 <body>
 
-<div class="grid-background"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="index.html" aria-label="Autheo, explained — home">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" rx="3" fill="none" stroke="currentColor" stroke-opacity=".35"/>
+        <rect x="8" y="25" width="24" height="5" fill="var(--accent)"/>
+        <rect x="8" y="18" width="24" height="5" fill="currentColor" opacity=".55"/>
+        <rect x="8" y="11" width="24" height="5" fill="currentColor" opacity=".3"/>
+      </svg>
+      <span>
+        <span class="brand-word">Autheo</span>
+        <span class="brand-sub">explained</span>
+      </span>
+    </a>
 
-<header>
-
-<div class="logo">
-
-<div class="logo-circle"></div>
-
-<h2>Understanding Autheo</h2>
-
-</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-
-<a href="blockchain-basics.html">Blockchain</a>
-
-<a href="autheo.html">AUTHEO</a>
-
-<a href="layer0.html">Layer 0</a>
-
-<a href="layer1.html">Layer 1</a>
-
-<a href="cosmos-sdk.html">Cosmos SDK</a>
-
-<a href="evm.html">EVM</a>
-
-<a href="ibc.html">IBC</a>
-
-<a href="validators.html">Validators</a>
-
-<a href="did.html">Identity</a>
-
-<a href="pqcnet.html">PQC</a>
-
-<a href="ai-agents.html">AI</a>
-
-</nav>
-
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">Overview</a>
+      <a href="autheo.html">Autheo</a>
+      <a href="blockchain-basics.html">Blockchain</a>
+      <a href="layer0.html">Layer 0</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero">
-
-<div class="hero-left">
-
-<span class="badge">
-
-● MAINNET EDUCATION PLATFORM
-
-</span>
-
-<h1>
-
-Understanding Modern Blockchain Infrastructure
-
-</h1>
-
-<p>
-
-Explore the technologies powering decentralized applications, AI coordination, digital identity, smart contracts, validator networks, interoperability, and post-quantum security. This companion guide is designed to make advanced blockchain concepts approachable for developers, businesses, and curious learners.
-
-</p>
-
-<div class="hero-buttons">
-
-<a href="blockchain-basics.html" class="btn-primary">
-
-Start Learning
-
-</a>
-
-<a href="#overview" class="btn-secondary">
-
-Explore Architecture
-
-</a>
-
-</div>
-
-</div>
-
-<div class="hero-right">
-
-<div class="hero-card">
-
-<div class="status"></div>
-
-<h3>Mainnet Features</h3>
-
-<ul>
-
-<li>Layer 0 Foundation</li>
-
-<li>EVM Compatible</li>
-
-<li>Cosmos SDK</li>
-
-<li>IBC Native</li>
-
-<li>CometBFT Consensus</li>
-
-<li>Decentralized Identity</li>
-
-<li>Post Quantum Security</li>
-
-<li>AI Agent Coordination</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="overview">
-
-<h2 class="section-title">
-
-Explore the Platform
-
-</h2>
-
-<div class="card-grid">
-
-<a href="blockchain-basics.html" class="feature-card">
-
-<h3>Blockchain Basics</h3>
-
-<p>
-
-Understand what blockchains are, how transactions work, and why decentralization matters.
-
-</p>
-
-</a>
-
-<a href="autheo.html" class="feature-card">
-
-<h3>AUTHEO</h3>
-
-<p>
-
-Learn about AUTHEO infrastructure, network, $THEO token etc.  
-  
-</p>
-
-</a>
-
-<a href="layer0.html" class="feature-card">
-
-<h3>Layer 0</h3>
-
-<p>
-
-Learn how infrastructure networks connect multiple blockchains into a scalable ecosystem.
-
-</p>
-
-</a>
-
-<a href="layer1.html" class="feature-card">
-
-<h3>Layer 1</h3>
-
-<p>
-
-Discover how transactions are processed, validated, and permanently recorded.
-
-</p>
-
-</a>
-
-<a href="cosmos-sdk.html" class="feature-card">
-
-<h3>Cosmos SDK</h3>
-
-<p>
-
-See how modular blockchain software allows developers to build custom chains.
-
-</p>
-
-</a>
-
-<a href="evm.html" class="feature-card">
-
-<h3>EVM</h3>
-
-<p>
-
-Learn how Solidity smart contracts execute across compatible blockchain networks.
-
-</p>
-
-</a>
-
-<a href="ibc.html" class="feature-card">
-
-<h3>IBC</h3>
-
-<p>
-
-Understand secure communication between independent blockchains.
-
-</p>
-
-</a>
-
-<a href="validators.html" class="feature-card">
-
-<h3>Validators</h3>
-
-<p>
-
-Discover how validators secure decentralized networks through consensus.
-
-</p>
-
-</a>
-
-<a href="did.html" class="feature-card">
-
-<h3>Decentralized Identity</h3>
-
-<p>
-
-Learn how users own their digital identities instead of relying on centralized providers.
-
-</p>
-
-</a>
-
-<a href="pqcnet.html" class="feature-card">
-
-<h3>Post Quantum Security</h3>
-
-<p>
-
-Understand how future-proof cryptography protects against quantum computing threats.
-
-</p>
-
-</a>
-
-</div>
-
-</section>
-
-<footer>
-
-<div>
-
-<h3>Understanding Autheo</h3>
-
-<p>
-
-Educational blockchain documentation built to simplify advanced decentralized technologies.
-
-</p>
-
-</div>
-
-<div>
-
-<a href="faq.html">FAQ</a>
-
-<a href="glossary.html">Glossary</a>
-
-<a href="#">GitHub</a>
-
-<a href="#">Documentation</a>
-
-</div>
-
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">One stack, read from the ground up</p>
+
+      <h1>
+        Autheo is a
+        <em>decentralized operating system</em>
+        for web, blockchain and AI.
+      </h1>
+
+      <p class="lede">
+        It coordinates web applications, blockchain networks and autonomous AI
+        agents through one execution and identity layer. This page explains how
+        that stack fits together — and links to the long-form pages that go
+        deeper.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="autheo.html">Read the architecture</a>
+        <a class="btn btn-quiet" href="blockchain-basics.html">Start with blockchain basics</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The graphic is the thing being explained: the stack as strata, with the
+       execution layer marked. It is drawn in the document, not loaded. -->
+  <figure class="strata-wrap">
+    <svg class="strata" viewBox="0 0 1200 520" role="img"
+         aria-label="Cross-section of the Autheo stack. From the top: web applications; AI agents and services; the EVM-compatible Layer 1 execution layer, marked in the accent colour; CometBFT consensus; and the Cosmos SDK Layer 0 foundation.">
+      <defs>
+        <linearGradient id="band" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="var(--accent)"/>
+          <stop offset="1" stop-color="var(--accent-2)"/>
+        </linearGradient>
+      </defs>
+
+      <g class="strata-grid" aria-hidden="true">
+        <path d="M0 60h1200M0 150h1200M0 240h1200M0 330h1200M0 420h1200"/>
+      </g>
+
+      <g class="stratum">
+        <rect x="0" y="80" width="1200" height="62"/>
+        <text x="56" y="104" class="s-num">05</text>
+        <text x="120" y="104" class="s-name">Web applications</text>
+        <text x="120" y="126" class="s-note">Users · services · enterprise systems</text>
+      </g>
+
+      <g class="stratum">
+        <rect x="0" y="170" width="1200" height="62"/>
+        <text x="56" y="194" class="s-num">04</text>
+        <text x="120" y="194" class="s-name">AI agents &amp; services</text>
+        <text x="120" y="216" class="s-note">Autonomous software coordination</text>
+      </g>
+
+      <g class="stratum stratum-marked">
+        <rect x="0" y="260" width="1200" height="62" fill="url(#band)"/>
+        <text x="56" y="284" class="s-num s-num-on">03</text>
+        <text x="120" y="284" class="s-name s-name-on">EVM-compatible Layer 1</text>
+        <text x="120" y="306" class="s-note s-note-on">Smart contracts and dApp execution</text>
+      </g>
+
+      <g class="stratum">
+        <rect x="0" y="350" width="1200" height="62"/>
+        <text x="56" y="374" class="s-num">02</text>
+        <text x="120" y="374" class="s-name">CometBFT consensus</text>
+        <text x="120" y="396" class="s-note">Byzantine fault tolerant block finality</text>
+      </g>
+
+      <g class="stratum stratum-base">
+        <rect x="0" y="440" width="1200" height="62"/>
+        <text x="56" y="464" class="s-num">01</text>
+        <text x="120" y="464" class="s-name">Cosmos SDK Layer 0</text>
+        <text x="120" y="486" class="s-note">The foundation the rest is built on</text>
+      </g>
+
+      <g class="strata-axis" aria-hidden="true">
+        <path d="M28 80v422"/>
+        <path class="arrow" d="M22 492l6 12 6-12"/>
+      </g>
+    </svg>
+    <figcaption>
+      The Autheo stack, drawn as a cross-section. Layer 03 is where applications
+      actually execute.
+    </figcaption>
+  </figure>
+
+  <section class="wrap prose">
+    <h2>What each layer is for</h2>
+
+    <div class="layers">
+      <article class="layer">
+        <p class="layer-num">01</p>
+        <h3>Cosmos SDK Layer 0</h3>
+        <p>
+          The foundation. Layer 0 provides the coordination and communication
+          substrate that the layers above it are assembled from.
+        </p>
+      </article>
+
+      <article class="layer">
+        <p class="layer-num">02</p>
+        <h3>CometBFT consensus</h3>
+        <p>
+          The agreement engine. It decides the order of transactions and when a
+          block is final, tolerating a minority of faulty or hostile validators.
+        </p>
+      </article>
+
+      <article class="layer layer-marked">
+        <p class="layer-num">03</p>
+        <h3>EVM-compatible Layer 1</h3>
+        <p>
+          The execution layer. Because it is EVM-compatible, contracts written in
+          Solidity run here with the tooling developers already use.
+        </p>
+      </article>
+
+      <article class="layer">
+        <p class="layer-num">04</p>
+        <h3>AI agents &amp; services</h3>
+        <p>
+          Autonomous software that acts on the network, coordinated through the
+          same execution and identity layer as everything else.
+        </p>
+      </article>
+
+      <article class="layer">
+        <p class="layer-num">05</p>
+        <h3>Web applications</h3>
+        <p>
+          What people actually touch: users, services and enterprise systems
+          sitting on top of the stack.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap prose">
+    <h2>Read further</h2>
+    <p>
+      Three long-form pages exist today. Each one is linked below; nothing on
+      this site points at a page that does not exist.
+    </p>
+
+    <ul class="cards">
+      <li>
+        <a href="autheo.html">
+          <h3>Autheo</h3>
+          <p>The network in detail: architecture, identity, security and agent infrastructure.</p>
+        </a>
+      </li>
+      <li>
+        <a href="blockchain-basics.html">
+          <h3>Blockchain basics</h3>
+          <p>What a blockchain is, how transactions work, and why decentralization matters.</p>
+        </a>
+      </li>
+      <li>
+        <a href="layer0.html">
+          <h3>Layer 0</h3>
+          <p>How infrastructure networks connect multiple blockchains into one ecosystem.</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>Autheo, explained — a reading room for the stack.</p>
+    <p><a href="https://github.com/SolutionsAsService/blockchain-explain">Source on GitHub</a></p>
+  </div>
 </footer>
 
-<script src="js/app.js"></script>
-
 </body>
-
 </html>
