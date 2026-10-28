@@ -282,7 +282,7 @@ no third-party host. One command, no judgement.
 |---|---|---|---|---|
 | Usability (Krug) | Second Law of Usability — many clicks are fine, ambiguous ones are not | `blockchain-basics.html` nav: 3 real links, **7 struck through (70%)**; `layer0.html` 6 of 9 struck. Struck items contradict their own pages: "Validators" and "AI Agents" struck on `autheo.html`, which contains validator and AI sections. **No legend anywhere** for the strikethrough. And `autheo.html` — the primary CTA's destination — has **zero inbound links** from the other two pages | OBJECT | Rebuild all three inner navs to the canonical four-item set; delete the 15 struck items |
 | Evidence (Tufte) | Graphical Integrity, principle 3 — show data variation, not design variation | Gradient `#3cff6e → #12b37a` runs along **x** across 1200 units in a dimension carrying no data (2.03:1 of design variation). Ruling: 6,000 sq units at a 90-unit pitch no band edge falls on, `aria-hidden`. Worst: labels are sized in **SVG user units**, so `.s-note` renders **3.5px at a 360px viewport** and 20.1px at 1920px | OBJECT, **Andon** | Labels ≥12px at 360px, and `grep -c 'url(#band)'` = 0 |
-| Craft (Bringhurst) | — | — | *transport failure on attempt 1; retried* | — |
+| Craft (Bringhurst) | §2.1.2 — a satisfactory measure is 45 to 75 characters, 66 ideal | The `h1` clamp `clamp(2.4rem, 7vw, var(--t-4))`: **the fluid term binds only across 549–558px**, a nine-pixel window. Below it, 38.4px type on a 280px measure = **14.6 characters per line**, five lines for a 68-character headline. He confirmed 62ch lands at ≈67 characters — inside the 45–75 — and found `--t-2` and `--t-3` declared and never spent | OBJECT | `clamp(1.75rem, 4.6vw + 1rem, var(--t-4))` |
 
 Andon pulled: **yes, by Tufte.** Krug declined ("the worst case is a reader who works a little harder than they should").
 
@@ -295,6 +295,7 @@ Andon pulled: **yes, by Tufte.** Krug declined ("the worst case is a reader who 
 | Krug | ADAPT | All three inner navs rebuilt to the canonical four items with `aria-current`; 15 struck items deleted; skip link and `<main id="main">` added to all three; the plumbing clause ("nothing on this site points at a page that does not exist") cut from the copy. `autheo.html` is now reachable from every page. |
 | Krug (secondary) | ADAPT | `fill="var(--accent)"` and `stop-color="var(--accent)"` were unreliable in SVG presentation attributes — the Layer 03 band could resolve to black. Both now carry literal hex on the element with a CSS class override where `var()` is supported. |
 | Tufte | ADAPT | Gradient and `<defs>` deleted (`url(#band)` 0); ruling deleted; figure rebuilt with HTML labels at 0.8rem minimum; figcaption now states that the five-layer reading is this site's own and not a quoted specification; the six figure pairs added to `tools/contrast.mjs`. |
+| Bringhurst | ADAPT | `h1` clamp now `clamp(1.75rem, 4.6vw + 1rem, var(--t-4))` — the fluid term governs 320–501px instead of 549–558px. Independently recomputed: at 320px the headline goes from 14.6 to **17.9 characters per line** and from five lines to four; at 360px `h1` is **32.6px** against his 34px release ceiling. Also: `p` capped at `min(62ch, 34em)` to guard the fallback face whose "0" is wider, `--t-2` spent on the figure's layer names, `--t-3` deleted, and layer headings given more air above than below. |
 
 ### Verification at the final state
 
@@ -302,6 +303,9 @@ Andon pulled: **yes, by Tufte.** Krug declined ("the worst case is a reader who 
 |---|---|---|
 | `grep -c 'url(#band)' index.html` | grep | **0** PASS |
 | Smallest figure label | read `css/site.css` | **0.8rem = 12.8px**, viewport-independent PASS |
+| `h1` at 360px / headline lines | recomputed from the clamp | **32.6px** (≤34) / **4 lines** (≤4) PASS |
+| Characters per line at 320px | recomputed | 14.6 → **17.9** PASS |
+| Dead type tokens | `grep -c "^  --t-n:"` vs `grep -c "var(--t-n)"` | **0 dead** (`--t-2` now spent, `--t-3` removed) PASS |
 | Pages passing acceptance | `node tools/verify.mjs` | **4 of 4** PASS |
 | Colour pairs passing | `node tools/contrast.mjs` | **24 of 24** PASS, lowest 4.99:1 |
 | `gridMove` / `filter:blur(` / `outline:none` | grep | 0 / 0 / 0 PASS |

@@ -10,12 +10,13 @@
    tools/contrast.mjs — run: node tools/contrast.mjs */
 
 :root {
-  /* Type: one modular scale, ratio 1.25. */
+  /* Type: one modular scale, ratio 1.25. Steps in use: --t--1, --t-0,
+     --t-1, --t-2 and --t-4. A step declared and never spent is noise, so
+     --t-3 is not declared. */
   --t--1: 0.8rem;
   --t-0: 1rem;
   --t-1: 1.25rem;
   --t-2: 1.563rem;
-  --t-3: 1.953rem;
   --t-4: 2.441rem;
 
   --measure: 62ch;
@@ -133,7 +134,7 @@ h3 {
 }
 
 p {
-  max-width: var(--measure);
+  max-width: min(var(--measure), 34em);
   margin: 0 0 calc(var(--u) * 3);
 }
 
@@ -228,7 +229,7 @@ p {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 7vw, var(--t-4));
+  font-size: clamp(1.75rem, 4.6vw + 1rem, var(--t-4));
   font-weight: 900;
   letter-spacing: -0.03em;
   max-width: 22ch;
@@ -388,7 +389,7 @@ p {
 .s-name {
   grid-area: name;
   font-family: var(--font-mono);
-  font-size: clamp(1rem, 2.4vw, var(--t-1));
+  font-size: clamp(1rem, 2.4vw, var(--t-2));
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -461,7 +462,7 @@ p {
   font-size: var(--t--1);
   letter-spacing: 0.14em;
   color: var(--accent);
-  margin-bottom: var(--u);
+  margin-bottom: calc(var(--u) * 1.5);
 }
 
 .layer h3 {
