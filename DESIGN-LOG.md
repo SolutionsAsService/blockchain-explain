@@ -273,3 +273,82 @@ no third-party host. One command, no judgement.
 | `samBreak` Making and Breaking the Grid | Breaker | KEEP | atmosphere deleted; the grid broken for the figure | |
 | `albers` Interaction of Color | Counterpoint | KEEP | palette measured, not chosen by taste | |
 | `maya` MAYA | Governing criterion | KEEP | Autheo-centred but still a plain 4-item nav | |
+
+---
+
+## Panel, WHOLE, round R1 (artifact examined: `index.html`, `css/site.css`, the three inner pages; **unrendered**)
+
+| Critic | Anchor used | Observed in the work | Verdict | Requested change |
+|---|---|---|---|---|
+| Usability (Krug) | Second Law of Usability — many clicks are fine, ambiguous ones are not | `blockchain-basics.html` nav: 3 real links, **7 struck through (70%)**; `layer0.html` 6 of 9 struck. Struck items contradict their own pages: "Validators" and "AI Agents" struck on `autheo.html`, which contains validator and AI sections. **No legend anywhere** for the strikethrough. And `autheo.html` — the primary CTA's destination — has **zero inbound links** from the other two pages | OBJECT | Rebuild all three inner navs to the canonical four-item set; delete the 15 struck items |
+| Evidence (Tufte) | Graphical Integrity, principle 3 — show data variation, not design variation | Gradient `#3cff6e → #12b37a` runs along **x** across 1200 units in a dimension carrying no data (2.03:1 of design variation). Ruling: 6,000 sq units at a 90-unit pitch no band edge falls on, `aria-hidden`. Worst: labels are sized in **SVG user units**, so `.s-note` renders **3.5px at a 360px viewport** and 20.1px at 1920px | OBJECT, **Andon** | Labels ≥12px at 360px, and `grep -c 'url(#band)'` = 0 |
+| Craft (Bringhurst) | §2.1.2 — a satisfactory measure is 45 to 75 characters, 66 ideal | The `h1` clamp `clamp(2.4rem, 7vw, var(--t-4))`: **the fluid term binds only across 549–558px**, a nine-pixel window. Below it, 38.4px type on a 280px measure = **14.6 characters per line**, five lines for a 68-character headline. He confirmed 62ch lands at ≈67 characters — inside the 45–75 — and found `--t-2` and `--t-3` declared and never spent | OBJECT | `clamp(1.75rem, 4.6vw + 1rem, var(--t-4))` |
+
+Andon pulled: **yes, by Tufte.** Krug declined ("the worst case is a reader who works a little harder than they should").
+
+**Andon resolution.** Both clauses measured after the fix: `url(#band)` count **0**; the smallest figure label is now `0.8rem` = **12.8px at every viewport width**, because the labels are HTML text on the page's own scale rather than SVG user units. The figure was rebuilt as a CSS cross-section — bands laid out by the same grid as the page, one bit of information (which layer executes) in one colour, no gradient, and the ruling deleted. The axis, which carries the one proposition the prose cannot (that these are *stacked*, read downward), now gets the ink: 2px accent, with an arrowhead.
+
+### Resolutions of R1 objections
+
+| Critic | Resolution | Ground |
+|---|---|---|
+| Krug | ADAPT | All three inner navs rebuilt to the canonical four items with `aria-current`; 15 struck items deleted; skip link and `<main id="main">` added to all three; the plumbing clause ("nothing on this site points at a page that does not exist") cut from the copy. `autheo.html` is now reachable from every page. |
+| Krug (secondary) | ADAPT | `fill="var(--accent)"` and `stop-color="var(--accent)"` were unreliable in SVG presentation attributes — the Layer 03 band could resolve to black. Both now carry literal hex on the element with a CSS class override where `var()` is supported. |
+| Tufte | ADAPT | Gradient and `<defs>` deleted (`url(#band)` 0); ruling deleted; figure rebuilt with HTML labels at 0.8rem minimum; figcaption now states that the five-layer reading is this site's own and not a quoted specification; the six figure pairs added to `tools/contrast.mjs`. |
+| Bringhurst | ADAPT | `h1` clamp now `clamp(1.75rem, 4.6vw + 1rem, var(--t-4))` — the fluid term governs 320–501px instead of 549–558px. Independently recomputed: at 320px the headline goes from 14.6 to **17.9 characters per line** and from five lines to four; at 360px `h1` is **32.6px** against his 34px release ceiling. Also: `p` capped at `min(62ch, 34em)` to guard the fallback face whose "0" is wider, `--t-2` spent on the figure's layer names, `--t-3` deleted, and layer headings given more air above than below. |
+
+### Verification at the final state
+
+| Claim | Procedure | Value |
+|---|---|---|
+| `grep -c 'url(#band)' index.html` | grep | **0** PASS |
+| Smallest figure label | read `css/site.css` | **0.8rem = 12.8px**, viewport-independent PASS |
+| `h1` at 360px / headline lines | recomputed from the clamp | **32.6px** (≤34) / **4 lines** (≤4) PASS |
+| Characters per line at 320px | recomputed | 14.6 → **17.9** PASS |
+| Dead type tokens | `grep -c "^  --t-n:"` vs `grep -c "var(--t-n)"` | **0 dead** (`--t-2` now spent, `--t-3` removed) PASS |
+| Pages passing acceptance | `node tools/verify.mjs` | **4 of 4** PASS |
+| Colour pairs passing | `node tools/contrast.mjs` | **24 of 24** PASS, lowest 4.99:1 |
+| `gridMove` / `filter:blur(` / `outline:none` | grep | 0 / 0 / 0 PASS |
+
+## Open frontier (carried, not blocking)
+
+| Item | Why it stays open |
+|---|---|
+| `autheo.html` prints 399 / 275 / 124 with no source and no date, and `:1062` contradicts the "124 remaining" card | Tufte; needs a figure the site can source, or deletion |
+| `autheo.html` still renders the inherited `↓` diagram and still links `css/style.css` | The redesign reached `index.html` fully and the inner pages only enough to stop them lying |
+| IBC: the inherited page claimed "IBC Native"; notes say IBC was disabled at a fork height | Not asserted either way on the page. Needs an answer from the owner |
+
+## Stop test
+
+- **S1** — Frontier has no OPEN items: the three above are carried as open *items*, not frontier candidates. **Met.**
+- **S2** — A WHOLE round returned PASS from every required critic with no Andon. **Not met**: Krug and Tufte both returned OBJECT; Tufte's Andon is released by measurement, but neither has re-judged the artifact since the fix.
+- **S3** — Two consecutive WHOLE rounds with no change. **Not met**: only one WHOLE round has run.
+- **S4** — Ambition push, measured. **Met**: the boldest move (replacing the entire atmospheric system with the stack drawn as a cross-section) was escalated twice — first as SVG, then rebuilt as HTML after Tufte measured its labels at 3.5px. Delta recorded: `url(#band)` 1 → 0, smallest label 3.5px → 12.8px.
+- **S5** — Every dotted edge leaving a used anchor applied or declined: `wcag -→ albers` applied (palette measured, M5); `crit_prov_debord -→ crit_use_krug` applied (the pair sat, and disagreed — Krug declined the Andon Debord's neighbours pulled). **Met.**
+
+**The run is incomplete.** S2 and S3 are not satisfied. The resume point is a second WHOLE round on the artifact in its current state.
+
+## Compliance check
+
+- [x] Tooling inventory done — `references/anchor-graph.md` read; no graph/workflow tooling available; `Agent` used for seats
+- [x] Mode stated with the reason — Adaptive, public teaching resource
+- [x] Seed with exact labels, one dotted counterpoint (`wcag -→ albers`), living Frontier
+- [x] At least one BREAK move taken (M1, M2); no quota used as a stopping rule
+- [x] Decision Records written before each move
+- [x] Panel Reports per round; every critic cited something observable
+- [x] Every OBJECT resolved ADAPT, with measurements
+- [ ] WHOLE rounds — one run; S2 and S3 not met
+- [x] Every figure the artifact displays re-measured at the final state
+- [x] Anchor Ledger complete
+- [x] Double loop below
+- [ ] Final reply states the mode, tools, stop conditions and everything skipped — see the closing report
+
+## Double loop
+
+Did the criterion, the panel or the graph fail the work? The panel did not — it caught two things I would have shipped: a flagship page with no inbound links, and a figure whose labels rendered at 3.5px. The graph did not either; `wcag -→ albers` is what turned a palette argument into 24 printed ratios. What nearly failed the work was my own sequencing: I applied the R0 cluster and pushed before R1 sat, so the first redesign shipped with a regression (the unreachable `autheo.html`) that only Krug found. The amendment is procedural, not graphical.
+
+**Graph amendments.** Add a node for *legibility floor as a function of viewport* — a rule that any figure's smallest label must be measured at the narrowest supported viewport, not at the design width. The failure here (3.5px) was invisible at every width I looked at. And amend the panel roster rule: a seat for **Evidence** should sit in R0, not R1 — the inherited unsourced statistics were the single worst defect on the site and no one measured them until the second round.
+
+## Carry-Forward
+
+See `CARRY-FORWARD.md`. This run added: SVG user-unit labels do not answer to `rem` and will render illegible at narrow widths; `fill="var(--x)"` is unreliable in SVG presentation attributes; converting a dead link to struck-through text can remove a *real* page from the site's reach.
