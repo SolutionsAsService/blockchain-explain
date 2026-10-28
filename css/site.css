@@ -1,0 +1,506 @@
+/* Autheo, explained — SolutionsAsService
+   The design system for index.html. One accent, one scale, no third-party
+   request: this file imports nothing.
+
+   The inherited sheet carried a drifting 60px grid, two 600px blurred glows and
+   a 30-second keyframe loop. None of that is here. What replaces it is the stack
+   itself, drawn in the document as an SVG cross-section.
+
+   Every text/background pair used here is listed and measured in
+   tools/contrast.mjs — run: node tools/contrast.mjs */
+
+:root {
+  /* Type: one modular scale, ratio 1.25. */
+  --t--1: 0.8rem;
+  --t-0: 1rem;
+  --t-1: 1.25rem;
+  --t-2: 1.563rem;
+  --t-3: 1.953rem;
+  --t-4: 2.441rem;
+
+  --measure: 62ch;
+
+  --font-text: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+
+  --paper: #0a0c0b;
+  --panel: #121614;
+  --raised: #171c19;
+  --ink: #e8ede9;
+  --muted: #9ba8a0;
+  --rule: #232b26;
+  --accent: #3cff6e;
+  --accent-2: #12b37a;
+  --on-accent: #04120a;
+
+  --u: 0.5rem;
+  --radius: 3px;
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --paper: #f4f6f4;
+  --panel: #ffffff;
+  --raised: #eef2ef;
+  --ink: #0a0c0b;
+  --muted: #4d5a53;
+  --rule: #cfd8d2;
+  --accent: #0f7a3d;
+  --accent-2: #12b37a;
+  --on-accent: #ffffff;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* The masthead is not sticky here, but in-page jumps must still clear it. */
+  scroll-padding-top: calc(var(--u) * 12);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--t-0);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Holmes and Mace: the keyboard is a first-class reader. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: var(--u);
+  top: var(--u);
+  transform: translateY(-200%);
+  z-index: 40;
+  background: var(--panel);
+  color: var(--ink);
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 2);
+  border: 2px solid var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.skip:focus {
+  transform: none;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: calc(var(--u) * 4);
+}
+
+@media (max-width: 40rem) {
+  .wrap {
+    padding-inline: calc(var(--u) * 2.5);
+  }
+}
+
+a {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+p {
+  max-width: var(--measure);
+  margin: 0 0 calc(var(--u) * 3);
+}
+
+/* ---------------------------------------------------------------- masthead */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 4);
+  padding-block: calc(var(--u) * 3);
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 2);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--ink);
+  flex: none;
+}
+
+.brand-word {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--t-0);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.brand-sub {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  gap: calc(var(--u) * 3);
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  padding-block: calc(var(--u) * 0.5);
+  border-bottom: 2px solid transparent;
+}
+
+.nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--rule);
+}
+
+.nav a[aria-current="page"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* -------------------------------------------------------------------- hero */
+
+.hero {
+  padding-block: calc(var(--u) * 14) calc(var(--u) * 10);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: calc(var(--u) * 3);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 7vw, var(--t-4));
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  max-width: 22ch;
+  margin-bottom: calc(var(--u) * 5);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.lede {
+  font-size: var(--t-1);
+  color: var(--muted);
+  max-width: 46ch;
+  margin-bottom: calc(var(--u) * 6);
+}
+
+.hero-actions {
+  display: flex;
+  gap: calc(var(--u) * 2);
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  padding: calc(var(--u) * 2.25) calc(var(--u) * 4);
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.12);
+}
+
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+
+.btn-quiet:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------ the graphic */
+
+.strata-wrap {
+  margin: 0 0 calc(var(--u) * 12);
+  padding-inline: calc(var(--u) * 4);
+}
+
+@media (max-width: 40rem) {
+  .strata-wrap {
+    padding-inline: calc(var(--u) * 2.5);
+  }
+}
+
+.strata {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+}
+
+.strata-grid path {
+  stroke: var(--rule);
+  stroke-width: 1;
+  fill: none;
+}
+
+.stratum rect {
+  fill: var(--raised);
+}
+
+.s-num {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--muted);
+}
+
+.s-num-on {
+  fill: var(--on-accent);
+  opacity: 0.75;
+}
+
+.s-name {
+  font-family: var(--font-text);
+  font-size: 21px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+.s-name-on {
+  fill: var(--on-accent);
+}
+
+.s-note {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--muted);
+}
+
+.s-note-on {
+  fill: var(--on-accent);
+  opacity: 0.8;
+}
+
+.strata-axis path {
+  stroke: var(--rule);
+  stroke-width: 1;
+  fill: none;
+}
+
+.strata-axis .arrow {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.strata-wrap figcaption {
+  margin-top: calc(var(--u) * 2);
+  font-size: var(--t--1);
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+/* ------------------------------------------------------------------ prose */
+
+.prose {
+  padding-block: calc(var(--u) * 6);
+}
+
+.prose h2 {
+  font-family: var(--font-mono);
+  font-size: var(--t-1);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  margin-bottom: calc(var(--u) * 4);
+  padding-bottom: var(--u);
+  border-bottom: 1px solid var(--rule);
+}
+
+.layers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: calc(var(--u) * 3);
+}
+
+.layer {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: calc(var(--u) * 3);
+}
+
+.layer-marked {
+  border-color: var(--accent);
+}
+
+.layer-num {
+  font-family: var(--font-mono);
+  font-size: var(--t--1);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: var(--u);
+}
+
+.layer h3 {
+  font-size: var(--t-0);
+  margin-bottom: var(--u);
+}
+
+.layer p:last-child {
+  margin-bottom: 0;
+  font-size: var(--t--1);
+  color: var(--muted);
+  max-width: none;
+}
+
+/* ------------------------------------------------------------------ cards */
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: calc(var(--u) * 3);
+}
+
+.cards a {
+  display: block;
+  height: 100%;
+  padding: calc(var(--u) * 3);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.cards a:hover {
+  border-color: var(--accent);
+}
+
+.cards h3 {
+  font-family: var(--font-mono);
+  font-size: var(--t-0);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--u);
+}
+
+.cards p {
+  font-size: var(--t--1);
+  color: var(--muted);
+  margin: 0;
+  max-width: none;
+}
+
+/* ----------------------------------------------------------------- footer */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  padding-block: calc(var(--u) * 5);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(var(--u) * 3);
+  flex-wrap: wrap;
+}
+
+.footer p {
+  margin: 0;
+  font-size: var(--t--1);
+  color: var(--muted);
+  max-width: none;
+}
+
+@media print {
+  .masthead,
+  .hero-actions {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* A topic with no page must not look like a door. */
+.not-written {
+  color: var(--muted);
+  text-decoration: line-through;
+  cursor: default;
+  opacity: .75;
+}
