@@ -8,6 +8,7 @@
 <meta property="og:title" content="The Cosmos SDK · Blockchain, explained">
 <meta property="og:description" content="Consensus orders transactions but does not know what they mean. The Cosmos SDK is a framework for writing that meaning: the chain&#x27;s own application.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,15 +26,16 @@
 <article class="wrap">
   <p class="kicker">Layer 2 of 4</p>
   <h1>The Cosmos SDK</h1>
-  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-execution"><a href="evm.html"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework on"><a href="cosmos-sdk.html" aria-current="true"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="evm.html#apps"><span>Apps</span><small>Applications</small></a></li><li class="ls-execution"><a href="evm.html"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework on"><a href="cosmos-sdk.html" aria-current="true"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
   <p class="lede">Consensus orders transactions but does not know what they mean. The Cosmos SDK is a framework for writing that meaning: the chain&#x27;s own application.</p>
   <h2>ABCI: the line between the two</h2><p>CometBFT hands each block to the application through an interface called ABCI (the Application Blockchain Interface). The application checks each transaction, applies it, and reports back. Consensus never needs to understand balances or contracts. It only needs the order.</p>
 <p>That split is why the Cosmos SDK can build very different chains on the same consensus engine.</p><h2>Modules</h2><p>A Cosmos SDK chain is assembled from modules, each one owning a part of the state: <code>bank</code> for balances, <code>staking</code> for validators and their stake, <code>gov</code> for on-chain votes, and <code>ibc</code> for talking to other chains (see <a href="layer0.html">Layer 0</a>). A chain built this way is called an <em>application-specific blockchain</em>: it exists to run one application well.</p>
   <p class="docs">Further: <a href="https://docs.cosmos.network/">Cosmos SDK documentation</a></p>
 </article>
+<nav class="pager" aria-label="Previous and next"><a href="consensus.html" rel="prev"><small>← Previous</small><span>Consensus</span></a><a class="nx" href="evm.html" rel="next"><small>Next →</small><span>EVM</span></a></nav>
 </main>
 <footer class="foot">
-  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
 </footer>
 </body>
 </html>

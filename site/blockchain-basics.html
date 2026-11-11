@@ -8,6 +8,7 @@
 <meta property="og:title" content="Basics · Blockchain, explained">
 <meta property="og:description" content="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -37,7 +38,7 @@
   <p>Changing one letter, <code>blockchain</code> to <code>Blockchain</code>, changes the hash from <code>ef7797e13d…</code> to <code>625da44e4e…</code>: 62 of the 64 digits differ.</p>
 
   <h2 id="chain">2 · The chain</h2>
-  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Re-linking that block changes its hash too, so the break moves down the chain: to rewrite one block, you must rewrite every block after it.</p>
+  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
   <div class="demo" data-demo="chain"><ol class="chain"><li class="blk" data-i="0">
   <div class="blk-h">Block 0</div>
   <label>Data <input type="text" value="Genesis" data-role="data" data-default="Genesis"></label>
@@ -63,7 +64,8 @@
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9">2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li></ol>
-    <button type="button" data-role="relink">Re-link the chain</button>
+    <button type="button" data-role="relink">Re-link the broken block</button>
+    <p class="relinked" data-role="count" role="status"></p>
     <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
 
   <h2 id="merkle">3 · Merkle trees</h2>
@@ -73,11 +75,12 @@
     <ol class="pairs"><li><code data-role="pair">d5a646a96efb…</code></li><li><code data-role="pair">320a971dbf5f…</code></li></ol>
     <p class="hx big"><span>Merkle root</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
   </div>
-  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, where hash chains and Merkle trees first met · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
+  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
 </article>
+<nav class="pager" aria-label="Previous and next"><a href="index.html" rel="prev"><small>← Previous</small><span>Home</span></a><a class="nx" href="consensus.html" rel="next"><small>Next →</small><span>Consensus</span></a></nav>
 </main>
 <footer class="foot">
-  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
 </footer>
 </body>
 </html>

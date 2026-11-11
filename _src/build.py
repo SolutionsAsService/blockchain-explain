@@ -74,6 +74,32 @@ def logo_mark():
     return "".join(parts)
 
 
+LOGO_COLOURS = {
+    "light": {"bg": "#f6f7f4", "frame": "#1b2a22", "path": "#1b2a22",
+              "top": ("#cfdcd3", "#b4c6b9", "#9fb5a6"), "mid": ("#86b398", "#6c9b7f", "#5a8a6d"), "base": ("#1a7d47", "#146b3e", "#0f5a33")},
+    "dark": {"bg": "#121513", "frame": "#eef1ec", "path": "#eef1ec",
+             "top": ("#e8efe9", "#c4d0c7", "#a9b8ad"), "mid": ("#8fc7a5", "#6fa886", "#5b8f70"), "base": ("#2fbf6e", "#1f8a52", "#176b40")},
+}
+
+
+def logo_file(scheme, favicon=False):
+    """Logo 2.0 as a standalone SVG with solid fills: v1's frame and three bars, as three slabs, green at the base."""
+    c = LOGO_COLOURS[scheme]
+    hw, hh, t = (14, 5.5, 3.5) if favicon else (12, 5, 3)
+    ys = (28.5, 19.5, 10.5) if favicon else (27, 19.5, 12)
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="160" height="160">',
+           f'<rect width="40" height="40" rx="{8 if favicon else 6}" fill="{c["bg"]}"/>']
+    if not favicon:
+        out.append(f'<rect x="2" y="2" width="36" height="36" rx="5" fill="none" stroke="{c["frame"]}" stroke-width="1.2"/>')
+    for y, key in zip(ys, ("base", "mid", "top")):
+        tp, l, r = slab_pts(20, y, hw, hh, t)
+        ft, fl, fr = c[key]
+        out.append(f'<polygon points="{l}" fill="{fl}"/><polygon points="{r}" fill="{fr}"/><polygon points="{tp}" fill="{ft}"/>')
+    if not favicon:
+        out.append(f'<path d="M20 5.5V35" stroke="{c["path"]}" stroke-width="1.2" stroke-dasharray="1.5 2" fill="none"/>')
+    return "".join(out) + "</svg>\n"
+
+
 # ------------------------------------------------------------------ hero
 def stack(cx, base_y, hw, hh, t, gap, labels, prefix, href_ok=True, chain_name=""):
     """Four slabs, bottom (consensus) to top (apps); returns svg and the y of each slab."""
@@ -136,11 +162,16 @@ def hero_narrow():
          f'<text x="180" y="{base + 120}" text-anchor="middle" class="br-t">→ Basics</text></a>',
          a,
          f'<a href="layer0.html" class="bridge" aria-label="Layer 0: IBC, the bridge to another chain">'
-         f'<path d="M{150 + hw - 4},{fy + 4} L356,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
-         f'<rect x="{262}" y="{fy - 58}" width="94" height="44" rx="10" class="br-pill"/>'
-         f'<text x="309" y="{fy - 39}" text-anchor="middle" class="br-pt">IBC →</text>'
-         f'<text x="309" y="{fy - 21}" text-anchor="middle" class="br-pt">Layer 0</text></a>',
+         f'<path d="M{150 + hw - 4},{fy + 4} L330,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
+         f'<rect x="332" y="{fy - 40}" width="28" height="96" rx="4" class="stub"/>'
+         f'<text x="346" y="{fy + 8}" text-anchor="middle" class="stub-t" transform="rotate(-90 346 {fy + 8})">Chain B</text>'
+         f'<rect x="252" y="{fy - 54}" width="78" height="48" rx="10" class="br-pill"/>'
+         f'<text x="291" y="{fy - 34}" text-anchor="middle" class="br-pt">IBC →</text>'
+         f'<text x="291" y="{fy - 15}" text-anchor="middle" class="br-pt">Layer 0</text></a>',
          f'<path d="M80,{ys[-1] - hh + 22} L80,{base + 66}" class="tx" marker-end="url(#ahn)"/>',
+         f'<text x="150" y="{ys[-1] - hh - 14}" text-anchor="middle" class="ch">Chain A</text>',
+         f'<text x="8" y="{ys[-1] - hh - 2}" class="tx-t">a transaction</text>',
+         f'<text x="8" y="{ys[-1] - hh + 15}" class="tx-t">travels down</text>',
          '</svg>']
     return "".join(s)
 
@@ -148,6 +179,22 @@ def hero_narrow():
 # ------------------------------------------------------------------ layout
 NAV = [("index.html", "Home"), ("blockchain-basics.html", "Basics"), ("consensus.html", "Consensus"), ("cosmos-sdk.html", "Cosmos SDK"),
        ("evm.html", "EVM"), ("layer0.html", "Layer 0"), ("autheo.html", "Autheo"), ("glossary.html", "Glossary")]
+
+
+def pager(path):
+    order = [h for h, _ in NAV]
+    if path not in order or path == "index.html":
+        return ""
+    i = order.index(path)
+    prev = order[i - 1] if i > 0 else None
+    nxt = order[i + 1] if i + 1 < len(order) else None
+    lab = dict(NAV)
+    out = '<nav class="pager" aria-label="Previous and next">'
+    if prev:
+        out += f'<a href="{prev}" rel="prev"><small>← Previous</small><span>{lab[prev]}</span></a>'
+    if nxt:
+        out += f'<a class="nx" href="{nxt}" rel="next"><small>Next →</small><span>{lab[nxt]}</span></a>'
+    return out + "</nav>"
 
 
 def page(path, title, body, desc, active=None, demos=False):
@@ -164,6 +211,7 @@ def page(path, title, body, desc, active=None, demos=False):
 <meta property="og:title" content="{e(full)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="{SITE_URL}/og.png">
+<meta property="og:site_name" content="{K.SITE}">
 <meta name="theme-color" content="#f6f7f4">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -179,9 +227,10 @@ def page(path, title, body, desc, active=None, demos=False):
 </header>
 <main id="main">
 {body}
+{pager(path)}
 </main>
 <footer class="foot">
-  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+  <p><strong>{K.SITE}.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
 </footer>
 </body>
 </html>
@@ -192,7 +241,7 @@ def page(path, title, body, desc, active=None, demos=False):
 def layer_strip(active_key):
     """The stack, as a row of four, with this page's layer marked."""
     items = "".join(f'<li class="ls-{k}{" on" if k == active_key else ""}"><a href="{h}"{" aria-current=\"true\"" if k == active_key else ""}><span>{e(name)}</span><small>{e(role)}</small></a></li>'
-                    for k, h, name, role, _ in reversed(K.LAYERS) if k != "apps")
+                    for k, h, name, role, _ in reversed(K.LAYERS))
     return f'<nav class="lstrip" aria-label="The stack, top to bottom"><ol>{items}</ol></nav>'
 
 
@@ -205,7 +254,7 @@ def build_home(ex):
   <div class="hero-text">
     <p class="kicker">One stack, from the bedrock up</p>
     <h1 id="h1">Blockchain, explained</h1>
-    <p class="lede">How a blockchain fits together, layer by layer, and how two chains talk. Every hash on this site is computed as you read it.</p>
+    <p class="lede">How a blockchain fits together, layer by layer, and how two chains talk. Every hash on the site is real, and you can change the input yourself.</p>
     <a class="start" href="blockchain-basics.html">Start with the basics →</a>
   </div>
   {hero_wide(ex)}
@@ -253,9 +302,10 @@ def build_basics(ex):
   <p>Changing one letter, <code>{e(K.HASH_INPUT)}</code> to <code>{e(K.HASH_INPUT_2)}</code>, changes the hash from <code>{short(ex["h1"])}</code> to <code>{short(ex["h2"])}</code>: {ex["diff"]} of the 64 digits differ.</p>
 
   <h2 id="chain">2 · The chain</h2>
-  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Re-linking that block changes its hash too, so the break moves down the chain: to rewrite one block, you must rewrite every block after it.</p>
+  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
   <div class="demo" data-demo="chain"><ol class="chain">{chain_html}</ol>
-    <button type="button" data-role="relink">Re-link the chain</button>
+    <button type="button" data-role="relink">Re-link the broken block</button>
+    <p class="relinked" data-role="count" role="status"></p>
     <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
 
   <h2 id="merkle">3 · Merkle trees</h2>
@@ -265,7 +315,7 @@ def build_basics(ex):
     <ol class="pairs">{pair_html}</ol>
     <p class="hx big"><span>Merkle root</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
   </div>
-  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, where hash chains and Merkle trees first met · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
+  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
 </article>"""
     page("blockchain-basics.html", "Basics", body, "Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.", active="blockchain-basics.html", demos=True)
 
@@ -358,8 +408,11 @@ def main():
     build_glossary()
     build_about(ex)
     build_404()
+    (OUT / "favicon.svg").write_text(logo_file("dark", favicon=True))
+    for scheme, name in (("light", "logo-v2.svg"), ("dark", "logo-v2-dark.svg")):
+        (ROOT / "brand" / name).write_text("<!-- Logo 2.0, written by _src/build.py: v1's frame and three bars as three slabs of the stack, the green base kept, a transaction's path through it. -->\n" + logo_file(scheme))
     (OUT / "computed.json").write_text(json.dumps(ex, indent=1) + "\n")
-    problems = check_links() + check_deploy()
+    problems = check_links() + check_deploy() + ([] if (OUT / "og.png").exists() else ["site/og.png missing: run node _src/og.cjs"])
     print(f"built {len(list(OUT.glob('*.html')))} pages; chain tip {ex['chain'][-1]['hash'][:12]}, merkle root {ex['merkle'][-1][0][:12]}")
     if problems:
         print("problems:", *problems, sep="\n  ")

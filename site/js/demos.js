@@ -34,15 +34,17 @@
       return sha(i + "|" + q(b, "prev").textContent + "|" + q(b, "data").value).then(function (h) { q(b, "hash").textContent = h; });
     }
     blocks.forEach(function (b) { q(b, "data").addEventListener("input", function () { rehash(b).then(status); }); });
+    var rewritten = 0;
     q(d, "relink").addEventListener("click", function () {
-      var p = Promise.resolve();
-      blocks.forEach(function (b, i) {
-        p = p.then(function () {
-          if (i > 0) q(b, "prev").textContent = q(blocks[i - 1], "hash").textContent;
-          return rehash(b);
-        });
+      var i = blocks.findIndex(function (b) { return b.classList.contains("broken"); });
+      var out = q(d, "count");
+      if (i < 0) { out.textContent = rewritten ? "Every link holds again: " + rewritten + " block" + (rewritten > 1 ? "s" : "") + " rewritten to hide your edit." : "Nothing is broken. Edit a block first."; return; }
+      q(blocks[i], "prev").textContent = q(blocks[i - 1], "hash").textContent;
+      rehash(blocks[i]).then(function () {
+        rewritten++; status();
+        var more = blocks.some(function (b) { return b.classList.contains("broken"); });
+        out.textContent = "Block " + i + " rewritten (" + rewritten + " so far). " + (more ? "Its hash changed, so the break moved to block " + (i + 1) + "." : "Every link holds again, after rewriting " + rewritten + " block" + (rewritten > 1 ? "s" : "") + ".");
       });
-      p.then(status);
     });
     if (canHash) Promise.all(blocks.map(rehash)).then(status);
   });

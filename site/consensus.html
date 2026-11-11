@@ -8,6 +8,7 @@
 <meta property="og:title" content="Consensus: CometBFT · Blockchain, explained">
 <meta property="og:description" content="Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,7 +26,7 @@
 <article class="wrap">
   <p class="kicker">Layer 1 of 4, the bottom</p>
   <h1>Consensus: CometBFT</h1>
-  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-execution"><a href="evm.html"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework"><a href="cosmos-sdk.html"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="evm.html#apps"><span>Apps</span><small>Applications</small></a></li><li class="ls-execution"><a href="evm.html"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework"><a href="cosmos-sdk.html"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
   <p class="lede">Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.</p>
   <h2>What consensus decides</h2><p>Every validator (a computer that takes part in agreeing) sees transactions arrive in a different order. Consensus decides <em>one</em> order, groups it into a block, and decides when that block is <em>final</em>: settled for good.</p>
 <p>CometBFT (formerly Tendermint Core) works in rounds. One validator proposes a block. The others vote twice, first a <em>prevote</em> and then a <em>precommit</em>. A block is final as soon as validators holding more than two thirds of the voting power have precommitted it. There are no forks to wait out.</p><h2>How many can fail</h2><p>The guarantee holds as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together against the rest. That is the limit for any protocol of this kind, called Byzantine fault tolerance.</p>
@@ -35,9 +36,10 @@
 <p class="demo-out">Needed to finalize: <strong data-role="q">7</strong> · faulty it can survive: <strong data-role="f">3</strong></p></div>
   <p class="docs">Further: <a href="https://docs.cometbft.com/">CometBFT documentation</a></p>
 </article>
+<nav class="pager" aria-label="Previous and next"><a href="blockchain-basics.html" rel="prev"><small>← Previous</small><span>Basics</span></a><a class="nx" href="cosmos-sdk.html" rel="next"><small>Next →</small><span>Cosmos SDK</span></a></nav>
 </main>
 <footer class="foot">
-  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
 </footer>
 </body>
 </html>

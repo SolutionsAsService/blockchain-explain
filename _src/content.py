@@ -78,7 +78,7 @@ PAGES = {
 <li><strong>Cosmos SDK base</strong>: the application framework. <a href="cosmos-sdk.html">How it works</a>.</li>
 <li><strong>EVM-compatible execution</strong>: the contract layer. <a href="evm.html">How it works</a>.</li>
 <li><strong>Connecting to other chains</strong>: IBC. <a href="layer0.html">How it works</a>.</li>
-<li><strong>Post-quantum cryptography</strong>: signature schemes meant to resist quantum computers. NIST standardized the first ones in 2024 (ML-KEM, ML-DSA and SLH-DSA). <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">NIST</a>.</li>
+<li><strong>Post-quantum cryptography</strong>: cryptography meant to resist quantum computers. NIST standardized the first in 2024: ML-KEM for key exchange, and ML-DSA and SLH-DSA for signatures. <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">NIST</a>.</li>
 </ul>"""),
         ],
         "docs": [],
