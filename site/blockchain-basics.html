@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Basics · Blockchain, explained</title>
+<title>The basics · Blockchain, explained</title>
 <meta name="description" content="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.">
-<meta property="og:title" content="Basics · Blockchain, explained">
+<meta property="og:title" content="The basics · Blockchain, explained">
 <meta property="og:description" content="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
 <meta property="og:site_name" content="Blockchain, explained">
@@ -23,27 +23,33 @@
   <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html" aria-current="page">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
 </header>
 <main id="main">
-<article class="wrap">
-  <p class="kicker">The bedrock, under every layer</p>
-  <h1>The basics</h1>
-  <p class="lede">A blockchain is a list of blocks, each holding the fingerprint of the one before, kept by many computers at once. Three ideas make it work. Each one below runs in your browser.</p>
-  <nav class="toc" aria-label="On this page"><a href="#hash">1 · Hashes</a><a href="#chain">2 · The chain</a><a href="#merkle">3 · Merkle trees</a></nav>
-
-  <h2 id="hash">1 · A hash is a fingerprint</h2>
-  <p>SHA-256 turns any text into 64 hexadecimal digits (the digits 0–9 and the letters a–f). The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
-  <div class="demo" data-demo="hash">
-    <label>Type anything <input type="text" value="blockchain" data-role="in"></label>
-    <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1">ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1</code></p>
-  </div>
-  <p>Changing one letter, <code>blockchain</code> to <code>Blockchain</code>, changes almost every digit:</p>
-  <div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
-    <p><span>blockchain</span><code>ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74d<mark>d</mark>434d<mark>1</mark></code></p>
-    <p><span>Blockchain</span><code>625da44e4eaf58d61cf048d168aa6f5e492dea166d8bb54ec06c30de07<mark>d</mark>b57e<mark>1</mark></code></p>
-    <p class="cmp-n">2 of 64 digits match by position (marked); 62 differ.</p></div>
-
-  <h2 id="chain">2 · The chain</h2>
-  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
-  <div class="demo" data-demo="chain"><ol class="chain"><li class="blk" data-i="0">
+<div class="doc">
+  <aside class="side" aria-label="Where you are">
+    <p class="side-where"><span>You are here</span>The bedrock, under every level</p>
+    <svg class="mini" viewBox="0 0 200 268" role="group" aria-label="Where this page sits in the stack"><a href="blockchain-basics.html" aria-label="Basics, the bedrock" aria-current="page"><rect x="10" y="214" width="164" height="44" rx="4" class="mn-bed on"/><text x="92" y="241" text-anchor="middle" class="mn-t">Basics</text></a><a href="consensus.html" aria-label="Level 1 of 4: Consensus"><g class="mn-off"><polygon points="24,182 92,207 92,217 24,192" class="sl-l"/><polygon points="92,207 160,182 160,192 92,217" class="sl-r"/><polygon points="24,182 92,157 160,182 92,207" class="sl-t"/></g><text x="92" y="187" text-anchor="middle" class="mn-t">Consensus</text></a><a href="contracts.html" aria-label="Level 2 of 4: Smart contracts"><g class="mn-off"><polygon points="24,142 92,167 92,177 24,152" class="sl-l"/><polygon points="92,167 160,142 160,152 92,177" class="sl-r"/><polygon points="24,142 92,117 160,142 92,167" class="sl-t"/></g><text x="92" y="147" text-anchor="middle" class="mn-t">Smart contracts</text></a><a href="layer2.html" aria-label="Level 3 of 4: Layer 2"><g class="mn-off"><polygon points="24,102 92,127 92,137 24,112" class="sl-l"/><polygon points="92,127 160,102 160,112 92,137" class="sl-r"/><polygon points="24,102 92,77 160,102 92,127" class="sl-t"/></g><text x="92" y="107" text-anchor="middle" class="mn-t">Layer 2</text></a><a href="keys.html" aria-label="Level 4 of 4: Wallets &amp; apps"><g class="mn-off"><polygon points="24,62 92,87 92,97 24,72" class="sl-l"/><polygon points="92,87 160,62 160,72 92,97" class="sl-r"/><polygon points="24,62 92,37 160,62 92,87" class="sl-t"/></g><text x="92" y="67" text-anchor="middle" class="mn-t">Wallets &amp; apps</text></a><a href="bridges.html" aria-label="Bridges, between chains"><path d="M160,148 L194,148" class="mn-br"/><rect x="164" y="102" width="34" height="34" rx="6" class="mn-bx"/><text x="181" y="124" text-anchor="middle" class="mn-t">↔</text></a></svg>
+    <nav class="side-toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#hash"><span>01</span>A hash is a fingerprint</a></li><li><a href="#chain"><span>02</span>Blocks chained by their hashes</a></li><li><a href="#merkle"><span>03</span>Merkle trees: one hash for many</a></li></ol></nav>
+  </aside>
+  <article class="doc-main">
+    <header class="doc-head">
+      <p class="kicker">The bedrock, under every level</p>
+      <h1>The basics</h1>
+      <p class="lede">A blockchain is a list of blocks, each holding the fingerprint of the one before, kept by many computers at once. Three ideas make it work, and each one runs in your browser.</p>
+    </header>
+    <p class="idea"><span>In one line</span>A blockchain is a shared list where every entry carries the fingerprint of the one before, so changing the past shows.</p>
+    <figure class="fig"><svg class="fig-svg" viewBox="0 0 360 318" role="img" aria-labelledby="f-chain-t"><title id="f-chain-t">Three blocks, each holding the previous block&#x27;s hash</title><defs><marker id="f-chain-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fg-head"/></marker></defs><rect x="40" y="8" width="280" height="78" rx="8" class="fg-key"/><text x="180.0" y="33.0" text-anchor="middle" class="fg-t on">Block 0: Genesis</text><text x="180.0" y="52.0" text-anchor="middle" class="fg-m on">previous 0000000000…</text><text x="180.0" y="71.0" text-anchor="middle" class="fg-m on">hash d01184f3cd…</text><path d="M180,86 L180,120" class="fg-arrow" marker-end="url(#f-chain-a)"/><text x="190" y="108" text-anchor="start" class="fg-s">becomes the next “previous”</text><rect x="40" y="120" width="280" height="78" rx="8" class="fg-box"/><text x="180.0" y="145.0" text-anchor="middle" class="fg-t">Block 1: Ada pays Ben 5</text><text x="180.0" y="164.0" text-anchor="middle" class="fg-m">previous d01184f3cd…</text><text x="180.0" y="183.0" text-anchor="middle" class="fg-m">hash 9bd3bb6e30…</text><path d="M180,198 L180,232" class="fg-arrow" marker-end="url(#f-chain-a)"/><text x="190" y="220" text-anchor="start" class="fg-s">becomes the next “previous”</text><rect x="40" y="232" width="280" height="78" rx="8" class="fg-box"/><text x="180.0" y="257.0" text-anchor="middle" class="fg-t">Block 2: Ben pays Cy 2</text><text x="180.0" y="276.0" text-anchor="middle" class="fg-m">previous 9bd3bb6e30…</text><text x="180.0" y="295.0" text-anchor="middle" class="fg-m">hash 8daa007721…</text></svg><figcaption>The first three blocks of the chain demo below. Each block stores the previous block&#x27;s hash, so the blocks are chained by their fingerprints.</figcaption></figure>
+    <section class="sec" aria-labelledby="hash"><h2 id="hash"><span class="num">01</span>A hash is a fingerprint</h2><p>SHA-256 turns any text into 64 hexadecimal digits (the digits 0–9 and the letters a–f). The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
+<div class="demo" data-demo="hash"><p class="demo-h">Try it · hash anything</p>
+  <label>Type anything <input type="text" value="blockchain" data-role="in"></label>
+  <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1">ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1</code></p>
+</div>
+<p>One capital letter changes almost every digit. The digits that happen to match, position by position, are marked:</p>
+<div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
+  <p><span>blockchain</span><code>ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74d<mark>d</mark>434d<mark>1</mark></code></p>
+  <p><span>Blockchain</span><code>625da44e4eaf58d61cf048d168aa6f5e492dea166d8bb54ec06c30de07<mark>d</mark>b57e<mark>1</mark></code></p>
+  <p class="cmp-n">2 of 64 digits match; 62 differ.</p></div></section><section class="sec" aria-labelledby="chain"><h2 id="chain"><span class="num">02</span>Blocks chained by their hashes</h2><p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches.</p>
+<div class="demo" data-demo="chain"><p class="demo-h">Try it · break the chain</p>
+  <p class="demo-note">Edit a block's data. The link after it snaps. “Re-link” repairs one block at a time, and each repair moves the break down the chain.</p>
+  <ol class="chain"><li class="blk" data-i="0">
   <div class="blk-h">Block 0</div>
   <label>Data <input type="text" value="Genesis" data-role="data" aria-label="Block 0 data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">0000000000000000000000000000000000000000000000000000000000000000</code></div>
@@ -68,23 +74,20 @@
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9">2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li></ol>
-    <p class="sr-only" data-role="live" aria-live="polite"></p>
-    <button type="button" data-role="relink">Re-link the broken block</button>
-    <p class="relinked" data-role="count" role="status"></p>
-    <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
-
-  <h2 id="merkle">3 · Merkle trees</h2>
-  <p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
-  <div class="demo" data-demo="merkle">
-    <p class="mk-row">Leaves: each transaction and its hash, H(1) to H(4). Pairs: the hash of two leaf hashes joined.</p>
-    <div class="mk-tree"><div class="mk-pair"><ol class="txs" start="1"><li><input type="text" value="Ada pays Ben 5" data-role="tx" aria-label="Transaction 1"><code data-role="leaf">2280cb6de1c8…</code></li><li><input type="text" value="Ben pays Cy 2" data-role="tx" aria-label="Transaction 2"><code data-role="leaf">1d2b11b4b4b1…</code></li></ol>
+  <p class="sr-only" data-role="live" aria-live="polite"></p>
+  <div class="btns"><button type="button" data-role="relink">Re-link the broken block</button></div>
+  <p class="relinked" data-role="count" role="status"></p>
+  <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network the other computers keep the original, and <a href="consensus.html">consensus</a> decides which one counts.</p></div></section><section class="sec" aria-labelledby="merkle"><h2 id="merkle"><span class="num">03</span>Merkle trees: one hash for many</h2><p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
+<div class="demo" data-demo="merkle"><p class="demo-h">Try it · change a transaction, watch the root</p>
+  <div class="mk-tree"><div class="mk-pair"><ol class="txs" start="1"><li><input type="text" value="Ada pays Ben 5" data-role="tx" aria-label="Transaction 1"><code data-role="leaf">2280cb6de1c8…</code></li><li><input type="text" value="Ben pays Cy 2" data-role="tx" aria-label="Transaction 2"><code data-role="leaf">1d2b11b4b4b1…</code></li></ol>
       <p class="mk-h"><span>H(1+2)</span><code data-role="pair">d5a646a96efb…</code></p></div><div class="mk-pair"><ol class="txs" start="3"><li><input type="text" value="Cy pays Ada 1" data-role="tx" aria-label="Transaction 3"><code data-role="leaf">d61045a0a743…</code></li><li><input type="text" value="Ada pays Cy 3" data-role="tx" aria-label="Transaction 4"><code data-role="leaf">e75d92ed432b…</code></li></ol>
       <p class="mk-h"><span>H(3+4)</span><code data-role="pair">320a971dbf5f…</code></p></div></div>
-    <p class="hx big mk-root"><span>Root: H(pairs)</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
-  </div>
-  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
-</article>
-<nav class="pager" aria-label="Previous and next"><a class="nx" href="keys.html" rel="next"><small>Next →</small><span>Keys</span></a></nav>
+  <p class="hx big mk-root"><span>Root</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
+</div></section>
+    <p class="docs"><span>Read further</span><a href="https://bitcoin.org/bitcoin.pdf">The Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta (1991) · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
+    <nav class="pager" aria-label="Previous and next"><a class="nx" href="keys.html" rel="next"><small>Next →</small><span>Keys</span></a></nav>
+  </article>
+</div>
 </main>
 <footer class="foot">
   <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>

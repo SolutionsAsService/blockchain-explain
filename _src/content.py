@@ -6,6 +6,8 @@ Claims about any one project are attributed to it; Autheo is one case study amon
 
 SITE = "Blockchain, explained"
 
+BASICS_IDEA = "A blockchain is a shared list where every entry carries the fingerprint of the one before, so changing the past shows."
+
 # The general stack of one chain, bottom to top. Used in the hero, the home list and the strip on each layer page.
 LAYERS = [
     ("consensus", "consensus.html", "Consensus", "Level 1 of 4",
@@ -23,6 +25,7 @@ POW_ZEROS = 3
 
 PAGES = {
     "keys": {
+        "idea": "Your private key is your identity: it signs, everyone can check, and nobody can reset it.",
         "title": "Keys, wallets and transactions",
         "kicker": "Level 4 of 4, where people start",
         "lede": "On the chain itself nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.",
@@ -37,6 +40,7 @@ PAGES = {
         "docs": [("Bitcoin's original paper (section 2: transactions)", "https://bitcoin.org/bitcoin.pdf"), ("Ethereum: accounts", "https://ethereum.org/en/developers/docs/accounts/")],
     },
     "consensus": {
+        "idea": "Rewriting history must cost more than a cheater can pay: in electricity (work) or in deposits (stake).",
         "title": "Consensus: agreeing without trust",
         "kicker": "Level 1 of 4, the bottom",
         "lede": "Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.",
@@ -53,6 +57,7 @@ PAGES = {
         "docs": [("Bitcoin paper", "https://bitcoin.org/bitcoin.pdf"), ("Ethereum: proof of stake", "https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/"), ("CometBFT documentation", "https://docs.cometbft.com/")],
     },
     "contracts": {
+        "idea": "A smart contract is a program every node runs, so everyone agrees on the result without trusting anyone.",
         "title": "Smart contracts",
         "kicker": "Level 2 of 4",
         "lede": "Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.",
@@ -65,6 +70,7 @@ PAGES = {
         "docs": [("Ethereum: smart contracts", "https://ethereum.org/en/developers/docs/smart-contracts/"), ("Ethereum: the EVM", "https://ethereum.org/en/developers/docs/evm/"), ("Solidity documentation", "https://docs.soliditylang.org/")],
     },
     "layer2": {
+        "idea": "Do the work off the chain, post the results to it, and let the chain judge.",
         "title": "Layer 2: scaling on top",
         "kicker": "Level 3 of 4",
         "lede": "If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.",
@@ -78,8 +84,9 @@ PAGES = {
         "docs": [("Ethereum: scaling and layer 2", "https://ethereum.org/en/layer-2/"), ("Lightning Network", "https://lightning.network/"), ("L2BEAT", "https://l2beat.com/")],
     },
     "bridges": {
+        "idea": "A bridge is only as safe as whoever, or whatever, checks the messages crossing it.",
         "title": "Bridges: chains that talk",
-        "kicker": "Between stacks",
+        "kicker": "Between chains",
         "lede": "One chain cannot read another's records. A bridge passes messages and tokens between them, and how it is built decides who you have to trust.",
         "sections": [
             ("Trusted bridges", """<p>The simplest bridge is a group of operators who watch one chain and sign messages on the other. Tokens are usually locked on one side and an IOU is issued on the other. It works, but you trust the operators: if their keys are stolen, the locked tokens can be taken. Some of the largest thefts in crypto have been bridge thefts.</p>"""),
@@ -89,6 +96,7 @@ PAGES = {
         "docs": [("Ethereum: bridges", "https://ethereum.org/en/developers/docs/bridges/"), ("IBC protocol", "https://ibcprotocol.dev/")],
     },
     "chains": {
+        "idea": "Every chain mixes the same parts; the mix decides what it is good at.",
         "title": "Major chains compared",
         "kicker": "The same parts, put together differently",
         "lede": "Every chain is a choice of consensus, execution and connections. Four well-known ones, and a case study, side by side.",
@@ -100,6 +108,7 @@ PAGES = {
         "docs": [("bitcoin.org", "https://bitcoin.org/en/how-it-works"), ("ethereum.org", "https://ethereum.org/en/what-is-ethereum/"), ("Cosmos", "https://cosmos.network/"), ("Solana documentation", "https://solana.com/docs")],
     },
     "risks": {
+        "idea": "No middleman means no safety net: mistakes and thefts are usually final.",
         "title": "Risks and limits",
         "kicker": "Before you use one",
         "lede": "The same features that remove the middleman remove the safety net. What goes wrong, and why.",
@@ -116,6 +125,7 @@ PAGES = {
         "docs": [("Ethereum: energy consumption", "https://ethereum.org/en/energy-consumption/"), ("Ethereum: security", "https://ethereum.org/en/security/")],
     },
     "autheo": {
+        "idea": "Read a project's description against the parts it claims to use.",
         "title": "Case study: Autheo",
         "kicker": "Reading a project's claims",
         "lede": "This site began as an explainer for Autheo. Here is how Autheo describes itself, set against the parts the rest of the guide explains.",

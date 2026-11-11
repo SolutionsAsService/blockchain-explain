@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>About · Blockchain, explained</title>
+<title>About this site · Blockchain, explained</title>
 <meta name="description" content="How the site is built, and its logo 2.0.">
-<meta property="og:title" content="About · Blockchain, explained">
+<meta property="og:title" content="About this site · Blockchain, explained">
 <meta property="og:description" content="How the site is built, and its logo 2.0.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
 <meta property="og:site_name" content="Blockchain, explained">
@@ -23,15 +23,25 @@
   <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
 </header>
 <main id="main">
-<article class="wrap"><p class="kicker">Version 2.0</p><h1>About this site</h1>
-<p class="lede">A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.</p>
-<h2>How the numbers are made</h2>
-<p><code>_src/build.py</code> computes every hash on the site with Python's SHA-256 and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. The two must agree: on load the page checks its own defaults against the values the build wrote.</p>
-<h2>The logo</h2>
-<p>Version 1 was three bars, the lowest one green. Version 2.0 turns them into three slabs of the stack, with the green base and a transaction's path running down through them. Both are in the repository, in <code>brand/</code>.</p>
-<h2>Sources</h2>
-<p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p></article>
-
+<div class="doc">
+  <aside class="side" aria-label="Where you are">
+    <p class="side-where"><span>You are here</span>Beyond the stack</p>
+    <svg class="mini" viewBox="0 0 200 268" role="group" aria-label="Where this page sits in the stack"><a href="blockchain-basics.html" aria-label="Basics, the bedrock"><rect x="10" y="214" width="164" height="44" rx="4" class="mn-bed"/><text x="92" y="241" text-anchor="middle" class="mn-t">Basics</text></a><a href="consensus.html" aria-label="Level 1 of 4: Consensus"><g class="mn-off"><polygon points="24,182 92,207 92,217 24,192" class="sl-l"/><polygon points="92,207 160,182 160,192 92,217" class="sl-r"/><polygon points="24,182 92,157 160,182 92,207" class="sl-t"/></g><text x="92" y="187" text-anchor="middle" class="mn-t">Consensus</text></a><a href="contracts.html" aria-label="Level 2 of 4: Smart contracts"><g class="mn-off"><polygon points="24,142 92,167 92,177 24,152" class="sl-l"/><polygon points="92,167 160,142 160,152 92,177" class="sl-r"/><polygon points="24,142 92,117 160,142 92,167" class="sl-t"/></g><text x="92" y="147" text-anchor="middle" class="mn-t">Smart contracts</text></a><a href="layer2.html" aria-label="Level 3 of 4: Layer 2"><g class="mn-off"><polygon points="24,102 92,127 92,137 24,112" class="sl-l"/><polygon points="92,127 160,102 160,112 92,137" class="sl-r"/><polygon points="24,102 92,77 160,102 92,127" class="sl-t"/></g><text x="92" y="107" text-anchor="middle" class="mn-t">Layer 2</text></a><a href="keys.html" aria-label="Level 4 of 4: Wallets &amp; apps"><g class="mn-off"><polygon points="24,62 92,87 92,97 24,72" class="sl-l"/><polygon points="92,87 160,62 160,72 92,97" class="sl-r"/><polygon points="24,62 92,37 160,62 92,87" class="sl-t"/></g><text x="92" y="67" text-anchor="middle" class="mn-t">Wallets &amp; apps</text></a><a href="bridges.html" aria-label="Bridges, between chains"><path d="M160,148 L194,148" class="mn-br"/><rect x="164" y="102" width="34" height="34" rx="6" class="mn-bx"/><text x="181" y="124" text-anchor="middle" class="mn-t">↔</text></a></svg>
+    <nav class="side-toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#numbers"><span>01</span>How the numbers are made</a></li><li><a href="#logo"><span>02</span>The logo</a></li><li><a href="#sources"><span>03</span>Sources</a></li></ol></nav>
+  </aside>
+  <article class="doc-main">
+    <header class="doc-head">
+      <p class="kicker">Version 2.0</p>
+      <h1>About this site</h1>
+      <p class="lede">A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.</p>
+    </header>
+    
+    
+    <section class="sec" aria-labelledby="numbers"><h2 id="numbers"><span class="num">01</span>How the numbers are made</h2><p><code>_src/build.py</code> computes every hash and count on the site with Python and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. On load, each page checks its own defaults against the values the build wrote.</p></section><section class="sec" aria-labelledby="logo"><h2 id="logo"><span class="num">02</span>The logo</h2><p>Version 1 was three bars in a frame, the lowest one green. Version 2.0 turns them into three slabs of the stack, keeps the green base, and runs a transaction's path down through them. Both are in the repository, in <code>brand/</code>.</p></section><section class="sec" aria-labelledby="sources"><h2 id="sources"><span class="num">03</span>Sources</h2><p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, L2BEAT and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p></section>
+    
+    
+  </article>
+</div>
 </main>
 <footer class="foot">
   <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>

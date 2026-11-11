@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site"
 sys.path.insert(0, str(Path(__file__).parent))
 import content as K  # noqa: E402
+import figures as FIG  # noqa: E402
 
 SITE_URL = "https://blockchain-explain.shadw.app"
 e = html.escape
@@ -140,9 +141,9 @@ def hero_wide(ex):
          f'<text x="205" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="575" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain B</text>',
          # the transaction path down chain A
-         f'<path d="M135,{ys[-1] - hh - 6} L135,{base + 60}" class="tx" marker-end="url(#ah)"/>',
-         f'<text x="128" y="{ys[-1] - hh - 2}" text-anchor="end" class="tx-t">a transaction</text>',
-         f'<text x="128" y="{ys[-1] - hh + 16}" text-anchor="end" class="tx-t">travels down</text>',
+         f'<path d="M100,{ys[-1] - 2} L100,{base + 60}" class="tx" marker-end="url(#ah)"/>',
+         f'<text x="92" y="{ys[-1] - 14}" text-anchor="end" class="tx-t">a transaction</text>',
+         f'<text x="92" y="{ys[-1] + 4}" text-anchor="end" class="tx-t">travels down</text>',
          '</svg>']
     return "".join(s)
 
@@ -228,7 +229,6 @@ def page(path, title, body, desc, active=None, demos=False):
 </header>
 <main id="main">
 {body}
-{pager(path)}
 </main>
 <footer class="foot">
   <p><strong>{K.SITE}.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
@@ -239,45 +239,82 @@ def page(path, title, body, desc, active=None, demos=False):
     (OUT / path).write_text(doc)
 
 
-def layer_strip(active_key):
-    """The stack, as a row of four, with this page's layer marked."""
-    items = "".join(f'<li class="ls-{k}{" on" if k == active_key else ""}"><a href="{h}"{" aria-current=\"true\"" if k == active_key else ""}><span>{e(name)}</span><small>{e(role)}</small></a></li>'
-                    for k, h, name, role, _ in reversed(K.LAYERS))
-    return f'<nav class="lstrip" aria-label="The four levels, top to bottom"><ol>{items}</ol></nav>'
+def slug(t):
+    return re.sub("[^a-z0-9]+", "-", t.lower()).strip("-")
 
 
-# ------------------------------------------------------------------ pages
+LEVEL_OF = {"blockchain-basics": "bedrock", "keys": "apps", "consensus": "consensus", "contracts": "execution",
+            "layer2": "layer2", "bridges": "bridge"}
+WHERE = {"bedrock": "The bedrock, under every level", "bridge": "Between chains", None: "Beyond the stack"}
+
+
+def doc(path, title, kicker, lede, idea, sections, docs="", figure=None, demos=False, level=None, desc=None):
+    """Every inner page: a sidebar map of the stack with the page's contents, then the article."""
+    toc = "".join(f'<li><a href="#{sid}"><span>{i + 1:02d}</span>{e(t)}</a></li>' for i, (sid, t, _) in enumerate(sections))
+    where = next((f"{role}: {name}" for k, _, name, role, _ in K.LAYERS if k == level), WHERE.get(level, WHERE[None]))
+    secs = "".join(f'<section class="sec" aria-labelledby="{sid}"><h2 id="{sid}"><span class="num">{i + 1:02d}</span>{e(t)}</h2>{h}</section>'
+                   for i, (sid, t, h) in enumerate(sections))
+    fig = ""
+    if figure:
+        svg_, cap = figure
+        fig = f'<figure class="fig">{svg_}<figcaption>{e(cap)}</figcaption></figure>'
+    body = f"""<div class="doc">
+  <aside class="side" aria-label="Where you are">
+    <p class="side-where"><span>You are here</span>{e(where)}</p>
+    {FIG.mini_stack(K.LAYERS, level)}
+    {f'<nav class="side-toc" aria-label="On this page"><p>On this page</p><ol>{toc}</ol></nav>' if len(sections) > 1 else ''}
+  </aside>
+  <article class="doc-main">
+    <header class="doc-head">
+      <p class="kicker">{e(kicker)}</p>
+      <h1>{e(title)}</h1>
+      <p class="lede">{lede}</p>
+    </header>
+    {f'<p class="idea"><span>In one line</span>{e(idea)}</p>' if idea else ''}
+    {fig}
+    {secs}
+    {f'<p class="docs"><span>Read further</span>{docs}</p>' if docs else ''}
+    {pager(path)}
+  </article>
+</div>"""
+    page(path, title, body, desc or re.sub("<[^>]+>", "", lede), active=path, demos=demos)
+
+
 def build_home(ex):
-    rows = "".join(f'<li class="lrow s-{k}"><a href="{h}"><span class="lr-n">{len(K.LAYERS) - i}</span><span class="lr-t">{e(name)}</span><span class="lr-l">{e(line)}</span></a></li>'
-                   for i, (k, h, name, role, line) in enumerate(reversed(K.LAYERS)))
     f100, q100 = bft(100)
     pw = ex["pow"]
+    blurbs = {
+        "blockchain-basics.html": ("0", "bedrock", "Hashes, blocks and the chain", "The fingerprints every chain is built from. Break a chain yourself."),
+        "keys.html": ("4", "apps", "Keys and wallets", "How you prove a transaction is yours. Sign one yourself."),
+        "consensus.html": ("1", "consensus", "Consensus", "How strangers agree on one history. Mine a block yourself."),
+        "contracts.html": ("2", "execution", "Smart contracts", "Programs every node runs, and what they cost."),
+        "layer2.html": ("3", "layer2", "Layer 2", "Rollups and channels: faster, settled on the chain."),
+        "bridges.html": ("↔", "bridge", "Bridges", "How chains pass tokens, and whom you trust."),
+        "chains.html": ("≈", "case", "Chains compared", "Bitcoin, Ethereum, Cosmos and Solana side by side."),
+        "risks.html": ("!", "risk", "Risks and limits", "Lost keys, scams, bugs and energy, plainly."),
+    }
+    cards = "".join(f'<li class="card c-{cls}"><a href="{h}"><span class="card-n">{i + 1}</span><span class="card-t">{e(t)}</span><span class="card-l">{e(l)}</span></a></li>'
+                    for i, (h, (n, cls, t, l)) in enumerate(blurbs.items()))
     body = f"""<section class="hero" aria-labelledby="h1">
   <div class="hero-text">
     <p class="kicker">A plain guide, from the bedrock up</p>
     <h1 id="h1">Blockchain, explained</h1>
-    <p class="lede">What a blockchain is, how strangers agree on one, and how chains connect, one layer at a time. Every hash on the site is real, and you can change the input yourself.</p>
+    <p class="lede">What a blockchain is, how strangers agree on one, and how chains connect, one level at a time. Every hash on the site is real, and you can change the input yourself.</p>
     <a class="start" href="blockchain-basics.html">Start with the basics →</a>
   </div>
   {hero_wide(ex)}
   {hero_narrow()}
 </section>
-<section class="wrap">
-  <h2>Every chain, top to bottom</h2>
-  <ol class="lrows">{rows}
-    <li class="lrow s-bedrock"><a href="blockchain-basics.html"><span class="lr-n">0</span><span class="lr-t">The bedrock: basics</span><span class="lr-l">Hashes, blocks, the chain and Merkle trees: what every layer stands on.</span></a></li>
-    <li class="lrow s-bridge"><a href="bridges.html"><span class="lr-n">↔</span><span class="lr-t">Between chains: bridges</span><span class="lr-l">How separate chains pass messages and tokens, and whom you have to trust.</span></a></li>
-  </ol>
-  <h2>Then compare, and be careful</h2>
-  <ol class="lrows">
-    <li class="lrow s-case"><a href="chains.html"><span class="lr-n">≠</span><span class="lr-t">Major chains compared</span><span class="lr-l">Bitcoin, Ethereum, Cosmos and Solana: the same parts, put together differently.</span></a></li>
-    <li class="lrow s-case"><a href="risks.html"><span class="lr-n">!</span><span class="lr-t">Risks and limits</span><span class="lr-l">Lost keys, scams, contract bugs, bridges and energy.</span></a></li>
-  </ol>
-  <h2>Three facts, computed</h2>
+<section class="home-sec" aria-labelledby="guide">
+  <h2 id="guide">The guide, in reading order</h2>
+  <ol class="cards">{cards}</ol>
+</section>
+<section class="home-sec" aria-labelledby="facts">
+  <h2 id="facts">Three facts this site computes</h2>
   <ul class="facts">
-    <li><code>SHA-256("{e(K.HASH_INPUT)}")</code> begins <code>{ex["h1"][:12]}</code>, and changing one letter gives <code>{ex["h2"][:12]}</code>. <a href="blockchain-basics.html#hash">Try it</a>.</li>
-    <li>For the block “{e(K.POW_DEFAULT)}” to start with {K.POW_ZEROS} zeros, a miner has to try {pw["nonce"] + 1:,} nonces. <a href="consensus.html#pow">Mine it</a>.</li>
-    <li>With 100 equal validators, a BFT chain finalizes a block once {q100} agree, and stays safe with up to {f100} faulty. <a href="consensus.html#bft">Why</a>.</li>
+    <li><span class="fact-n"><code>{ex["h1"][:8]}…</code></span><span>is how <code>SHA-256("{e(K.HASH_INPUT)}")</code> begins. One capital letter later it begins <code>{ex["h2"][:8]}…</code>.</span><a href="blockchain-basics.html#hash">Try it</a></li>
+    <li><span class="fact-n">{pw["nonce"] + 1:,}</span><span>guesses to find a nonce that gives the block “{e(K.POW_DEFAULT)}” a hash starting with {K.POW_ZEROS} zeros.</span><a href="consensus.html#proof-of-work">Mine it</a></li>
+    <li><span class="fact-n">{q100} of 100</span><span>equal validators must sign to finalize a BFT block; it survives up to {f100} faulty.</span><a href="consensus.html#bft">Why</a></li>
   </ul>
 </section>"""
     page("index.html", None, body, "A plain guide to blockchains: hashes and blocks, keys, proof of work and stake, smart contracts, layer 2, bridges and the risks. Every hash on the site is real.", active="index.html")
@@ -299,43 +336,36 @@ def build_basics(ex):
     h1, h2 = ex["h1"], ex["h2"]
     def marked(h, other):
         return "".join(f"<mark>{c}</mark>" if c == o else c for c, o in zip(h, other))
-    cmp_html = f"""<div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
-    <p><span>{e(K.HASH_INPUT)}</span><code>{marked(h1, h2)}</code></p>
-    <p><span>{e(K.HASH_INPUT_2)}</span><code>{marked(h2, h1)}</code></p>
-    <p class="cmp-n">{64 - ex["diff"]} of 64 digits match by position (marked); {ex["diff"]} differ.</p></div>"""
-    body = f"""<article class="wrap">
-  <p class="kicker">The bedrock, under every layer</p>
-  <h1>The basics</h1>
-  <p class="lede">A blockchain is a list of blocks, each holding the fingerprint of the one before, kept by many computers at once. Three ideas make it work. Each one below runs in your browser.</p>
-  <nav class="toc" aria-label="On this page"><a href="#hash">1 · Hashes</a><a href="#chain">2 · The chain</a><a href="#merkle">3 · Merkle trees</a></nav>
-
-  <h2 id="hash">1 · A hash is a fingerprint</h2>
-  <p>SHA-256 turns any text into 64 hexadecimal digits (the digits 0–9 and the letters a–f). The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
-  <div class="demo" data-demo="hash">
-    <label>Type anything <input type="text" value="{e(K.HASH_INPUT)}" data-role="in"></label>
-    <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="{ex["h1"]}">{ex["h1"]}</code></p>
-  </div>
-  <p>Changing one letter, <code>{e(K.HASH_INPUT)}</code> to <code>{e(K.HASH_INPUT_2)}</code>, changes almost every digit:</p>
-  {cmp_html}
-
-  <h2 id="chain">2 · The chain</h2>
-  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
-  <div class="demo" data-demo="chain"><ol class="chain">{chain_html}</ol>
-    <p class="sr-only" data-role="live" aria-live="polite"></p>
-    <button type="button" data-role="relink">Re-link the broken block</button>
-    <p class="relinked" data-role="count" role="status"></p>
-    <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
-
-  <h2 id="merkle">3 · Merkle trees</h2>
-  <p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
-  <div class="demo" data-demo="merkle">
-    <p class="mk-row">Leaves: each transaction and its hash, H(1) to H(4). Pairs: the hash of two leaf hashes joined.</p>
-    <div class="mk-tree">{groups}</div>
-    <p class="hx big mk-root"><span>Root: H(pairs)</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
-  </div>
-  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
-</article>"""
-    page("blockchain-basics.html", "Basics", body, "Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.", active="blockchain-basics.html", demos=True)
+    sections = [
+        ("hash", "A hash is a fingerprint", f"""<p>SHA-256 turns any text into 64 hexadecimal digits (the digits 0–9 and the letters a–f). The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
+<div class="demo" data-demo="hash"><p class="demo-h">Try it · hash anything</p>
+  <label>Type anything <input type="text" value="{e(K.HASH_INPUT)}" data-role="in"></label>
+  <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="{h1}">{h1}</code></p>
+</div>
+<p>One capital letter changes almost every digit. The digits that happen to match, position by position, are marked:</p>
+<div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
+  <p><span>{e(K.HASH_INPUT)}</span><code>{marked(h1, h2)}</code></p>
+  <p><span>{e(K.HASH_INPUT_2)}</span><code>{marked(h2, h1)}</code></p>
+  <p class="cmp-n">{64 - ex["diff"]} of 64 digits match; {ex["diff"]} differ.</p></div>"""),
+        ("chain", "Blocks chained by their hashes", f"""<p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches.</p>
+<div class="demo" data-demo="chain"><p class="demo-h">Try it · break the chain</p>
+  <p class="demo-note">Edit a block's data. The link after it snaps. “Re-link” repairs one block at a time, and each repair moves the break down the chain.</p>
+  <ol class="chain">{chain_html}</ol>
+  <p class="sr-only" data-role="live" aria-live="polite"></p>
+  <div class="btns"><button type="button" data-role="relink">Re-link the broken block</button></div>
+  <p class="relinked" data-role="count" role="status"></p>
+  <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network the other computers keep the original, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>"""),
+        ("merkle", "Merkle trees: one hash for many", f"""<p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
+<div class="demo" data-demo="merkle"><p class="demo-h">Try it · change a transaction, watch the root</p>
+  <div class="mk-tree">{groups}</div>
+  <p class="hx big mk-root"><span>Root</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
+</div>"""),
+    ]
+    docs = '<a href="https://bitcoin.org/bitcoin.pdf">The Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta (1991) · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a>'
+    doc("blockchain-basics.html", "The basics", "The bedrock, under every level",
+        "A blockchain is a list of blocks, each holding the fingerprint of the one before, kept by many computers at once. Three ideas make it work, and each one runs in your browser.",
+        K.BASICS_IDEA, sections, docs, FIG.chain_fig(ex["chain"]), demos=True, level="bedrock",
+        desc="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.")
 
 
 def bft_table():
@@ -345,7 +375,7 @@ def bft_table():
 
 def bft_demo():
     f, q = bft(10)
-    return f"""<div class="demo" data-demo="bft"><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
+    return f"""<div class="demo" data-demo="bft"><p class="demo-h">Try it · any number of validators</p><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
 <p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">{q}</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">{f}</strong></p></div>"""
 
 
@@ -360,23 +390,24 @@ def pow_search(data, zeros):
 
 def pow_demo(ex):
     pw = ex["pow"]
-    return f"""<div class="demo" data-demo="pow" id="pow">
-<p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>.</p>
-<label>Block data <input type="text" value="{e(K.POW_DEFAULT)}" data-role="data"></label>
-<label>Zeros needed <input type="number" min="1" max="5" value="{K.POW_ZEROS}" data-role="zeros"></label>
-<button type="button" data-role="mine">Mine: try nonces 0, 1, 2…</button>
+    return f"""<div class="demo" data-demo="pow" id="pow"><p class="demo-h">Try it · mine a block</p>
+<p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>. The browser tries nonces 0, 1, 2… until the hash starts with enough zeros.</p>
+<div class="fields"><label>Block data <input type="text" value="{e(K.POW_DEFAULT)}" data-role="data"></label>
+<label class="narrow">Zeros needed <input type="number" min="1" max="5" value="{K.POW_ZEROS}" data-role="zeros"></label></div>
+<div class="btns"><button type="button" data-role="mine">Mine</button></div>
 <p class="hx"><span>Nonce</span><code data-role="nonce" data-expect="{pw["nonce"]}">{pw["nonce"]}</code></p>
 <p class="hx big"><span>Hash</span><code data-role="hash" data-expect="{pw["hash"]}">{pw["hash"]}</code></p>
 <p class="demo-out" data-role="out" role="status">{pw["nonce"] + 1:,} guesses. Each extra zero needs about 16 times as many.</p></div>"""
 
 
 def sign_demo():
-    return """<div class="demo" data-demo="sign">
-<label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
-<button type="button" data-role="keys">1 · Make a key pair</button>
-<button type="button" data-role="sign" disabled>2 · Sign</button>
-<label>Change the transaction, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
-<button type="button" data-role="verify" disabled>3 · Check the signature</button>
+    return """<div class="demo" data-demo="sign"><p class="demo-h">Try it · sign and check a transaction</p>
+<ol class="steps">
+<li><label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
+<div class="btns"><button type="button" data-role="keys">Make a key pair</button><button type="button" data-role="sign" disabled>Sign it</button></div></li>
+<li><label>Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
+<div class="btns"><button type="button" data-role="verify" disabled>Check the signature</button></div></li>
+</ol>
 <p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
 <p class="hx"><span>Signature</span><code data-role="sig">none yet</code></p>
 <p class="demo-out" data-role="out" role="status">Runs in your browser. Nothing is sent anywhere.</p>
@@ -390,25 +421,18 @@ def chains_table():
 
 def build_topic(key, ex):
     P = K.PAGES[key]
-    lkey = {"consensus": "consensus", "contracts": "execution", "layer2": "layer2", "keys": "apps"}.get(key)
-    secs = ""
+    f100, q100 = bft(100)
+    figs = {"keys": FIG.keys_fig(), "consensus": FIG.votes_fig(100, f100, q100), "contracts": FIG.contract_fig(),
+            "layer2": FIG.rollup_fig(), "bridges": FIG.bridge_fig()}
+    sections = []
     for t, h in P["sections"]:
-        anchor = {"Proof of work": "pow", "BFT voting, and how many can fail": "bft"}.get(t)
+        sid = {"BFT voting, and how many can fail": "bft"}.get(t, slug(t))
         h = (h.replace("{BFT_TABLE}", bft_table()).replace("{BFT_DEMO}", bft_demo()).replace("{POW_DEMO}", pow_demo(ex))
              .replace("{SIGN_DEMO}", sign_demo()).replace("{CHAINS_TABLE}", chains_table()))
-        secs += f'<h2{f" id=\"{anchor}\"" if anchor else ""}>{e(t)}</h2>{h}'
+        sections.append((sid, t, h))
     docs = " · ".join(f'<a href="{u}">{e(n)}</a>' for n, u in P["docs"])
-    strip = layer_strip(lkey) if lkey else ""
-    body = f"""<article class="wrap">
-  <p class="kicker">{e(P["kicker"])}</p>
-  <h1>{e(P["title"])}</h1>
-  {strip}
-  <p class="lede">{e(P["lede"])}</p>
-  {secs}
-  {f'<p class="docs">Further: {docs}</p>' if docs else ''}
-</article>"""
-    path = f"{key}.html"
-    page(path, P["title"], body, P["lede"], active=path, demos=key in ("consensus", "keys"))
+    doc(f"{key}.html", P["title"], P["kicker"], e(P["lede"]), P.get("idea"), sections, docs, figs.get(key),
+        demos=key in ("consensus", "keys"), level=LEVEL_OF.get(key))
 
 
 def build_redirects():
@@ -420,25 +444,37 @@ def build_redirects():
 
 
 def build_glossary():
-    items = "".join(f'<div class="gl"><dt id="{re.sub("[^a-z0-9]+", "-", t.lower()).strip("-")}">{e(t)}</dt><dd>{e(d)}</dd></div>' for t, d in K.GLOSSARY)
-    body = f"""<article class="wrap"><p class="kicker">{len(K.GLOSSARY)} terms</p><h1>Glossary</h1><dl class="glossary">{items}</dl></article>"""
+    groups = {}
+    for t, d in sorted(K.GLOSSARY, key=lambda x: x[0].lower()):
+        groups.setdefault(t[0].upper(), []).append((t, d))
+    html_ = "".join(f'<div class="gl-group"><h2 id="g-{L.lower()}" class="gl-l">{L}</h2><dl>' +
+                    "".join(f'<div class="gl" id="{slug(t)}"><dt>{e(t)}</dt><dd>{e(d)}</dd></div>' for t, d in items) + "</dl></div>"
+                    for L, items in groups.items())
+    letters = "".join(f'<a href="#g-{L.lower()}">{L}</a>' for L in groups)
+    body = f"""<div class="doc doc-wide">
+  <article class="doc-main">
+    <header class="doc-head"><p class="kicker">{len(K.GLOSSARY)} terms, in plain words</p><h1>Glossary</h1></header>
+    <nav class="letters" aria-label="Jump to a letter">{letters}</nav>
+    <div class="glossary">{html_}</div>
+    {pager("glossary.html")}
+  </article>
+</div>"""
     page("glossary.html", "Glossary", body, "The terms this site uses, in plain words.", active="glossary.html")
 
 
 def build_about(ex):
-    body = f"""<article class="wrap"><p class="kicker">Version 2.0</p><h1>About this site</h1>
-<p class="lede">A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.</p>
-<h2>How the numbers are made</h2>
-<p><code>_src/build.py</code> computes every hash on the site with Python's SHA-256 and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. The two must agree: on load the page checks its own defaults against the values the build wrote.</p>
-<h2>The logo</h2>
-<p>Version 1 was three bars, the lowest one green. Version 2.0 turns them into three slabs of the stack, with the green base and a transaction's path running down through them. Both are in the repository, in <code>brand/</code>.</p>
-<h2>Sources</h2>
-<p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p></article>"""
-    page("about.html", "About", body, "How the site is built, and its logo 2.0.", active=None)
+    sections = [
+        ("numbers", "How the numbers are made", "<p><code>_src/build.py</code> computes every hash and count on the site with Python and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. On load, each page checks its own defaults against the values the build wrote.</p>"),
+        ("logo", "The logo", "<p>Version 1 was three bars in a frame, the lowest one green. Version 2.0 turns them into three slabs of the stack, keeps the green base, and runs a transaction's path down through them. Both are in the repository, in <code>brand/</code>.</p>"),
+        ("sources", "Sources", '<p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, L2BEAT and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p>'),
+    ]
+    doc("about.html", "About this site", "Version 2.0",
+        "A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.",
+        None, sections, desc="How the site is built, and its logo 2.0.")
 
 
 def build_404():
-    page("404.html", "Not found", '<article class="wrap"><p class="kicker">hash mismatch</p><h1>404</h1><p class="lede">This page is not in the chain. <a href="index.html">Back to the home page</a>.</p></article>', "Page not found.")
+    doc("404.html", "Not in the chain", "404 · hash mismatch", 'This page does not exist. <a href="index.html">Back to the home page</a>.', None, [])
 
 
 # ------------------------------------------------------------------ checks

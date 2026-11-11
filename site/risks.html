@@ -23,20 +23,30 @@
   <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html" aria-current="page">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
 </header>
 <main id="main">
-<article class="wrap">
-  <p class="kicker">Before you use one</p>
-  <h1>Risks and limits</h1>
-  
-  <p class="lede">The same features that remove the middleman remove the safety net. What goes wrong, and why.</p>
-  <h2>You are the bank</h2><ul class="map"><li><strong>Lost keys</strong>: there is no reset; the funds stay where they are, out of reach.</li>
+<div class="doc">
+  <aside class="side" aria-label="Where you are">
+    <p class="side-where"><span>You are here</span>Beyond the stack</p>
+    <svg class="mini" viewBox="0 0 200 268" role="group" aria-label="Where this page sits in the stack"><a href="blockchain-basics.html" aria-label="Basics, the bedrock"><rect x="10" y="214" width="164" height="44" rx="4" class="mn-bed"/><text x="92" y="241" text-anchor="middle" class="mn-t">Basics</text></a><a href="consensus.html" aria-label="Level 1 of 4: Consensus"><g class="mn-off"><polygon points="24,182 92,207 92,217 24,192" class="sl-l"/><polygon points="92,207 160,182 160,192 92,217" class="sl-r"/><polygon points="24,182 92,157 160,182 92,207" class="sl-t"/></g><text x="92" y="187" text-anchor="middle" class="mn-t">Consensus</text></a><a href="contracts.html" aria-label="Level 2 of 4: Smart contracts"><g class="mn-off"><polygon points="24,142 92,167 92,177 24,152" class="sl-l"/><polygon points="92,167 160,142 160,152 92,177" class="sl-r"/><polygon points="24,142 92,117 160,142 92,167" class="sl-t"/></g><text x="92" y="147" text-anchor="middle" class="mn-t">Smart contracts</text></a><a href="layer2.html" aria-label="Level 3 of 4: Layer 2"><g class="mn-off"><polygon points="24,102 92,127 92,137 24,112" class="sl-l"/><polygon points="92,127 160,102 160,112 92,137" class="sl-r"/><polygon points="24,102 92,77 160,102 92,127" class="sl-t"/></g><text x="92" y="107" text-anchor="middle" class="mn-t">Layer 2</text></a><a href="keys.html" aria-label="Level 4 of 4: Wallets &amp; apps"><g class="mn-off"><polygon points="24,62 92,87 92,97 24,72" class="sl-l"/><polygon points="92,87 160,62 160,72 92,97" class="sl-r"/><polygon points="24,62 92,37 160,62 92,87" class="sl-t"/></g><text x="92" y="67" text-anchor="middle" class="mn-t">Wallets &amp; apps</text></a><a href="bridges.html" aria-label="Bridges, between chains"><path d="M160,148 L194,148" class="mn-br"/><rect x="164" y="102" width="34" height="34" rx="6" class="mn-bx"/><text x="181" y="124" text-anchor="middle" class="mn-t">↔</text></a></svg>
+    <nav class="side-toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#you-are-the-bank"><span>01</span>You are the bank</a></li><li><a href="#code-and-bridges"><span>02</span>Code and bridges</a></li><li><a href="#the-network-itself"><span>03</span>The network itself</a></li></ol></nav>
+  </aside>
+  <article class="doc-main">
+    <header class="doc-head">
+      <p class="kicker">Before you use one</p>
+      <h1>Risks and limits</h1>
+      <p class="lede">The same features that remove the middleman remove the safety net. What goes wrong, and why.</p>
+    </header>
+    <p class="idea"><span>In one line</span>No middleman means no safety net: mistakes and thefts are usually final.</p>
+    
+    <section class="sec" aria-labelledby="you-are-the-bank"><h2 id="you-are-the-bank"><span class="num">01</span>You are the bank</h2><ul class="map"><li><strong>Lost keys</strong>: there is no reset; the funds stay where they are, out of reach.</li>
 <li><strong>Phishing and fake apps</strong>: a site that gets you to sign a transaction can empty a wallet, and a confirmed transaction cannot be reversed.</li>
-<li><strong>Wrong address</strong>: a payment to a mistyped address is gone.</li></ul><h2>Code and bridges</h2><ul class="map"><li><strong>Contract bugs</strong>: a contract does exactly what its code says, including its mistakes, and anyone may call it.</li>
-<li><strong>Bridges</strong> hold large pools of locked tokens, which makes them targets.</li></ul><h2>The network itself</h2><ul class="map"><li><strong>Majority attacks</strong>: whoever controls most of the mining power (proof of work) can reorder recent blocks; on a BFT chain, a third of the stake can stop the chain by refusing to vote, and more than a third voting twice can finalize conflicting blocks.</li>
+<li><strong>Wrong address</strong>: a payment to a mistyped address is gone.</li></ul></section><section class="sec" aria-labelledby="code-and-bridges"><h2 id="code-and-bridges"><span class="num">02</span>Code and bridges</h2><ul class="map"><li><strong>Contract bugs</strong>: a contract does exactly what its code says, including its mistakes, and anyone may call it.</li>
+<li><strong>Bridges</strong> hold large pools of locked tokens, which makes them targets.</li></ul></section><section class="sec" aria-labelledby="the-network-itself"><h2 id="the-network-itself"><span class="num">03</span>The network itself</h2><ul class="map"><li><strong>Majority attacks</strong>: whoever controls most of the mining power (proof of work) can reorder recent blocks; on a BFT chain, a third of the stake can stop the chain by refusing to vote, and more than a third voting twice can finalize conflicting blocks.</li>
 <li><strong>Energy</strong>: proof of work uses a great deal of electricity by design. Ethereum's move to proof of stake cut its energy use by about 99.95%, by its own estimate.</li>
-<li><strong>Speed and cost</strong>: a chain everyone can check is slower and dearer per transaction than one company's database. Many uses do not need a blockchain at all.</li></ul>
-  <p class="docs">Further: <a href="https://ethereum.org/en/energy-consumption/">Ethereum: energy consumption</a> · <a href="https://ethereum.org/en/security/">Ethereum: security</a></p>
-</article>
-<nav class="pager" aria-label="Previous and next"><a href="chains.html" rel="prev"><small>← Previous</small><span>Chains</span></a><a class="nx" href="glossary.html" rel="next"><small>Next →</small><span>Glossary</span></a></nav>
+<li><strong>Speed and cost</strong>: a chain everyone can check is slower and dearer per transaction than one company's database. Many uses do not need a blockchain at all.</li></ul></section>
+    <p class="docs"><span>Read further</span><a href="https://ethereum.org/en/energy-consumption/">Ethereum: energy consumption</a> · <a href="https://ethereum.org/en/security/">Ethereum: security</a></p>
+    <nav class="pager" aria-label="Previous and next"><a href="chains.html" rel="prev"><small>← Previous</small><span>Chains</span></a><a class="nx" href="glossary.html" rel="next"><small>Next →</small><span>Glossary</span></a></nav>
+  </article>
+</div>
 </main>
 <footer class="foot">
   <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
