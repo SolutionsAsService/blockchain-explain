@@ -42,9 +42,9 @@
 <p>Most wallets show you a <em>recovery phrase</em> of 12 or 24 words when you set them up. Those words can recreate every key in the wallet, so the phrase <em>is</em> the key: whoever has it has the funds. If you keep crypto on an exchange instead, the exchange holds the keys for you, and you are trusting it like a bank.</p></section><section class="sec" aria-labelledby="signing-a-transaction"><h2 id="signing-a-transaction"><span class=num>02</span>Signing a transaction</h2><p>To send something, your wallet writes a transaction (“from this address, to that one, this amount”) and <em>signs</em> it with your private key. Every node checks the signature against your public key before accepting it. A changed transaction, or one signed with any other key, fails the check.</p>
 <div class="demo" data-demo="sign"><p class="demo-h">Try it · sign and check a transaction</p>
 <ol class="steps">
-<li><label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
+<li><label>1 · Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
 <div class="btns"><button type="button" data-role="keys">Make a key pair</button><button type="button" data-role="sign" disabled>Sign it</button></div><p class="hint" data-role="hint1">Make a key pair first.</p></li>
-<li><label>Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
+<li><label>2 · Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
 <div class="btns"><button type="button" data-role="verify" disabled>Check the signature</button></div><p class="hint" data-role="hint2">Sign it first.</p></li>
 </ol>
 <p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>

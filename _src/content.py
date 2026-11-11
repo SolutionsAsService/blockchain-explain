@@ -100,7 +100,7 @@ PAGES = {
         "idea": "Every chain mixes the same parts; the mix decides what it is good at.",
         "title": "Major chains compared",
         "kicker": "The same parts, put together differently",
-        "lede": "Every chain is a choice of consensus, execution and connections. Four well-known ones, and a case study, side by side.",
+        "lede": "Every chain is a choice of consensus, execution and connections. Four well‑known ones, and a case study, side by side.",
         "sections": [
             ("Four chains", """{CHAINS_TABLE}
 <p>Bitcoin is built to be money and changes slowly. Ethereum is built for contracts and scales through layer 2s. Cosmos is a family of separate chains, each built with the Cosmos SDK on CometBFT and joined by IBC. Solana runs one fast chain and asks more of the computers that run it.</p>"""),

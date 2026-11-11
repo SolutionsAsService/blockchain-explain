@@ -362,3 +362,9 @@ h1,h2,.card-t{text-wrap:balance}
 .tx-t{font-size:16px}.br-pt{font-size:16px}.stub-t{font-size:17px}
 .hero-narrow .ch,.hero-narrow .br-pt{font-size:17px}
 @media (max-width:420px){.fig{padding:12px 0;border-left:0;border-right:0;border-radius:0;background:none}.fig figcaption{padding-left:0;padding-right:0}}
+/* R7 */
+.steps{list-style:none;padding-left:0}
+.steps li>label{display:block;width:auto}
+.mn-br{stroke-dasharray:none;stroke-width:1.5}
+.fg-lv.s-bridge{fill:var(--bed);stroke:none}
+.side-toc a{justify-content:flex-start}

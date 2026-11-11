@@ -159,16 +159,15 @@ def hero_narrow():
          '<defs><marker id="ahn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahead"/></marker></defs>',
          f'<a href="blockchain-basics.html" class="bedrock" aria-label="The bedrock: blocks, hashes, the chain and Merkle trees. Blockchain basics">'
          f'<polygon points="8,{base + 74} 352,{base + 74} 360,{base + 132} 0,{base + 132}" class="br"/>'
-         f'<text x="180" y="{base + 99}" text-anchor="middle" class="br-t">Bedrock: hashes and blocks</text>'
-         f'<text x="180" y="{base + 120}" text-anchor="middle" class="br-t">→ Basics</text></a>',
+         f'<text x="180" y="{base + 99}" text-anchor="middle" class="br-t">Bedrock: blocks, hashes</text>'
+         f'<text x="180" y="{base + 120}" text-anchor="middle" class="br-t">and Merkle trees → Basics</text></a>',
          a,
          f'<a href="bridges.html" class="bridge" aria-label="Bridges: how chains pass messages and tokens">'
-         f'<path d="M{150 + hw - 4},{fy + 4} L330,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
-         f'<rect x="332" y="{fy - 40}" width="28" height="96" rx="4" class="stub"/>'
-         f'<text x="346" y="{fy + 8}" text-anchor="middle" class="stub-t" transform="rotate(-90 346 {fy + 8})">Chain B</text>'
-         f'<rect x="252" y="{fy - 54}" width="78" height="48" rx="10" class="br-pill"/>'
-         f'<text x="291" y="{fy - 34}" text-anchor="middle" class="br-pt">Bridge</text>'
-         f'<text x="291" y="{fy - 15}" text-anchor="middle" class="br-pt">→</text></a>',
+         f'<path d="M{150 + hw - 4},{fy + 4} L296,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
+         f'<rect x="298" y="{fy - 22}" width="60" height="56" rx="8" class="stub"/>'
+         f'<text x="328" y="{fy + 2}" text-anchor="middle" class="stub-t">Chain</text><text x="328" y="{fy + 22}" text-anchor="middle" class="stub-t">B</text>'
+         f'<rect x="262" y="{fy + 42}" width="96" height="44" rx="22" class="br-pill"/>'
+         f'<text x="310" y="{fy + 70}" text-anchor="middle" class="br-pt">Bridges →</text></a>',
          f'<path d="M80,{ys[-1] - hh + 22} L80,{base + 66}" class="tx" marker-end="url(#ahn)"/>',
          f'<text x="150" y="{ys[-1] - hh - 14}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="8" y="{ys[-1] - hh - 2}" class="tx-t">a transaction</text>',
@@ -254,7 +253,7 @@ def doc(path, title, kicker, lede, idea, sections, docs="", figure=None, demos=F
     if path in guide:
         step = f"Step {guide.index(path) + 1} of {len(guide)}"
         kicker = f"{step} · {kicker}" if kicker else step
-    toc = "".join(f'<li><a href="#{sid}"><span>{f"{i + 1:02d}" if numbered else ""}</span>{e(t)}</a></li>' for i, (sid, t, _) in enumerate(sections))
+    toc = "".join(f'<li><a href="#{sid}">{f"<span>{i + 1:02d}</span>" if numbered else ""}{e(t)}</a></li>' for i, (sid, t, _) in enumerate(sections))
     where = next((f"{role}: {name}" for k, _, name, role, _ in K.LAYERS if k == level), WHERE.get(level, WHERE[None]))
     secs = "".join(f'<section class="sec" aria-labelledby="{sid}"><h2 id="{sid}">{f"<span class=num>{i + 1:02d}</span>" if numbered else ""}{e(t)}</h2>{h}</section>'
                    for i, (sid, t, h) in enumerate(sections))
@@ -408,9 +407,9 @@ def pow_demo(ex):
 def sign_demo():
     return """<div class="demo" data-demo="sign"><p class="demo-h">Try it · sign and check a transaction</p>
 <ol class="steps">
-<li><label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
+<li><label>1 · Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
 <div class="btns"><button type="button" data-role="keys">Make a key pair</button><button type="button" data-role="sign" disabled>Sign it</button></div><p class="hint" data-role="hint1">Make a key pair first.</p></li>
-<li><label>Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
+<li><label>2 · Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
 <div class="btns"><button type="button" data-role="verify" disabled>Check the signature</button></div><p class="hint" data-role="hint2">Sign it first.</p></li>
 </ol>
 <p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
