@@ -18,7 +18,7 @@ break a chain, mine a block and sign a transaction yourself.
 | Bridges | Trusted bridges and light-client bridges (IBC) |
 | Chains | Bitcoin, Ethereum, Cosmos Hub and Solana compared; an Autheo case study |
 | Risks | Lost keys, scams, contract bugs, bridges, majority attacks, energy |
-| Glossary | 20 terms |
+| Glossary | 21 terms |
 
 ## Build
 

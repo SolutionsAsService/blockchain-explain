@@ -8,13 +8,13 @@ SITE = "Blockchain, explained"
 
 # The general stack of one chain, bottom to top. Used in the hero, the home list and the strip on each layer page.
 LAYERS = [
-    ("consensus", "consensus.html", "Consensus", "Layer 1 of 4",
+    ("consensus", "consensus.html", "Consensus", "Level 1 of 4",
      "Many computers agree on one history: proof of work, proof of stake and BFT voting."),
-    ("execution", "contracts.html", "Smart contracts", "Layer 2 of 4",
+    ("execution", "contracts.html", "Smart contracts", "Level 2 of 4",
      "Programs stored on the chain, run by every node with the same result."),
-    ("layer2", "layer2.html", "Layer 2", "Layer 3 of 4",
+    ("layer2", "layer2.html", "Layer 2", "Level 3 of 4",
      "Rollups and channels: work done off the chain, settled on it."),
-    ("apps", "keys.html", "Wallets & apps", "Layer 4 of 4",
+    ("apps", "keys.html", "Wallets & apps", "Level 4 of 4",
      "Keys that sign transactions, and the apps people use."),
 ]
 
@@ -24,11 +24,12 @@ POW_ZEROS = 3
 PAGES = {
     "keys": {
         "title": "Keys, wallets and transactions",
-        "kicker": "Layer 4 of 4, where people start",
-        "lede": "Nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.",
+        "kicker": "Level 4 of 4, where people start",
+        "lede": "On the chain itself nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.",
         "sections": [
             ("Keys", """<p>A <em>private key</em> is a very large random number that only you know. From it, software computes a <em>public key</em> that anyone may see, and an <em>address</em> (a shortened hash of the public key) that people send to. Going forward is easy; going back, from address to private key, is not practical with today's computers.</p>
-<p>A <em>wallet</em> is just software that keeps your private keys and uses them. It does not hold coins: the chain records which address owns what, and the key is what lets you move it.</p>"""),
+<p>A <em>wallet</em> is just software that keeps your private keys and uses them. It does not hold coins: the chain records which address owns what, and the key is what lets you move it.</p>
+<p>Most wallets show you a <em>recovery phrase</em> of 12 or 24 words when you set them up. Those words can recreate every key in the wallet, so the phrase <em>is</em> the key: whoever has it has the funds. If you keep crypto on an exchange instead, the exchange holds the keys for you, and you are trusting it like a bank.</p>"""),
             ("Signing a transaction", """<p>To send something, your wallet writes a transaction (“from this address, to that one, this amount”) and <em>signs</em> it with your private key. Every node checks the signature against your public key before accepting it. A changed transaction, or one signed with any other key, fails the check.</p>
 {SIGN_DEMO}"""),
             ("No reset button", """<p>Because the key is the only proof that you own something, losing it means losing access, and anyone who copies it can spend as you. There is no support desk that can reverse a signed, confirmed transaction. That is the price of not needing a bank, and the main reason people lose money: see <a href="risks.html">Risks</a>.</p>"""),
@@ -37,14 +38,14 @@ PAGES = {
     },
     "consensus": {
         "title": "Consensus: agreeing without trust",
-        "kicker": "Layer 1 of 4, the bottom",
-        "lede": "Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.",
+        "kicker": "Level 1 of 4, the bottom",
+        "lede": "Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.",
         "sections": [
             ("Proof of work", """<p>Bitcoin's answer: to add a block, a computer must find a number (a <em>nonce</em>) that makes the block's hash start with enough zeros. The only way is to guess, billions of times. Whoever finds one first adds the block and is paid for it. Rewriting history would mean redoing that work faster than everyone else combined.</p>
 {POW_DEMO}
 <p>Bitcoin adjusts its difficulty so that, across the whole network, a block is found about every ten minutes.</p>"""),
             ("Proof of stake", """<p>Instead of spending electricity, validators lock up the chain's own tokens as <em>stake</em>: a deposit they lose if they cheat. The protocol picks who proposes each block, and other validators vote on it. Ethereum switched from proof of work to proof of stake in September 2022.</p>"""),
-            ("BFT voting, and how many can fail", """<p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. So there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
+            ("BFT voting, and how many can fail", """<p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. As long as fewer than a third are faulty, there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
 <p>It stays safe as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together. That is the limit for any protocol of this kind, called Byzantine fault tolerance. On a real chain, voting power follows stake, so the third is a third of the stake, not of the machines.</p>
 {BFT_TABLE}
 {BFT_DEMO}"""),
@@ -53,22 +54,22 @@ PAGES = {
     },
     "contracts": {
         "title": "Smart contracts",
-        "kicker": "Layer 2 of 4",
+        "kicker": "Level 2 of 4",
         "lede": "Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.",
         "sections": [
             ("Programs everyone runs", """<p>A <em>smart contract</em> is a program saved on the chain at its own address. Calling it is a transaction: every node runs the code with the same inputs, so they all reach the same new state. Nobody can change a contract's code once it is deployed, unless the code itself allows it.</p>
 <p>Bitcoin allows only small, fixed scripts. Ethereum made general programs the point: its <em>Ethereum Virtual Machine</em> (EVM) runs contracts usually written in Solidity, and many other chains run the same EVM so those contracts work there too.</p>"""),
-            ("Gas", """<p>Since every node runs every call, each step of computation costs a fee, called <em>gas</em> on Ethereum. The fee pays the network and stops a program from running forever.</p>"""),
+            ("Gas", """<p>Since every node runs every call, each step of computation and each piece of stored data is measured in units of <em>gas</em>. You pay the gas used times a price per unit. On Ethereum, the base part of that fee is destroyed (“burned”) and a tip goes to the validator. The cost is also what stops a program from running forever.</p>"""),
             ("What people build", """<p>Tokens (a contract that keeps a list of balances), exchanges that trade them without a company in the middle, lending, collectibles (NFTs), and votes for groups that hold funds together. Each is a contract, and each is only as safe as its code: see <a href="risks.html">Risks</a>.</p>"""),
         ],
         "docs": [("Ethereum: smart contracts", "https://ethereum.org/en/developers/docs/smart-contracts/"), ("Ethereum: the EVM", "https://ethereum.org/en/developers/docs/evm/"), ("Solidity documentation", "https://docs.soliditylang.org/")],
     },
     "layer2": {
         "title": "Layer 2: scaling on top",
-        "kicker": "Layer 3 of 4",
-        "lede": "If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.",
+        "kicker": "Level 3 of 4",
+        "lede": "If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.",
         "sections": [
-            ("Rollups", """<p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) keeps the data, so anyone can rebuild the rollup's state and check it.</p>
+            ("Rollups", """<p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) publishes the data for everyone, so anyone who downloads it can rebuild the rollup's state and check it.</p>
 <ul class="map"><li><strong>Optimistic rollups</strong> assume each batch is correct, and allow a challenge period in which anyone can prove a batch wrong.</li>
 <li><strong>Zero-knowledge rollups</strong> post a cryptographic proof with each batch that it was computed correctly.</li></ul>"""),
             ("Payment channels", """<p>Two people lock funds on the chain, then pay each other many times off it by signing updated balances, and settle the final balance on the chain. Bitcoin's Lightning Network links channels into a network.</p>"""),
@@ -108,7 +109,7 @@ PAGES = {
 <li><strong>Wrong address</strong>: a payment to a mistyped address is gone.</li></ul>"""),
             ("Code and bridges", """<ul class="map"><li><strong>Contract bugs</strong>: a contract does exactly what its code says, including its mistakes, and anyone may call it.</li>
 <li><strong>Bridges</strong> hold large pools of locked tokens, which makes them targets.</li></ul>"""),
-            ("The network itself", """<ul class="map"><li><strong>Majority attacks</strong>: whoever controls most of the mining power (proof of work) can reorder recent blocks; on a BFT chain, if a third or more of the stake is dishonest, it can stop the chain or finalize conflicting blocks.</li>
+            ("The network itself", """<ul class="map"><li><strong>Majority attacks</strong>: whoever controls most of the mining power (proof of work) can reorder recent blocks; on a BFT chain, a third of the stake can stop the chain by refusing to vote, and more than a third voting twice can finalize conflicting blocks.</li>
 <li><strong>Energy</strong>: proof of work uses a great deal of electricity by design. Ethereum's move to proof of stake cut its energy use by about 99.95%, by its own estimate.</li>
 <li><strong>Speed and cost</strong>: a chain everyone can check is slower and dearer per transaction than one company's database. Many uses do not need a blockchain at all.</li></ul>"""),
         ],
@@ -145,8 +146,8 @@ GLOSSARY = [
     ("Block", "A batch of transactions, with a header that includes the previous block's hash."),
     ("Bridge", "A system that passes messages or tokens between two chains."),
     ("Finality", "The point after which a block cannot be reversed. In BFT chains, once more than two thirds of the voting power sign it."),
-    ("Fork", "Two competing versions of a chain's history. Proof-of-work chains wait for one to win; BFT chains never produce one."),
-    ("Gas", "The fee for each step of computation on Ethereum and similar chains."),
+    ("Fork", "Two competing versions of a chain's history. Proof-of-work chains wait for one to win; BFT chains cannot produce one while fewer than a third of the voting power is faulty."),
+    ("Gas", "The unit that measures computation and storage on Ethereum and similar chains. The fee is the gas used times a price per unit."),
     ("Hash", "A fixed-length fingerprint of some data, here SHA-256's 64 hexadecimal digits (0–9 and a–f). Finding two inputs with the same hash is infeasible."),
     ("Layer 1", "A main chain, such as Bitcoin or Ethereum, that settles transactions itself."),
     ("Layer 2", "A system that runs transactions off a layer 1 and settles them on it, such as a rollup or payment channel."),
@@ -156,6 +157,7 @@ GLOSSARY = [
     ("Private key", "The secret number that signs your transactions. Whoever has it controls the funds."),
     ("Proof of stake", "Consensus where validators lock up tokens as a deposit and vote on blocks."),
     ("Proof of work", "Consensus where adding a block requires finding a hash that meets a target, by guessing."),
+    ("Recovery phrase", "12 or 24 words that can recreate a wallet's keys. Whoever has the phrase has the funds."),
     ("Rollup", "A layer 2 that posts batches of transactions, and either a proof or a challenge period, to a layer 1."),
     ("Smart contract", "A program stored on the chain, run by every node with the same result."),
     ("Stake", "Tokens a validator locks up as a deposit. Its voting power grows with its stake, and it can lose some for breaking the rules."),

@@ -243,7 +243,7 @@ def layer_strip(active_key):
     """The stack, as a row of four, with this page's layer marked."""
     items = "".join(f'<li class="ls-{k}{" on" if k == active_key else ""}"><a href="{h}"{" aria-current=\"true\"" if k == active_key else ""}><span>{e(name)}</span><small>{e(role)}</small></a></li>'
                     for k, h, name, role, _ in reversed(K.LAYERS))
-    return f'<nav class="lstrip" aria-label="The stack, top to bottom"><ol>{items}</ol></nav>'
+    return f'<nav class="lstrip" aria-label="The four levels, top to bottom"><ol>{items}</ol></nav>'
 
 
 # ------------------------------------------------------------------ pages
@@ -380,7 +380,7 @@ def sign_demo():
 <p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
 <p class="hx"><span>Signature</span><code data-role="sig">none yet</code></p>
 <p class="demo-out" data-role="out" role="status">Runs in your browser. Nothing is sent anywhere.</p>
-<p class="demo-note">Your browser signs with ECDSA on the P-256 curve. Bitcoin and Ethereum use the same method on a different curve, secp256k1, which browsers do not offer.</p></div>"""
+<p class="demo-note">Your browser signs with ECDSA on the P-256 curve. Bitcoin and Ethereum sign on a different curve, secp256k1, which browsers do not offer (Bitcoin has also used Schnorr signatures on it since 2021).</p></div>"""
 
 
 def chains_table():

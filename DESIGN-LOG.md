@@ -153,6 +153,24 @@ The owner, on seeing the R4 site: "It's supposed to be about blockchain, more ge
 Intent: every page is about blockchains in general. The four layers are generic (consensus, smart contracts, layer 2, wallets and apps) on the bedrock (basics), with bridges between chains. New pages: Keys (live ECDSA signing), Layer 2, Bridges (trusted and light-client, IBC as the example), Chains compared (Bitcoin, Ethereum, Cosmos Hub, Solana), Risks. Consensus now covers proof of work (a live mining demo whose default nonce the build computes and the browser must match), proof of stake and BFT voting. Autheo is one case study, linked from Chains. The 2.0 URLs `evm.html`, `cosmos-sdk.html` and `layer0.html` redirect to Contracts, Chains and Bridges.
 Lesson: an R0 objection about framing ("vendor copy") is answered by the structure, not by the wording. Rewording the vendor page while keeping the vendor's stack as the site's skeleton left the site about the vendor.
 
+### Panel, WHOLE, round R5 (the general guide, after M5; verdict in panel/R5-v2/)
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Evidence (Cairo) | How Charts Lie (Alberto Cairo): a claim is only as honest as its scope; an absolute stated where the truth is conditional misleads, even when every number is right | Dates (Bitcoin 2009, Ethereum 2015, Merge Sept 2022, Cosmos Hub 2019, Solana 2020), the ten-minute target, the BFT bound and table (n=4/7/10/100 -> f=1/2/3/33, quorum 3/5/7/67), the "a third or more can stop the chain" statement, the ~99.95% figure (attributed to ethereum.org), IBC, Lightning, payment channels, P-256 vs secp256k1, NIST 2024 PQC and Haber-Stornetta 1991 are all correct. PoW demo checked: Python finds nonce 1526, SHA-256("Ada pays Ben 5\|1526") = 000e589cc17b...; the page's default, its data-expect and a live Mine click in Chromium all give 1526 / same hash / "1,527 guesses", no console errors. Defects: the glossary says BFT chains "never" fork, which the Risks page contradicts; gas is described as a fee that "pays the network" (the base fee is burned); rollups are said to have L1 "keep" their data (blob data is pruned after about 18 days); the "Layer 1/2 of 4" kickers collide with the industry terms Layer 1 / Layer 2 the glossary defines; the keys page omits recovery phrases and custodial wallets. | OBJECT | Fix D1-D3 (factual); fix D4-D5 (misleading for a beginner); D6-D9 optional precision. |
+
+#### Resolutions, round R5
+| Finding | Resolution |
+|---|---|
+| Cairo: "BFT chains 'never' fork" | ADAPT: never, as long as fewer than a third of the voting power is faulty (consensus page and glossary) |
+| Cairo: "gas is a unit, not the fee; the base fee is burned" | ADAPT: gas measures computation and storage; fee = gas used × price; base fee burned, tip to the validator |
+| Cairo: "layer 1 does not keep rollup data" | ADAPT: layer 1 publishes it for everyone to download |
+| Cairo: "'Layer 2 of 4' clashes with the term layer 2" | ADAPT: the four parts are "Level n of 4" everywhere |
+| Cairo: "no recovery phrase, no custodial wallets" | ADAPT: a paragraph on the 12- or 24-word phrase and on exchanges holding keys; "Recovery phrase" in the glossary (21 terms) |
+| Cairo: "a third can stop, more than a third voting twice can rewrite" | ADAPT |
+| Cairo: "'cannot be fast and cheap' is overstated" | ADAPT: the trade-off is speed against ordinary computers being able to check |
+| Cairo: "Bitcoin also uses Schnorr since 2021" | ADAPT |
+| Cairo: "'three main ways' counts BFT twice" | ADAPT: two families, with BFT voting as a way proof-of-stake chains finalize |
+
 ## Stop test
 - **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
 - **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**

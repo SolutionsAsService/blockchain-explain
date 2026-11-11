@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Layer 2: scaling on top · Blockchain, explained</title>
-<meta name="description" content="If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
+<meta name="description" content="If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
 <meta property="og:title" content="Layer 2: scaling on top · Blockchain, explained">
-<meta property="og:description" content="If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
+<meta property="og:description" content="If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
 <meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
@@ -24,11 +24,11 @@
 </header>
 <main id="main">
 <article class="wrap">
-  <p class="kicker">Layer 3 of 4</p>
+  <p class="kicker">Level 3 of 4</p>
   <h1>Layer 2: scaling on top</h1>
-  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2 on"><a href="layer2.html" aria-current="true"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
-  <p class="lede">If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.</p>
-  <h2>Rollups</h2><p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) keeps the data, so anyone can rebuild the rollup's state and check it.</p>
+  <nav class="lstrip" aria-label="The four levels, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Level 4 of 4</small></a></li><li class="ls-layer2 on"><a href="layer2.html" aria-current="true"><span>Layer 2</span><small>Level 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Level 2 of 4</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>Consensus</span><small>Level 1 of 4</small></a></li></ol></nav>
+  <p class="lede">If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.</p>
+  <h2>Rollups</h2><p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) publishes the data for everyone, so anyone who downloads it can rebuild the rollup's state and check it.</p>
 <ul class="map"><li><strong>Optimistic rollups</strong> assume each batch is correct, and allow a challenge period in which anyone can prove a batch wrong.</li>
 <li><strong>Zero-knowledge rollups</strong> post a cryptographic proof with each batch that it was computed correctly.</li></ul><h2>Payment channels</h2><p>Two people lock funds on the chain, then pay each other many times off it by signing updated balances, and settle the final balance on the chain. Bitcoin's Lightning Network links channels into a network.</p><h2>What it costs</h2><p>Layer 2s inherit the main chain's security only as far as their design allows: who can post batches, how a user leaves if the operator stops, and how long withdrawals take all differ. L2BEAT tracks these differences for each one.</p>
   <p class="docs">Further: <a href="https://ethereum.org/en/layer-2/">Ethereum: scaling and layer 2</a> · <a href="https://lightning.network/">Lightning Network</a> · <a href="https://l2beat.com/">L2BEAT</a></p>

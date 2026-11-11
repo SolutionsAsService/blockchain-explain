@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Consensus: agreeing without trust · Blockchain, explained</title>
-<meta name="description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.">
+<meta name="description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.">
 <meta property="og:title" content="Consensus: agreeing without trust · Blockchain, explained">
-<meta property="og:description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.">
+<meta property="og:description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
 <meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
@@ -24,10 +24,10 @@
 </header>
 <main id="main">
 <article class="wrap">
-  <p class="kicker">Layer 1 of 4, the bottom</p>
+  <p class="kicker">Level 1 of 4, the bottom</p>
   <h1>Consensus: agreeing without trust</h1>
-  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2"><a href="layer2.html"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
-  <p class="lede">Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.</p>
+  <nav class="lstrip" aria-label="The four levels, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Level 4 of 4</small></a></li><li class="ls-layer2"><a href="layer2.html"><span>Layer 2</span><small>Level 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Level 2 of 4</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>Consensus</span><small>Level 1 of 4</small></a></li></ol></nav>
+  <p class="lede">Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.</p>
   <h2 id="pow">Proof of work</h2><p>Bitcoin's answer: to add a block, a computer must find a number (a <em>nonce</em>) that makes the block's hash start with enough zeros. The only way is to guess, billions of times. Whoever finds one first adds the block and is paid for it. Rewriting history would mean redoing that work faster than everyone else combined.</p>
 <div class="demo" data-demo="pow" id="pow">
 <p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>.</p>
@@ -37,7 +37,7 @@
 <p class="hx"><span>Nonce</span><code data-role="nonce" data-expect="1526">1526</code></p>
 <p class="hx big"><span>Hash</span><code data-role="hash" data-expect="000e589cc17ba680b146c42be0f87a991138926393e27727bdbbabd98cac56f8">000e589cc17ba680b146c42be0f87a991138926393e27727bdbbabd98cac56f8</code></p>
 <p class="demo-out" data-role="out" role="status">1,527 guesses. Each extra zero needs about 16 times as many.</p></div>
-<p>Bitcoin adjusts its difficulty so that, across the whole network, a block is found about every ten minutes.</p><h2>Proof of stake</h2><p>Instead of spending electricity, validators lock up the chain's own tokens as <em>stake</em>: a deposit they lose if they cheat. The protocol picks who proposes each block, and other validators vote on it. Ethereum switched from proof of work to proof of stake in September 2022.</p><h2 id="bft">BFT voting, and how many can fail</h2><p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. So there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
+<p>Bitcoin adjusts its difficulty so that, across the whole network, a block is found about every ten minutes.</p><h2>Proof of stake</h2><p>Instead of spending electricity, validators lock up the chain's own tokens as <em>stake</em>: a deposit they lose if they cheat. The protocol picks who proposes each block, and other validators vote on it. Ethereum switched from proof of work to proof of stake in September 2022.</p><h2 id="bft">BFT voting, and how many can fail</h2><p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. As long as fewer than a third are faulty, there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
 <p>It stays safe as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together. That is the limit for any protocol of this kind, called Byzantine fault tolerance. On a real chain, voting power follows stake, so the third is a third of the stake, not of the machines.</p>
 <table class="tbl"><caption>Equal voting power</caption><thead><tr><th scope="col">Validators</th><th scope="col">Needed to finalize (more than ⅔)</th><th scope="col">Faulty it can survive (fewer than ⅓)</th></tr></thead><tbody><tr><td>4</td><td>3</td><td>1</td></tr><tr><td>7</td><td>5</td><td>2</td></tr><tr><td>10</td><td>7</td><td>3</td></tr><tr><td>100</td><td>67</td><td>33</td></tr></tbody></table>
 <div class="demo" data-demo="bft"><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
