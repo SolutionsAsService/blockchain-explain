@@ -23,11 +23,15 @@
   document.querySelectorAll('[data-demo="chain"]').forEach(function (d) {
     var blocks = Array.prototype.slice.call(d.querySelectorAll(".blk"));
     function status() {
+      var live = q(d, "live"), first = -1;
       blocks.forEach(function (b, i) {
         var ok = i === 0 || q(b, "prev").textContent === q(blocks[i - 1], "hash").textContent;
         b.classList.toggle("broken", !ok);
         q(b, "status").textContent = ok ? "linked" : "broken: “previous” no longer matches block " + (i - 1);
+        if (!ok && first < 0) first = i;
       });
+      var msg = first < 0 ? "" : "Block " + first + " is broken: its previous hash no longer matches block " + (first - 1) + ".";
+      if (live.textContent !== msg) live.textContent = msg;
     }
     function rehash(b) {
       var i = +b.dataset.i;

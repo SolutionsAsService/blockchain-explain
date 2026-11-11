@@ -11,7 +11,7 @@ const pages = walk('').sort((a, b) => (a === 'index.html' ? -1 : b === 'index.ht
 const shots = new Set(['index.html', 'blockchain-basics.html', 'consensus.html', 'autheo.html']);
 (async () => {
   const b = await chromium.launch(); const report = [];
-  for (const scheme of ['light', 'dark']) for (const [w, h] of [[1280, 800], [375, 812], [390, 844]]) {
+  for (const scheme of ['light', 'dark']) for (const [w, h] of [[1280, 800], [375, 812], [390, 844], [320, 640]]) {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, colorScheme: scheme, hasTouch: w < 500 });
     const p = await ctx.newPage();
     for (const pg of pages) {

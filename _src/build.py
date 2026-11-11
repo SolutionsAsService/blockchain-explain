@@ -274,13 +274,13 @@ def build_home(ex):
     <li>With 100 equal validators, CometBFT finalizes a block once {q100} agree, and stays safe with up to {f100} faulty. <a href="consensus.html">Why</a>.</li>
   </ul>
 </section>"""
-    page("index.html", None, body, "How a blockchain stack fits together, from hashes to consensus to two chains talking over IBC, with every hash computed as you read.", active="index.html")
+    page("index.html", None, body, "How a blockchain stack fits together, from hashes to consensus to two chains talking over IBC. Every hash on the site is real, and you can change the input.", active="index.html")
 
 
 def build_basics(ex):
     chain_html = "".join(f"""<li class="blk" data-i="{b["i"]}">
   <div class="blk-h">Block {b["i"]}</div>
-  <label>Data <input type="text" value="{e(b["data"])}" data-role="data" data-default="{e(b["data"])}"></label>
+  <label>Data <input type="text" value="{e(b["data"])}" data-role="data" aria-label="Block {b["i"]} data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">{b["prev"]}</code></div>
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="{b["hash"]}">{b["hash"]}</code></div>
   <p class="blk-s" data-role="status">linked</p>
@@ -315,6 +315,7 @@ def build_basics(ex):
   <h2 id="chain">2 · The chain</h2>
   <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
   <div class="demo" data-demo="chain"><ol class="chain">{chain_html}</ol>
+    <p class="sr-only" data-role="live" aria-live="polite"></p>
     <button type="button" data-role="relink">Re-link the broken block</button>
     <p class="relinked" data-role="count" role="status"></p>
     <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>

@@ -45,29 +45,30 @@
   <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
   <div class="demo" data-demo="chain"><ol class="chain"><li class="blk" data-i="0">
   <div class="blk-h">Block 0</div>
-  <label>Data <input type="text" value="Genesis" data-role="data" data-default="Genesis"></label>
+  <label>Data <input type="text" value="Genesis" data-role="data" aria-label="Block 0 data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">0000000000000000000000000000000000000000000000000000000000000000</code></div>
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c">d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li><li class="blk" data-i="1">
   <div class="blk-h">Block 1</div>
-  <label>Data <input type="text" value="Ada pays Ben 5" data-role="data" data-default="Ada pays Ben 5"></label>
+  <label>Data <input type="text" value="Ada pays Ben 5" data-role="data" aria-label="Block 1 data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c</code></div>
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4">9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li><li class="blk" data-i="2">
   <div class="blk-h">Block 2</div>
-  <label>Data <input type="text" value="Ben pays Cy 2" data-role="data" data-default="Ben pays Cy 2"></label>
+  <label>Data <input type="text" value="Ben pays Cy 2" data-role="data" aria-label="Block 2 data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4</code></div>
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f">8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li><li class="blk" data-i="3">
   <div class="blk-h">Block 3</div>
-  <label>Data <input type="text" value="Cy pays Ada 1" data-role="data" data-default="Cy pays Ada 1"></label>
+  <label>Data <input type="text" value="Cy pays Ada 1" data-role="data" aria-label="Block 3 data"></label>
   <div class="hx"><span>Previous</span><code data-role="prev">8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f</code></div>
   <div class="hx"><span>Hash</span><code data-role="hash" data-expect="2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9">2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9</code></div>
   <p class="blk-s" data-role="status">linked</p>
 </li></ol>
+    <p class="sr-only" data-role="live" aria-live="polite"></p>
     <button type="button" data-role="relink">Re-link the broken block</button>
     <p class="relinked" data-role="count" role="status"></p>
     <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
