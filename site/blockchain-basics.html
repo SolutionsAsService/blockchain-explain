@@ -35,7 +35,11 @@
     <label>Type anything <input type="text" value="blockchain" data-role="in"></label>
     <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1">ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1</code></p>
   </div>
-  <p>Changing one letter, <code>blockchain</code> to <code>Blockchain</code>, changes the hash from <code>ef7797e13d…</code> to <code>625da44e4e…</code>: 62 of the 64 digits differ.</p>
+  <p>Changing one letter, <code>blockchain</code> to <code>Blockchain</code>, changes almost every digit:</p>
+  <div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
+    <p><span>blockchain</span><code>ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74d<mark>d</mark>434d<mark>1</mark></code></p>
+    <p><span>Blockchain</span><code>625da44e4eaf58d61cf048d168aa6f5e492dea166d8bb54ec06c30de07<mark>d</mark>b57e<mark>1</mark></code></p>
+    <p class="cmp-n">2 of 64 digits match by position (marked); 62 differ.</p></div>
 
   <h2 id="chain">2 · The chain</h2>
   <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
@@ -71,9 +75,11 @@
   <h2 id="merkle">3 · Merkle trees</h2>
   <p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
   <div class="demo" data-demo="merkle">
-    <ol class="txs"><li><input type="text" value="Ada pays Ben 5" data-role="tx" aria-label="Transaction 1"><code data-role="leaf">2280cb6de1c8…</code></li><li><input type="text" value="Ben pays Cy 2" data-role="tx" aria-label="Transaction 2"><code data-role="leaf">1d2b11b4b4b1…</code></li><li><input type="text" value="Cy pays Ada 1" data-role="tx" aria-label="Transaction 3"><code data-role="leaf">d61045a0a743…</code></li><li><input type="text" value="Ada pays Cy 3" data-role="tx" aria-label="Transaction 4"><code data-role="leaf">e75d92ed432b…</code></li></ol>
-    <ol class="pairs"><li><code data-role="pair">d5a646a96efb…</code></li><li><code data-role="pair">320a971dbf5f…</code></li></ol>
-    <p class="hx big"><span>Merkle root</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
+    <p class="mk-row">Leaves: each transaction and its hash, H(1) to H(4). Pairs: the hash of two leaf hashes joined.</p>
+    <div class="mk-tree"><div class="mk-pair"><ol class="txs" start="1"><li><input type="text" value="Ada pays Ben 5" data-role="tx" aria-label="Transaction 1"><code data-role="leaf">2280cb6de1c8…</code></li><li><input type="text" value="Ben pays Cy 2" data-role="tx" aria-label="Transaction 2"><code data-role="leaf">1d2b11b4b4b1…</code></li></ol>
+      <p class="mk-h"><span>H(1+2)</span><code data-role="pair">d5a646a96efb…</code></p></div><div class="mk-pair"><ol class="txs" start="3"><li><input type="text" value="Cy pays Ada 1" data-role="tx" aria-label="Transaction 3"><code data-role="leaf">d61045a0a743…</code></li><li><input type="text" value="Ada pays Cy 3" data-role="tx" aria-label="Transaction 4"><code data-role="leaf">e75d92ed432b…</code></li></ol>
+      <p class="mk-h"><span>H(3+4)</span><code data-role="pair">320a971dbf5f…</code></p></div></div>
+    <p class="hx big mk-root"><span>Root: H(pairs)</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
   </div>
   <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
 </article>

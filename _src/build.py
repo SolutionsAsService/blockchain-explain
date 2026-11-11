@@ -121,7 +121,7 @@ def hero_wide(ex):
     hw, hh, t, gap = 120, 46, 18, 80
     base = 380
     a, ys = stack(205, base, hw, hh, t, gap, True, "a", chain_name="Chain A, ")
-    b, _ = stack(575, base, hw, hh, t, gap, True, "b", chain_name="Chain B, Autheo as it describes itself, ")
+    b, _ = stack(575, base, hw, hh, t, gap, True, "b", chain_name="Chain B, ")
     fy = ys[1]  # framework layer: where IBC lives
     s = [f'<svg class="hero-svg hero-wide" viewBox="0 0 {W} {H}" role="group" aria-labelledby="hw-t">',
          '<title id="hw-t">Two blockchain stacks on one bedrock, joined by an IBC bridge</title>',
@@ -138,7 +138,7 @@ def hero_wide(ex):
          f'<text x="390" y="{fy - 21}" text-anchor="middle" class="br-pt">IBC · Layer 0 →</text></a>',
          # chain names
          f'<text x="205" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain A</text>',
-         f'<a href="autheo.html" aria-label="Chain B: Autheo, as it describes itself. Case study"><rect x="440" y="{ys[-1] - hh - 46}" width="270" height="52" class="hit"/><text x="575" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch ch-link">Chain B: Autheo, in its own terms →</text></a>',
+         f'<text x="575" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain B</text>',
          # the transaction path down chain A
          f'<path d="M135,{ys[-1] - hh - 6} L135,{base + 60}" class="tx" marker-end="url(#ah)"/>',
          f'<text x="128" y="{ys[-1] - hh - 2}" text-anchor="end" class="tx-t">a transaction</text>',
@@ -265,6 +265,7 @@ def build_home(ex):
   <ol class="lrows">{rows}
     <li class="lrow s-bridge"><a href="layer0.html"><span class="lr-n">↔</span><span class="lr-t">Layer 0: IBC</span><span class="lr-l">The bridge between chains, each keeping its own validators.</span></a></li>
     <li class="lrow s-bedrock"><a href="blockchain-basics.html"><span class="lr-n">0</span><span class="lr-t">Bedrock: the basics</span><span class="lr-l">Blocks, hashes, the chain and Merkle trees: what every layer stands on.</span></a></li>
+    <li class="lrow s-case"><a href="autheo.html"><span class="lr-n">?</span><span class="lr-t">Case study: Autheo</span><span class="lr-l">One project's description of itself, set against the stack.</span></a></li>
   </ol>
   <h2>Three facts, computed</h2>
   <ul class="facts">
@@ -285,8 +286,17 @@ def build_basics(ex):
   <p class="blk-s" data-role="status">linked</p>
 </li>""" for b in ex["chain"])
     lv = ex["merkle"]
-    tx_html = "".join(f'<li><input type="text" value="{e(t)}" data-role="tx" aria-label="Transaction {k + 1}"><code data-role="leaf">{short(lv[0][k], 12)}</code></li>' for k, t in enumerate(K.TXS))
-    pair_html = "".join(f'<li><code data-role="pair">{short(h, 12)}</code></li>' for h in lv[1])
+    def tx(k):
+        return f'<li><input type="text" value="{e(K.TXS[k])}" data-role="tx" aria-label="Transaction {k + 1}"><code data-role="leaf">{short(lv[0][k], 12)}</code></li>'
+    groups = "".join(f"""<div class="mk-pair"><ol class="txs" start="{2 * g + 1}">{tx(2 * g)}{tx(2 * g + 1)}</ol>
+      <p class="mk-h"><span>H({2 * g + 1}+{2 * g + 2})</span><code data-role="pair">{short(lv[1][g], 12)}</code></p></div>""" for g in range(len(K.TXS) // 2))
+    h1, h2 = ex["h1"], ex["h2"]
+    def marked(h, other):
+        return "".join(f"<mark>{c}</mark>" if c == o else c for c, o in zip(h, other))
+    cmp_html = f"""<div class="cmp" role="group" aria-label="Both hashes, the matching digits marked">
+    <p><span>{e(K.HASH_INPUT)}</span><code>{marked(h1, h2)}</code></p>
+    <p><span>{e(K.HASH_INPUT_2)}</span><code>{marked(h2, h1)}</code></p>
+    <p class="cmp-n">{64 - ex["diff"]} of 64 digits match by position (marked); {ex["diff"]} differ.</p></div>"""
     body = f"""<article class="wrap">
   <p class="kicker">The bedrock, under every layer</p>
   <h1>The basics</h1>
@@ -299,7 +309,8 @@ def build_basics(ex):
     <label>Type anything <input type="text" value="{e(K.HASH_INPUT)}" data-role="in"></label>
     <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="{ex["h1"]}">{ex["h1"]}</code></p>
   </div>
-  <p>Changing one letter, <code>{e(K.HASH_INPUT)}</code> to <code>{e(K.HASH_INPUT_2)}</code>, changes the hash from <code>{short(ex["h1"])}</code> to <code>{short(ex["h2"])}</code>: {ex["diff"]} of the 64 digits differ.</p>
+  <p>Changing one letter, <code>{e(K.HASH_INPUT)}</code> to <code>{e(K.HASH_INPUT_2)}</code>, changes almost every digit:</p>
+  {cmp_html}
 
   <h2 id="chain">2 · The chain</h2>
   <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Press “Re-link” to repair it: that block's hash changes too, so the break moves to the next block. To hide one edit, you must rewrite every block after it.</p>
@@ -311,9 +322,9 @@ def build_basics(ex):
   <h2 id="merkle">3 · Merkle trees</h2>
   <p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
   <div class="demo" data-demo="merkle">
-    <ol class="txs">{tx_html}</ol>
-    <ol class="pairs">{pair_html}</ol>
-    <p class="hx big"><span>Merkle root</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
+    <p class="mk-row">Leaves: each transaction and its hash, H(1) to H(4). Pairs: the hash of two leaf hashes joined.</p>
+    <div class="mk-tree">{groups}</div>
+    <p class="hx big mk-root"><span>Root: H(pairs)</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
   </div>
   <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta's 1991 time-stamping work · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
 </article>"""
@@ -328,7 +339,7 @@ def bft_table():
 def bft_demo():
     f, q = bft(10)
     return f"""<div class="demo" data-demo="bft"><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
-<p class="demo-out">Needed to finalize: <strong data-role="q">{q}</strong> · faulty it can survive: <strong data-role="f">{f}</strong></p></div>"""
+<p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">{q}</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">{f}</strong></p></div>"""
 
 
 def build_topic(key, ex):

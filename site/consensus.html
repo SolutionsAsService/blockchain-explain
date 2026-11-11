@@ -33,7 +33,7 @@
 <p>The table assumes every validator has equal voting power. On a real chain, power is proportional to stake, so the third is a third of the stake, not of the machines.</p>
 <table class="tbl"><caption>Equal voting power</caption><thead><tr><th scope="col">Validators</th><th scope="col">Needed to finalize (more than ⅔)</th><th scope="col">Faulty it can survive (fewer than ⅓)</th></tr></thead><tbody><tr><td>4</td><td>3</td><td>1</td></tr><tr><td>7</td><td>5</td><td>2</td></tr><tr><td>10</td><td>7</td><td>3</td></tr><tr><td>100</td><td>67</td><td>33</td></tr></tbody></table>
 <div class="demo" data-demo="bft"><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
-<p class="demo-out">Needed to finalize: <strong data-role="q">7</strong> · faulty it can survive: <strong data-role="f">3</strong></p></div>
+<p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">7</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">3</strong></p></div>
   <p class="docs">Further: <a href="https://docs.cometbft.com/">CometBFT documentation</a></p>
 </article>
 <nav class="pager" aria-label="Previous and next"><a href="blockchain-basics.html" rel="prev"><small>← Previous</small><span>Basics</span></a><a class="nx" href="cosmos-sdk.html" rel="next"><small>Next →</small><span>Cosmos SDK</span></a></nav>

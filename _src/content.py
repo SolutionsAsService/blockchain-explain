@@ -68,16 +68,17 @@ PAGES = {
     },
     "autheo": {
         "title": "Case study: Autheo",
-        "kicker": "Chain B on the home page",
+        "kicker": "A case study, in its own terms",
         "lede": "This site began as an explainer for Autheo. What follows is only how Autheo describes itself, set against the stack the other pages explain.",
         "sections": [
             ("In Autheo's own terms", """<p>Autheo describes itself as a decentralized operating system for web, blockchain and AI. It says it combines a Cosmos SDK base, an EVM-compatible execution layer and CometBFT consensus, with decentralized identity, post-quantum cryptography and infrastructure for AI agents.</p>
+<p><strong>Source:</strong> this summary condenses version 1 of this site (2025), which was written from Autheo's own materials; its text is <a href="https://github.com/SolutionsAsService/blockchain-explain/blob/c4a5a61/autheo.html">in the repository history</a>. It is not a quotation from a dated Autheo page, so check Autheo's current materials for its own wording.</p>
 <p>This site has not checked those claims against a running network, and it prints no figures about one. Read them as a description, and the other pages as the background that lets you judge it.</p>"""),
             ("Where each claim sits on the stack", """<ul class="map">
 <li><strong>CometBFT consensus</strong>: the bottom layer. <a href="consensus.html">How it works</a>.</li>
 <li><strong>Cosmos SDK base</strong>: the application framework. <a href="cosmos-sdk.html">How it works</a>.</li>
 <li><strong>EVM-compatible execution</strong>: the contract layer. <a href="evm.html">How it works</a>.</li>
-<li><strong>Connecting to other chains</strong>: IBC. <a href="layer0.html">How it works</a>.</li>
+<li><strong>IBC interoperability</strong>, as Autheo's materials list it: connecting to other chains. <a href="layer0.html">How it works</a>.</li>
 <li><strong>Post-quantum cryptography</strong>: cryptography meant to resist quantum computers. NIST standardized the first in 2024: ML-KEM for key exchange, and ML-DSA and SLH-DSA for signatures. <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">NIST</a>.</li>
 </ul>"""),
         ],
