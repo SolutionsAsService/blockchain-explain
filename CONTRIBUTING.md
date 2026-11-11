@@ -13,14 +13,19 @@ docs, new features, data corrections and ideas.
 
 ## Getting set up
 
-This is a static site: no build step.
+The site in `site/` is generated. Edit `_src/content.py` (the words) or `_src/build.py` (the pages,
+the hero and every computed hash), then rebuild:
 
 ```bash
 git clone https://github.com/SolutionsAsService/blockchain-explain
 cd blockchain-explain
-npx serve .
+python3 _src/build.py          # writes site/, fails on a dead link or missing deploy config
+python3 -m http.server 8768    # then open http://localhost:8768/site/
+node _src/og.cjs http://localhost:8768/site/   # after a change to the home page: refresh site/og.png
+node _src/measure.cjs http://localhost:8768/site/ /tmp/shots   # every page, three sizes, light and dark
 ```
 
+Never type a hash into a page: the build computes it, and `site/js/demos.js` recomputes it in the browser.
 Then open the printed localhost URL. Keep links relative so the site still deploys from any host.
 
 ## Making a change
