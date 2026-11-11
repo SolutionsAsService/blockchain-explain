@@ -98,6 +98,7 @@
       if (busy) return;
       busy = true; btn.disabled = true;
       var data = q(d, "data").value, k = Math.max(1, Math.min(4, Math.floor(+q(d, "zeros").value) || 1)), target = "0".repeat(k), n = 0;
+      q(d, "zeros").value = k;
       stopped = false; q(d, "data").disabled = true; q(d, "zeros").disabled = true; q(d, "stop").hidden = false;
       function done() { busy = false; btn.disabled = false; btn.textContent = "Mine"; d.classList.remove("mining"); q(d, "data").disabled = false; q(d, "zeros").disabled = false; q(d, "stop").hidden = true; }
       q(d, "out").textContent = k === 4 ? "Mining… 4 zeros takes about 65,000 guesses: a few seconds." : "Mining…"; btn.textContent = "Mining…"; d.classList.add("mining");

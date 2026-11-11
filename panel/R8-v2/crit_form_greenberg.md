@@ -1,0 +1,10 @@
+# R8-v2 critique: Critic: Formalist (Greenberg)
+
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Formalist (Greenberg) | Modernist Painting (Clement Greenberg): the medium earns its authority by being exactly itself, so the flat plane, the grid and the type have to be exact. | Checked on the live build. All eight R7 items are resolved. The Consensus figure sets "A CHEATER'S / REWRITE" on two lines clear of the Block 3′ box, and its chain arrows are 12 units with room around them (1280 and 375). The sign demo has one left edge, with numbered labels, inputs, buttons and hints all at the same x. The mini-map connector is solid and reaches the Bridges box. The Bridges figure boxes have clear margins. The Risks level boxes share one width and style, and Bridges no longer reads as selected. The Chains lede uses a non-breaking hyphen ("well‑known"). The glossary letters sit on the sidebar edge. The Contracts state box is set in one typeface. The phone hero uses the same "Bridges →" and bedrock wording as desktop. Together with the R6 fixes (one content edge, a stable nav, aligned cards, 32/32 hashes, 15 px figure labels), nothing left is something a careful designer would refuse to ship. | PASS | Optional polish only (below). The Autheo/About pager deferral is accepted: those pages sit outside the reading order. |
+
+## Optional polish (not blocking)
+
+1. **Home phone hero (375):** the "Bridges →" pill (`rect x=262, y=fy+42, h=44`, build.py line 169) overlaps the top-right corner of the Consensus slab by about 4 units, so the pill sits on the slab's tip. Moving it to `x=272, width=86` with text at x=315 clears the slab edge. The "Chain / B" label in the 60-unit stub (line 168) is deliberately split over two lines but reads as a wrap; a 72-unit stub with a single line, "Chain B", at 14 px would read more cleanly.
+2. **Glossary sidebar:** 13 single letters at a 44 px pitch make a very tall, sparse column. A 4-column grid of 44 px cells (`display:grid;grid-template-columns:repeat(4,44px)`) would keep the targets and fit the 220 px sidebar.
