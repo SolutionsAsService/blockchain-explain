@@ -2,20 +2,23 @@
 
 **https://blockchain-explain.shadw.app**
 
-A plain explainer of how a blockchain fits together, drawn as what it is: two stacks of layers
-(consensus, the Cosmos SDK, the EVM, apps) on one bedrock of hashes and Merkle trees, joined by an IBC
-bridge. One topic per page, and every hash on the site is real SHA-256: computed by the build, and
-recomputed in your browser when you change the input. You can break the chain yourself.
+A plain, general guide to how blockchains work: hashes and blocks, keys and signatures, proof of work,
+proof of stake and BFT voting, smart contracts, layer 2, bridges, major chains compared, and the risks. The home
+page draws every chain as the same stack of four layers on one bedrock, with a bridge between two chains. Every
+value on the site is real: the build computes it, and your browser recomputes it when you change the input. You can
+break a chain, mine a block and sign a transaction yourself.
 
 | Page | What it covers |
 |---|---|
 | Basics | Hashes, the chain and Merkle trees, each a live demo |
-| Consensus | CometBFT: rounds, finality, and the one-third bound, with a calculator |
-| Cosmos SDK | ABCI and modules |
-| EVM | Smart contracts and the apps on top |
-| Layer 0 | IBC: light clients, relayers, sovereign chains |
-| Autheo | A case study, strictly in Autheo's own terms |
-| Glossary | 14 terms |
+| Keys | Private and public keys, wallets, signing (live demo) |
+| Consensus | Proof of work (mine a block), proof of stake, BFT voting (calculator) |
+| Contracts | Smart contracts, the EVM, gas |
+| Layer 2 | Rollups and payment channels |
+| Bridges | Trusted bridges and light-client bridges (IBC) |
+| Chains | Bitcoin, Ethereum, Cosmos Hub and Solana compared; an Autheo case study |
+| Risks | Lost keys, scams, contract bugs, bridges, majority attacks, energy |
+| Glossary | 20 terms |
 
 ## Build
 

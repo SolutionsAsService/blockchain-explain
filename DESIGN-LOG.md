@@ -148,6 +148,11 @@ Intent: stone-white paper, near-black ink, the logo's green deepened for text co
 ## Move M4: One topic per page (KEEP-THE-RULE)
 Depends on: M2. Pages: home; Basics (blocks, hashes, the chain, Merkle trees: the bedrock); Consensus (CometBFT); Cosmos SDK; EVM; Layer 0 (IBC); Autheo (case study, attributed); Glossary; About; 404. The old URLs `blockchain-basics.html`, `layer0.html` and `autheo.html` are kept.
 
+## Move M5: A general guide, not one project's stack (owner direction, after R4)
+The owner, on seeing the R4 site: "It's supposed to be about blockchain, more general guide, not just Autheo, and not all pages seem redone and it seems bad." The R4 site was still organised around one stack (CometBFT, Cosmos SDK, EVM), which is Autheo's own: Debord's R0 objection was answered in the copy, not in the structure.
+Intent: every page is about blockchains in general. The four layers are generic (consensus, smart contracts, layer 2, wallets and apps) on the bedrock (basics), with bridges between chains. New pages: Keys (live ECDSA signing), Layer 2, Bridges (trusted and light-client, IBC as the example), Chains compared (Bitcoin, Ethereum, Cosmos Hub, Solana), Risks. Consensus now covers proof of work (a live mining demo whose default nonce the build computes and the browser must match), proof of stake and BFT voting. Autheo is one case study, linked from Chains. The 2.0 URLs `evm.html`, `cosmos-sdk.html` and `layer0.html` redirect to Contracts, Chains and Bridges.
+Lesson: an R0 objection about framing ("vendor copy") is answered by the structure, not by the wording. Rewording the vendor page while keeping the vendor's stack as the site's skeleton left the site about the vendor.
+
 ## Stop test
 - **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
 - **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**

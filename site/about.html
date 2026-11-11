@@ -19,18 +19,18 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
-  <nav class="nav-wide" aria-label="Site"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
-  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
 </header>
 <main id="main">
 <article class="wrap"><p class="kicker">Version 2.0</p><h1>About this site</h1>
-<p class="lede">A plain explainer of the blockchain stack. Version 2.0 rebuilds an earlier site about Autheo. Its numbers were typed by hand, so this version computes them.</p>
+<p class="lede">A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.</p>
 <h2>How the numbers are made</h2>
 <p><code>_src/build.py</code> computes every hash on the site with Python's SHA-256 and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. The two must agree: on load the page checks its own defaults against the values the build wrote.</p>
 <h2>The logo</h2>
 <p>Version 1 was three bars, the lowest one green. Version 2.0 turns them into three slabs of the stack, with the green base and a transaction's path running down through them. Both are in the repository, in <code>brand/</code>.</p>
 <h2>Sources</h2>
-<p>Each page links the documentation it rests on. What Autheo says about itself is quoted only as that: <a href="autheo.html">the case study</a>.</p></article>
+<p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p></article>
 
 </main>
 <footer class="foot">

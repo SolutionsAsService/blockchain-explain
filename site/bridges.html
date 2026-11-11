@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bridges: chains that talk · Blockchain, explained</title>
+<meta name="description" content="One chain cannot read another&#x27;s records. A bridge passes messages and tokens between them, and how it is built decides who you have to trust.">
+<meta property="og:title" content="Bridges: chains that talk · Blockchain, explained">
+<meta property="og:description" content="One chain cannot read another&#x27;s records. A bridge passes messages and tokens between them, and how it is built decides who you have to trust.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html" aria-current="page">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html" aria-current="page">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">Between stacks</p>
+  <h1>Bridges: chains that talk</h1>
+  
+  <p class="lede">One chain cannot read another&#x27;s records. A bridge passes messages and tokens between them, and how it is built decides who you have to trust.</p>
+  <h2>Trusted bridges</h2><p>The simplest bridge is a group of operators who watch one chain and sign messages on the other. Tokens are usually locked on one side and an IOU is issued on the other. It works, but you trust the operators: if their keys are stolen, the locked tokens can be taken. Some of the largest thefts in crypto have been bridge thefts.</p><h2>Light-client bridges: IBC</h2><p>Cosmos chains use IBC, the Inter-Blockchain Communication protocol. Each chain runs a <em>light client</em> of the other: a small program that follows the other chain's block headers and checks its validators' signatures. A <em>relayer</em>, which anyone can run, carries messages and their proofs; the receiving chain checks each proof itself, so the relayer needs no trust.</p>
+<p>Connected chains stay separate. Each keeps its own validators and rules, and they agree only on how to pass messages. Some writers call this connecting layer “layer 0”; the term has no single meaning.</p>
+  <p class="docs">Further: <a href="https://ethereum.org/en/developers/docs/bridges/">Ethereum: bridges</a> · <a href="https://ibcprotocol.dev/">IBC protocol</a></p>
+</article>
+<nav class="pager" aria-label="Previous and next"><a href="layer2.html" rel="prev"><small>← Previous</small><span>Layer 2</span></a><a class="nx" href="chains.html" rel="next"><small>Next →</small><span>Chains</span></a></nav>
+</main>
+<footer class="foot">
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>

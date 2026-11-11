@@ -8,7 +8,7 @@ const root = path.join(__dirname, '..', 'site');
 const walk = d => fs.readdirSync(path.join(root, d), { withFileTypes: true }).flatMap(e =>
   e.isDirectory() ? (e.name === 'fonts' ? [] : walk(path.join(d, e.name))) : e.name.endsWith('.html') ? [path.join(d, e.name)] : []);
 const pages = walk('').sort((a, b) => (a === 'index.html' ? -1 : b === 'index.html' ? 1 : a.localeCompare(b)));
-const shots = new Set(['index.html', 'blockchain-basics.html', 'consensus.html', 'autheo.html']);
+const shots = new Set(['index.html', 'blockchain-basics.html', 'keys.html', 'consensus.html', 'chains.html', 'risks.html']);
 (async () => {
   const b = await chromium.launch(); const report = [];
   for (const scheme of ['light', 'dark']) for (const [w, h] of [[1280, 800], [375, 812], [390, 844], [320, 640]]) {

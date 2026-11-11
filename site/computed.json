@@ -42,5 +42,9 @@
   [
    "e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18"
   ]
- ]
+ ],
+ "pow": {
+  "nonce": 1526,
+  "hash": "000e589cc17ba680b146c42be0f87a991138926393e27727bdbbabd98cac56f8"
+ }
 }

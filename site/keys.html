@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Keys, wallets and transactions · Blockchain, explained</title>
+<meta name="description" content="Nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.">
+<meta property="og:title" content="Keys, wallets and transactions · Blockchain, explained">
+<meta property="og:description" content="Nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+<script src="js/demos.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html" aria-current="page">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html" aria-current="page">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">Layer 4 of 4, where people start</p>
+  <h1>Keys, wallets and transactions</h1>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps on"><a href="keys.html" aria-current="true"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2"><a href="layer2.html"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
+  <p class="lede">Nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.</p>
+  <h2>Keys</h2><p>A <em>private key</em> is a very large random number that only you know. From it, software computes a <em>public key</em> that anyone may see, and an <em>address</em> (a shortened hash of the public key) that people send to. Going forward is easy; going back, from address to private key, is not practical with today's computers.</p>
+<p>A <em>wallet</em> is just software that keeps your private keys and uses them. It does not hold coins: the chain records which address owns what, and the key is what lets you move it.</p><h2>Signing a transaction</h2><p>To send something, your wallet writes a transaction (“from this address, to that one, this amount”) and <em>signs</em> it with your private key. Every node checks the signature against your public key before accepting it. A changed transaction, or one signed with any other key, fails the check.</p>
+<div class="demo" data-demo="sign">
+<label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
+<button type="button" data-role="keys">1 · Make a key pair</button>
+<button type="button" data-role="sign" disabled>2 · Sign</button>
+<label>Change the transaction, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
+<button type="button" data-role="verify" disabled>3 · Check the signature</button>
+<p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
+<p class="hx"><span>Signature</span><code data-role="sig">none yet</code></p>
+<p class="demo-out" data-role="out" role="status">Runs in your browser. Nothing is sent anywhere.</p>
+<p class="demo-note">Your browser signs with ECDSA on the P-256 curve. Bitcoin and Ethereum use the same method on a different curve, secp256k1, which browsers do not offer.</p></div><h2>No reset button</h2><p>Because the key is the only proof that you own something, losing it means losing access, and anyone who copies it can spend as you. There is no support desk that can reverse a signed, confirmed transaction. That is the price of not needing a bank, and the main reason people lose money: see <a href="risks.html">Risks</a>.</p>
+  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">Bitcoin&#x27;s original paper (section 2: transactions)</a> · <a href="https://ethereum.org/en/developers/docs/accounts/">Ethereum: accounts</a></p>
+</article>
+<nav class="pager" aria-label="Previous and next"><a href="blockchain-basics.html" rel="prev"><small>← Previous</small><span>Basics</span></a><a class="nx" href="consensus.html" rel="next"><small>Next →</small><span>Consensus</span></a></nav>
+</main>
+<footer class="foot">
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>

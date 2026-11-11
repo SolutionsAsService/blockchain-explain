@@ -76,8 +76,8 @@ p{margin:0 0 1em}
 .hero-narrow{display:none}
 .slab polygon,.bedrock polygon{stroke:var(--paper);stroke-width:1}
 .s-apps .sl-t{fill:var(--s-apps)}.s-apps .sl-l{fill:var(--s-apps-l)}.s-apps .sl-r{fill:var(--s-apps-r)}
-.s-execution .sl-t{fill:var(--s-exec)}.s-execution .sl-l{fill:var(--s-exec-l)}.s-execution .sl-r{fill:var(--s-exec-r)}
-.s-framework .sl-t{fill:var(--s-frame)}.s-framework .sl-l{fill:var(--s-frame-l)}.s-framework .sl-r{fill:var(--s-frame-r)}
+.s-layer2 .sl-t{fill:var(--s-exec)}.s-layer2 .sl-l{fill:var(--s-exec-l)}.s-layer2 .sl-r{fill:var(--s-exec-r)}
+.s-execution .sl-t{fill:var(--s-frame)}.s-execution .sl-l{fill:var(--s-frame-l)}.s-execution .sl-r{fill:var(--s-frame-r)}
 .s-consensus .sl-t{fill:var(--s-cons)}.s-consensus .sl-l{fill:var(--s-cons-l)}.s-consensus .sl-r{fill:var(--s-cons-r)}
 .sl-name{font:700 17px "Archivo",sans-serif;fill:var(--label)}
 .s-consensus .sl-name{fill:var(--label-on-green)}
@@ -108,8 +108,8 @@ p{margin:0 0 1em}
 .lrow a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:2px 14px;padding:14px 12px;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}
 .lrow:last-child a{border-bottom:1px solid var(--rule)}
 .lr-n{grid-row:span 2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:8px;font:600 1rem "Plex Mono",monospace}
-.lrow.s-apps .lr-n{background:var(--s-apps)}.lrow.s-execution .lr-n{background:var(--s-exec)}
-.lrow.s-framework .lr-n{background:var(--s-frame);color:var(--label)}.lrow.s-consensus .lr-n{background:var(--s-cons);color:#fff}
+.lrow.s-apps .lr-n{background:var(--s-apps)}.lrow.s-layer2 .lr-n{background:var(--s-exec)}
+.lrow.s-execution .lr-n{background:var(--s-frame);color:var(--label)}.lrow.s-consensus .lr-n{background:var(--s-cons);color:#fff}
 .lrow.s-bridge .lr-n{border:2px solid var(--ink)}.lrow.s-bedrock .lr-n{background:var(--bed)}
 .lr-t{font-weight:700}.lr-l{color:var(--muted)}
 .facts li{padding:12px 0;border-top:1px solid var(--rule)}
@@ -199,3 +199,23 @@ p{margin:0 0 1em}
 .demo,.cmp,.pager a,.lstrip a,.demo input,.toc a,.blk,.mk-pair{border-radius:8px}
 .nav-menu[open] nav{box-shadow:none}
 .foot a{display:inline;padding:15px 0;min-height:0}
+
+/* general guide: PoW and signing demos, text table */
+.demo button+button{margin-left:8px}
+.demo button:disabled{opacity:.45;cursor:default}
+.demo label+label{margin-top:10px}
+.tbl-wrap{overflow-x:auto}
+.tbl.tbl-text td,.tbl.tbl-text th{text-align:left}
+.tbl.tbl-text tbody th{font-weight:700}
+.lrow.s-layer2 .lr-n{background:var(--s-exec)}
+.lrow.s-execution .lr-n{background:var(--s-frame)}
+@media (max-width:860px){.demo button+button{margin-left:0}.demo button{display:block}}
+@media (max-width:860px){
+  .tbl-text thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tbl-text caption{display:block;padding-bottom:8px}
+  .tbl-text,.tbl-text tbody,.tbl-text tr,.tbl-text th,.tbl-text td{display:block}
+  .tbl-text tr{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;margin:0 0 10px;background:var(--panel)}
+  .tbl-text tbody th{border:0;padding:0 0 6px;font-size:1.0625rem}
+  .tbl-text td{border:0;padding:2px 0;display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:8px}
+  .tbl-text td::before{content:attr(data-l);color:var(--muted);font-size:.875rem}
+}

@@ -122,9 +122,9 @@ def hero_wide(ex):
     base = 380
     a, ys = stack(205, base, hw, hh, t, gap, True, "a", chain_name="Chain A, ")
     b, _ = stack(575, base, hw, hh, t, gap, True, "b", chain_name="Chain B, ")
-    fy = ys[1]  # framework layer: where IBC lives
+    fy = ys[1]  # execution layer: where bridges pass messages
     s = [f'<svg class="hero-svg hero-wide" viewBox="0 0 {W} {H}" role="group" aria-labelledby="hw-t">',
-         '<title id="hw-t">Two blockchain stacks on one bedrock, joined by an IBC bridge</title>',
+         '<title id="hw-t">Two blockchains, each a stack of four layers on one bedrock, joined by a bridge</title>',
          '<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahead"/></marker></defs>',
          # bedrock
          f'<a href="blockchain-basics.html" class="bedrock" aria-label="The bedrock: blocks, hashes, the chain and Merkle trees. Blockchain basics">'
@@ -132,10 +132,10 @@ def hero_wide(ex):
          f'<text x="390" y="{base + 100}" text-anchor="middle" class="br-t">Bedrock: blocks, hashes and Merkle trees → Basics</text></a>',
          a, b,
          # bridge
-         f'<a href="layer0.html" class="bridge" aria-label="Layer 0: IBC, the bridge that lets the two chains pass messages">'
+         f'<a href="bridges.html" class="bridge" aria-label="Bridges: how two chains pass messages and tokens">'
          f'<path d="M{205 + hw - 6},{fy + 6} L{575 - hw + 6},{fy + 6}" class="br-line" marker-start="url(#ah)" marker-end="url(#ah)"/>'
          f'<rect x="{390 - 66}" y="{fy - 52}" width="132" height="52" rx="26" class="br-pill"/>'
-         f'<text x="390" y="{fy - 21}" text-anchor="middle" class="br-pt">IBC · Layer 0 →</text></a>',
+         f'<text x="390" y="{fy - 21}" text-anchor="middle" class="br-pt">Bridges →</text></a>',
          # chain names
          f'<text x="205" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="575" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain B</text>',
@@ -154,20 +154,20 @@ def hero_narrow():
     a, ys = stack(150, base, hw, hh, t, gap, True, "n", chain_name="Chain A, ")
     fy = ys[1]
     s = [f'<svg class="hero-svg hero-narrow" viewBox="0 0 {W} {H}" role="group" aria-labelledby="hn-t">',
-         '<title id="hn-t">A blockchain stack on its bedrock, with an IBC bridge to another chain</title>',
+         '<title id="hn-t">A blockchain as a stack of four layers on its bedrock, with a bridge to another chain</title>',
          '<defs><marker id="ahn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahead"/></marker></defs>',
          f'<a href="blockchain-basics.html" class="bedrock" aria-label="The bedrock: blocks, hashes, the chain and Merkle trees. Blockchain basics">'
          f'<polygon points="8,{base + 74} 352,{base + 74} 360,{base + 132} 0,{base + 132}" class="br"/>'
          f'<text x="180" y="{base + 99}" text-anchor="middle" class="br-t">Bedrock: hashes and blocks</text>'
          f'<text x="180" y="{base + 120}" text-anchor="middle" class="br-t">→ Basics</text></a>',
          a,
-         f'<a href="layer0.html" class="bridge" aria-label="Layer 0: IBC, the bridge to another chain">'
+         f'<a href="bridges.html" class="bridge" aria-label="Bridges: how chains pass messages and tokens">'
          f'<path d="M{150 + hw - 4},{fy + 4} L330,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
          f'<rect x="332" y="{fy - 40}" width="28" height="96" rx="4" class="stub"/>'
          f'<text x="346" y="{fy + 8}" text-anchor="middle" class="stub-t" transform="rotate(-90 346 {fy + 8})">Chain B</text>'
          f'<rect x="252" y="{fy - 54}" width="78" height="48" rx="10" class="br-pill"/>'
-         f'<text x="291" y="{fy - 34}" text-anchor="middle" class="br-pt">IBC →</text>'
-         f'<text x="291" y="{fy - 15}" text-anchor="middle" class="br-pt">Layer 0</text></a>',
+         f'<text x="291" y="{fy - 34}" text-anchor="middle" class="br-pt">Bridge</text>'
+         f'<text x="291" y="{fy - 15}" text-anchor="middle" class="br-pt">→</text></a>',
          f'<path d="M80,{ys[-1] - hh + 22} L80,{base + 66}" class="tx" marker-end="url(#ahn)"/>',
          f'<text x="150" y="{ys[-1] - hh - 14}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="8" y="{ys[-1] - hh - 2}" class="tx-t">a transaction</text>',
@@ -177,8 +177,9 @@ def hero_narrow():
 
 
 # ------------------------------------------------------------------ layout
-NAV = [("index.html", "Home"), ("blockchain-basics.html", "Basics"), ("consensus.html", "Consensus"), ("cosmos-sdk.html", "Cosmos SDK"),
-       ("evm.html", "EVM"), ("layer0.html", "Layer 0"), ("autheo.html", "Autheo"), ("glossary.html", "Glossary")]
+NAV = [("blockchain-basics.html", "Basics"), ("keys.html", "Keys"), ("consensus.html", "Consensus"), ("contracts.html", "Contracts"),
+       ("layer2.html", "Layer 2"), ("bridges.html", "Bridges"), ("chains.html", "Chains"), ("risks.html", "Risks"), ("glossary.html", "Glossary")]
+REDIRECTS = {"evm.html": "contracts.html", "cosmos-sdk.html": "chains.html", "layer0.html": "bridges.html"}  # version 2.0 URLs
 
 
 def pager(path):
@@ -247,34 +248,39 @@ def layer_strip(active_key):
 
 # ------------------------------------------------------------------ pages
 def build_home(ex):
-    rows = "".join(f'<li class="lrow s-{k}"><a href="{h}"><span class="lr-n">{len(K.LAYERS) - i}</span><span class="lr-t">{e(role)}: {e(name)}</span><span class="lr-l">{e(line)}</span></a></li>'
+    rows = "".join(f'<li class="lrow s-{k}"><a href="{h}"><span class="lr-n">{len(K.LAYERS) - i}</span><span class="lr-t">{e(name)}</span><span class="lr-l">{e(line)}</span></a></li>'
                    for i, (k, h, name, role, line) in enumerate(reversed(K.LAYERS)))
     f100, q100 = bft(100)
+    pw = ex["pow"]
     body = f"""<section class="hero" aria-labelledby="h1">
   <div class="hero-text">
-    <p class="kicker">One stack, from the bedrock up</p>
+    <p class="kicker">A plain guide, from the bedrock up</p>
     <h1 id="h1">Blockchain, explained</h1>
-    <p class="lede">How a blockchain fits together, layer by layer, and how two chains talk. Every hash on the site is real, and you can change the input yourself.</p>
+    <p class="lede">What a blockchain is, how strangers agree on one, and how chains connect, one layer at a time. Every hash on the site is real, and you can change the input yourself.</p>
     <a class="start" href="blockchain-basics.html">Start with the basics →</a>
   </div>
   {hero_wide(ex)}
   {hero_narrow()}
 </section>
 <section class="wrap">
-  <h2>The stack, top to bottom</h2>
+  <h2>Every chain, top to bottom</h2>
   <ol class="lrows">{rows}
-    <li class="lrow s-bridge"><a href="layer0.html"><span class="lr-n">↔</span><span class="lr-t">Layer 0: IBC</span><span class="lr-l">The bridge between chains, each keeping its own validators.</span></a></li>
-    <li class="lrow s-bedrock"><a href="blockchain-basics.html"><span class="lr-n">0</span><span class="lr-t">Bedrock: the basics</span><span class="lr-l">Blocks, hashes, the chain and Merkle trees: what every layer stands on.</span></a></li>
-    <li class="lrow s-case"><a href="autheo.html"><span class="lr-n">?</span><span class="lr-t">Case study: Autheo</span><span class="lr-l">One project's description of itself, set against the stack.</span></a></li>
+    <li class="lrow s-bedrock"><a href="blockchain-basics.html"><span class="lr-n">0</span><span class="lr-t">The bedrock: basics</span><span class="lr-l">Hashes, blocks, the chain and Merkle trees: what every layer stands on.</span></a></li>
+    <li class="lrow s-bridge"><a href="bridges.html"><span class="lr-n">↔</span><span class="lr-t">Between chains: bridges</span><span class="lr-l">How separate chains pass messages and tokens, and whom you have to trust.</span></a></li>
+  </ol>
+  <h2>Then compare, and be careful</h2>
+  <ol class="lrows">
+    <li class="lrow s-case"><a href="chains.html"><span class="lr-n">≠</span><span class="lr-t">Major chains compared</span><span class="lr-l">Bitcoin, Ethereum, Cosmos and Solana: the same parts, put together differently.</span></a></li>
+    <li class="lrow s-case"><a href="risks.html"><span class="lr-n">!</span><span class="lr-t">Risks and limits</span><span class="lr-l">Lost keys, scams, contract bugs, bridges and energy.</span></a></li>
   </ol>
   <h2>Three facts, computed</h2>
   <ul class="facts">
     <li><code>SHA-256("{e(K.HASH_INPUT)}")</code> begins <code>{ex["h1"][:12]}</code>, and changing one letter gives <code>{ex["h2"][:12]}</code>. <a href="blockchain-basics.html#hash">Try it</a>.</li>
-    <li>A chain of {len(K.CHAIN)} blocks ends at <code>{ex["chain"][-1]["hash"][:12]}</code>. Edit any block and the link after it breaks. <a href="blockchain-basics.html#chain">Break it</a>.</li>
-    <li>With 100 equal validators, CometBFT finalizes a block once {q100} agree, and stays safe with up to {f100} faulty. <a href="consensus.html">Why</a>.</li>
+    <li>For the block “{e(K.POW_DEFAULT)}” to start with {K.POW_ZEROS} zeros, a miner has to try {pw["nonce"] + 1:,} nonces. <a href="consensus.html#pow">Mine it</a>.</li>
+    <li>With 100 equal validators, a BFT chain finalizes a block once {q100} agree, and stays safe with up to {f100} faulty. <a href="consensus.html#bft">Why</a>.</li>
   </ul>
 </section>"""
-    page("index.html", None, body, "How a blockchain stack fits together, from hashes to consensus to two chains talking over IBC. Every hash on the site is real, and you can change the input.", active="index.html")
+    page("index.html", None, body, "A plain guide to blockchains: hashes and blocks, keys, proof of work and stake, smart contracts, layer 2, bridges and the risks. Every hash on the site is real.", active="index.html")
 
 
 def build_basics(ex):
@@ -343,12 +349,54 @@ def bft_demo():
 <p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">{q}</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">{f}</strong></p></div>"""
 
 
+def pow_search(data, zeros):
+    n = 0
+    while True:
+        h = sha(f"{data}|{n}")
+        if h.startswith("0" * zeros):
+            return {"nonce": n, "hash": h}
+        n += 1
+
+
+def pow_demo(ex):
+    pw = ex["pow"]
+    return f"""<div class="demo" data-demo="pow" id="pow">
+<p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>.</p>
+<label>Block data <input type="text" value="{e(K.POW_DEFAULT)}" data-role="data"></label>
+<label>Zeros needed <input type="number" min="1" max="5" value="{K.POW_ZEROS}" data-role="zeros"></label>
+<button type="button" data-role="mine">Mine: try nonces 0, 1, 2…</button>
+<p class="hx"><span>Nonce</span><code data-role="nonce" data-expect="{pw["nonce"]}">{pw["nonce"]}</code></p>
+<p class="hx big"><span>Hash</span><code data-role="hash" data-expect="{pw["hash"]}">{pw["hash"]}</code></p>
+<p class="demo-out" data-role="out" role="status">{pw["nonce"] + 1:,} guesses. Each extra zero needs about 16 times as many.</p></div>"""
+
+
+def sign_demo():
+    return """<div class="demo" data-demo="sign">
+<label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
+<button type="button" data-role="keys">1 · Make a key pair</button>
+<button type="button" data-role="sign" disabled>2 · Sign</button>
+<label>Change the transaction, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
+<button type="button" data-role="verify" disabled>3 · Check the signature</button>
+<p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
+<p class="hx"><span>Signature</span><code data-role="sig">none yet</code></p>
+<p class="demo-out" data-role="out" role="status">Runs in your browser. Nothing is sent anywhere.</p>
+<p class="demo-note">Your browser signs with ECDSA on the P-256 curve. Bitcoin and Ethereum use the same method on a different curve, secp256k1, which browsers do not offer.</p></div>"""
+
+
+def chains_table():
+    rows = "".join(f"<tr><th scope=\"row\">{e(n)}</th><td data-l=\"Launched\">{y}</td><td data-l=\"Consensus\">{e(c)}</td><td data-l=\"Programs\">{e(x)}</td><td data-l=\"Scales or connects\">{e(l)}</td></tr>" for n, y, c, x, l in K.CHAINS)
+    return f"""<div class="tbl-wrap"><table class="tbl tbl-text"><caption>Launch year of the main network; consensus as of 2026</caption><thead><tr><th scope="col">Chain</th><th scope="col">Launched</th><th scope="col">Consensus</th><th scope="col">Programs</th><th scope="col">Scales or connects by</th></tr></thead><tbody>{rows}</tbody></table></div>"""
+
+
 def build_topic(key, ex):
     P = K.PAGES[key]
-    lkey = {"consensus": "consensus", "cosmos-sdk": "framework", "evm": "execution"}.get(key)
+    lkey = {"consensus": "consensus", "contracts": "execution", "layer2": "layer2", "keys": "apps"}.get(key)
     secs = ""
     for t, h in P["sections"]:
-        secs += f"<h2>{e(t)}</h2>{h.replace('{BFT_TABLE}', bft_table()).replace('{BFT_DEMO}', bft_demo())}"
+        anchor = {"Proof of work": "pow", "BFT voting, and how many can fail": "bft"}.get(t)
+        h = (h.replace("{BFT_TABLE}", bft_table()).replace("{BFT_DEMO}", bft_demo()).replace("{POW_DEMO}", pow_demo(ex))
+             .replace("{SIGN_DEMO}", sign_demo()).replace("{CHAINS_TABLE}", chains_table()))
+        secs += f'<h2{f" id=\"{anchor}\"" if anchor else ""}>{e(t)}</h2>{h}'
     docs = " · ".join(f'<a href="{u}">{e(n)}</a>' for n, u in P["docs"])
     strip = layer_strip(lkey) if lkey else ""
     body = f"""<article class="wrap">
@@ -359,8 +407,16 @@ def build_topic(key, ex):
   {secs}
   {f'<p class="docs">Further: {docs}</p>' if docs else ''}
 </article>"""
-    path = {"layer0": "layer0.html", "autheo": "autheo.html"}.get(key, f"{key}.html")
-    page(path, P["title"], body, P["lede"], active=path, demos=(key == "consensus"))
+    path = f"{key}.html"
+    page(path, P["title"], body, P["lede"], active=path, demos=key in ("consensus", "keys"))
+
+
+def build_redirects():
+    for old, new in REDIRECTS.items():
+        (OUT / old).write_text(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved · {K.SITE}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="canonical" href="{new}"><meta http-equiv="refresh" content="0; url={new}">
+<link rel="stylesheet" href="css/site.css"></head><body><main class="wrap"><p>This page moved: <a href="{new}">{new}</a>.</p></main></body></html>
+""")
 
 
 def build_glossary():
@@ -371,13 +427,13 @@ def build_glossary():
 
 def build_about(ex):
     body = f"""<article class="wrap"><p class="kicker">Version 2.0</p><h1>About this site</h1>
-<p class="lede">A plain explainer of the blockchain stack. Version 2.0 rebuilds an earlier site about Autheo. Its numbers were typed by hand, so this version computes them.</p>
+<p class="lede">A plain guide to how blockchains work, for anyone. Version 1 of this site explained one project, Autheo, with numbers typed by hand. Version 2.0 is a general guide, and it computes every value it shows.</p>
 <h2>How the numbers are made</h2>
 <p><code>_src/build.py</code> computes every hash on the site with Python's SHA-256 and writes it into the pages. In your browser, <code>js/demos.js</code> recomputes the same values with Web Crypto, so when you change an input, the result is real. The two must agree: on load the page checks its own defaults against the values the build wrote.</p>
 <h2>The logo</h2>
 <p>Version 1 was three bars, the lowest one green. Version 2.0 turns them into three slabs of the stack, with the green base and a transaction's path running down through them. Both are in the repository, in <code>brand/</code>.</p>
 <h2>Sources</h2>
-<p>Each page links the documentation it rests on. What Autheo says about itself is quoted only as that: <a href="autheo.html">the case study</a>.</p></article>"""
+<p>Each page links the documentation it rests on: the Bitcoin paper, ethereum.org, the CometBFT, IBC and Solana documentation, and NIST. What any one project says about itself is given only as that, as in <a href="autheo.html">the Autheo case study</a>.</p></article>"""
     page("about.html", "About", body, "How the site is built, and its logo 2.0.", active=None)
 
 
@@ -410,13 +466,14 @@ def check_deploy():
 def main():
     h1, h2 = sha(K.HASH_INPUT), sha(K.HASH_INPUT_2)
     ex = {"h1": h1, "h2": h2, "diff": sum(a != b for a, b in zip(h1, h2)),
-          "chain": chain_blocks(K.CHAIN), "merkle": merkle(K.TXS)}
+          "chain": chain_blocks(K.CHAIN), "merkle": merkle(K.TXS), "pow": pow_search(K.POW_DEFAULT, K.POW_ZEROS)}
     for f in OUT.glob("*.html"):
         f.unlink()
     build_home(ex)
     build_basics(ex)
     for key in K.PAGES:
         build_topic(key, ex)
+    build_redirects()
     build_glossary()
     build_about(ex)
     build_404()

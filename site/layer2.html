@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Layer 2: scaling on top · Blockchain, explained</title>
+<meta name="description" content="If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
+<meta property="og:title" content="Layer 2: scaling on top · Blockchain, explained">
+<meta property="og:description" content="If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html" aria-current="page">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html" aria-current="page">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">Layer 3 of 4</p>
+  <h1>Layer 2: scaling on top</h1>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2 on"><a href="layer2.html" aria-current="true"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
+  <p class="lede">If every node must run every transaction, a chain cannot be fast and cheap at once. Layer 2 systems do most of the work elsewhere and use the chain as the judge.</p>
+  <h2>Rollups</h2><p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) keeps the data, so anyone can rebuild the rollup's state and check it.</p>
+<ul class="map"><li><strong>Optimistic rollups</strong> assume each batch is correct, and allow a challenge period in which anyone can prove a batch wrong.</li>
+<li><strong>Zero-knowledge rollups</strong> post a cryptographic proof with each batch that it was computed correctly.</li></ul><h2>Payment channels</h2><p>Two people lock funds on the chain, then pay each other many times off it by signing updated balances, and settle the final balance on the chain. Bitcoin's Lightning Network links channels into a network.</p><h2>What it costs</h2><p>Layer 2s inherit the main chain's security only as far as their design allows: who can post batches, how a user leaves if the operator stops, and how long withdrawals take all differ. L2BEAT tracks these differences for each one.</p>
+  <p class="docs">Further: <a href="https://ethereum.org/en/layer-2/">Ethereum: scaling and layer 2</a> · <a href="https://lightning.network/">Lightning Network</a> · <a href="https://l2beat.com/">L2BEAT</a></p>
+</article>
+<nav class="pager" aria-label="Previous and next"><a href="contracts.html" rel="prev"><small>← Previous</small><span>Contracts</span></a><a class="nx" href="bridges.html" rel="next"><small>Next →</small><span>Bridges</span></a></nav>
+</main>
+<footer class="foot">
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>

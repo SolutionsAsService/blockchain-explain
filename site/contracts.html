@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart contracts · Blockchain, explained</title>
+<meta name="description" content="Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.">
+<meta property="og:title" content="Smart contracts · Blockchain, explained">
+<meta property="og:description" content="Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta property="og:site_name" content="Blockchain, explained">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html" aria-current="page">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="contracts.html" aria-current="page">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">Layer 2 of 4</p>
+  <h1>Smart contracts</h1>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2"><a href="layer2.html"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution on"><a href="contracts.html" aria-current="true"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
+  <p class="lede">Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.</p>
+  <h2>Programs everyone runs</h2><p>A <em>smart contract</em> is a program saved on the chain at its own address. Calling it is a transaction: every node runs the code with the same inputs, so they all reach the same new state. Nobody can change a contract's code once it is deployed, unless the code itself allows it.</p>
+<p>Bitcoin allows only small, fixed scripts. Ethereum made general programs the point: its <em>Ethereum Virtual Machine</em> (EVM) runs contracts usually written in Solidity, and many other chains run the same EVM so those contracts work there too.</p><h2>Gas</h2><p>Since every node runs every call, each step of computation costs a fee, called <em>gas</em> on Ethereum. The fee pays the network and stops a program from running forever.</p><h2>What people build</h2><p>Tokens (a contract that keeps a list of balances), exchanges that trade them without a company in the middle, lending, collectibles (NFTs), and votes for groups that hold funds together. Each is a contract, and each is only as safe as its code: see <a href="risks.html">Risks</a>.</p>
+  <p class="docs">Further: <a href="https://ethereum.org/en/developers/docs/smart-contracts/">Ethereum: smart contracts</a> · <a href="https://ethereum.org/en/developers/docs/evm/">Ethereum: the EVM</a> · <a href="https://docs.soliditylang.org/">Solidity documentation</a></p>
+</article>
+<nav class="pager" aria-label="Previous and next"><a href="consensus.html" rel="prev"><small>← Previous</small><span>Consensus</span></a><a class="nx" href="layer2.html" rel="next"><small>Next →</small><span>Layer 2</span></a></nav>
+</main>
+<footer class="foot">
+  <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>

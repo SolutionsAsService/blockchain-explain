@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Consensus: CometBFT · Blockchain, explained</title>
-<meta name="description" content="Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.">
-<meta property="og:title" content="Consensus: CometBFT · Blockchain, explained">
-<meta property="og:description" content="Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.">
+<title>Consensus: agreeing without trust · Blockchain, explained</title>
+<meta name="description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.">
+<meta property="og:title" content="Consensus: agreeing without trust · Blockchain, explained">
+<meta property="og:description" content="Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.">
 <meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
 <meta property="og:site_name" content="Blockchain, explained">
 <meta name="theme-color" content="#f6f7f4">
@@ -19,24 +19,32 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
-  <nav class="nav-wide" aria-label="Site"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html" aria-current="page">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
-  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html" aria-current="page">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html" aria-current="page">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="blockchain-basics.html">Basics</a></li><li><a href="keys.html">Keys</a></li><li><a href="consensus.html" aria-current="page">Consensus</a></li><li><a href="contracts.html">Contracts</a></li><li><a href="layer2.html">Layer 2</a></li><li><a href="bridges.html">Bridges</a></li><li><a href="chains.html">Chains</a></li><li><a href="risks.html">Risks</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
 </header>
 <main id="main">
 <article class="wrap">
   <p class="kicker">Layer 1 of 4, the bottom</p>
-  <h1>Consensus: CometBFT</h1>
-  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="evm.html#apps"><span>Apps</span><small>Applications</small></a></li><li class="ls-execution"><a href="evm.html"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework"><a href="cosmos-sdk.html"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
-  <p class="lede">Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.</p>
-  <h2>What consensus decides</h2><p>Every validator (a computer that takes part in agreeing) sees transactions arrive in a different order. Consensus decides <em>one</em> order, groups it into a block, and decides when that block is <em>final</em>: settled for good.</p>
-<p>CometBFT (formerly Tendermint Core) works in rounds. One validator proposes a block. The others vote twice, first a <em>prevote</em> and then a <em>precommit</em>. A block is final as soon as validators holding more than two thirds of the voting power have precommitted it. So there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p><h2>How many can fail</h2><p>The guarantee holds as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together against the rest. That is the limit for any protocol of this kind, called Byzantine fault tolerance.</p>
-<p>The table assumes every validator has equal voting power. On a real chain, power is proportional to <em>stake</em>: the chain's tokens a validator has locked up as a deposit it can lose if it cheats. So the third is a third of the stake, not of the machines.</p>
+  <h1>Consensus: agreeing without trust</h1>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-apps"><a href="keys.html"><span>Wallets &amp; apps</span><small>Layer 4 of 4</small></a></li><li class="ls-layer2"><a href="layer2.html"><span>Layer 2</span><small>Layer 3 of 4</small></a></li><li class="ls-execution"><a href="contracts.html"><span>Smart contracts</span><small>Layer 2 of 4</small></a></li><li class="ls-consensus on"><a href="consensus.html" aria-current="true"><span>Consensus</span><small>Layer 1 of 4</small></a></li></ol></nav>
+  <p class="lede">Thousands of computers that do not trust each other must agree on one list of transactions. There are three main ways to do it.</p>
+  <h2 id="pow">Proof of work</h2><p>Bitcoin's answer: to add a block, a computer must find a number (a <em>nonce</em>) that makes the block's hash start with enough zeros. The only way is to guess, billions of times. Whoever finds one first adds the block and is paid for it. Rewriting history would mean redoing that work faster than everyone else combined.</p>
+<div class="demo" data-demo="pow" id="pow">
+<p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>.</p>
+<label>Block data <input type="text" value="Ada pays Ben 5" data-role="data"></label>
+<label>Zeros needed <input type="number" min="1" max="5" value="3" data-role="zeros"></label>
+<button type="button" data-role="mine">Mine: try nonces 0, 1, 2…</button>
+<p class="hx"><span>Nonce</span><code data-role="nonce" data-expect="1526">1526</code></p>
+<p class="hx big"><span>Hash</span><code data-role="hash" data-expect="000e589cc17ba680b146c42be0f87a991138926393e27727bdbbabd98cac56f8">000e589cc17ba680b146c42be0f87a991138926393e27727bdbbabd98cac56f8</code></p>
+<p class="demo-out" data-role="out" role="status">1,527 guesses. Each extra zero needs about 16 times as many.</p></div>
+<p>Bitcoin adjusts its difficulty so that, across the whole network, a block is found about every ten minutes.</p><h2>Proof of stake</h2><p>Instead of spending electricity, validators lock up the chain's own tokens as <em>stake</em>: a deposit they lose if they cheat. The protocol picks who proposes each block, and other validators vote on it. Ethereum switched from proof of work to proof of stake in September 2022.</p><h2 id="bft">BFT voting, and how many can fail</h2><p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. So there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
+<p>It stays safe as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together. That is the limit for any protocol of this kind, called Byzantine fault tolerance. On a real chain, voting power follows stake, so the third is a third of the stake, not of the machines.</p>
 <table class="tbl"><caption>Equal voting power</caption><thead><tr><th scope="col">Validators</th><th scope="col">Needed to finalize (more than ⅔)</th><th scope="col">Faulty it can survive (fewer than ⅓)</th></tr></thead><tbody><tr><td>4</td><td>3</td><td>1</td></tr><tr><td>7</td><td>5</td><td>2</td></tr><tr><td>10</td><td>7</td><td>3</td></tr><tr><td>100</td><td>67</td><td>33</td></tr></tbody></table>
 <div class="demo" data-demo="bft"><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
 <p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">7</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">3</strong></p></div>
-  <p class="docs">Further: <a href="https://docs.cometbft.com/">CometBFT documentation</a></p>
+  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">Bitcoin paper</a> · <a href="https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/">Ethereum: proof of stake</a> · <a href="https://docs.cometbft.com/">CometBFT documentation</a></p>
 </article>
-<nav class="pager" aria-label="Previous and next"><a href="blockchain-basics.html" rel="prev"><small>← Previous</small><span>Basics</span></a><a class="nx" href="cosmos-sdk.html" rel="next"><small>Next →</small><span>Cosmos SDK</span></a></nav>
+<nav class="pager" aria-label="Previous and next"><a href="keys.html" rel="prev"><small>← Previous</small><span>Keys</span></a><a class="nx" href="contracts.html" rel="next"><small>Next →</small><span>Contracts</span></a></nav>
 </main>
 <footer class="foot">
   <p><strong>Blockchain, explained.</strong> Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
