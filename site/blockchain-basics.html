@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Basics · Blockchain, explained</title>
+<meta name="description" content="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.">
+<meta property="og:title" content="Basics · Blockchain, explained">
+<meta property="og:description" content="Hashes, the chain and Merkle trees, each running in your browser with real SHA-256.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+<script src="js/demos.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html" aria-current="page">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html" aria-current="page">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">The bedrock, under every layer</p>
+  <h1>The basics</h1>
+  <p class="lede">A blockchain is a list of blocks, each holding the fingerprint of the one before, kept by many computers at once. Three ideas make it work. Each one below runs in your browser.</p>
+  <nav class="toc" aria-label="On this page"><a href="#hash">1 · Hashes</a><a href="#chain">2 · The chain</a><a href="#merkle">3 · Merkle trees</a></nav>
+
+  <h2 id="hash">1 · A hash is a fingerprint</h2>
+  <p>SHA-256 turns any text into 64 hexadecimal digits. The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
+  <div class="demo" data-demo="hash">
+    <label>Type anything <input type="text" value="blockchain" data-role="in"></label>
+    <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1">ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1</code></p>
+  </div>
+  <p>Changing one letter, <code>blockchain</code> to <code>Blockchain</code>, changes the hash from <code>ef7797e13d…</code> to <code>625da44e4e…</code>: 62 of the 64 digits differ.</p>
+
+  <h2 id="chain">2 · The chain</h2>
+  <p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches. Edit a block below and watch the link after it break. Re-linking that block changes its hash too, so the break moves down the chain: to rewrite one block, you must rewrite every block after it.</p>
+  <div class="demo" data-demo="chain"><ol class="chain"><li class="blk" data-i="0">
+  <div class="blk-h">Block 0</div>
+  <label>Data <input type="text" value="Genesis" data-role="data" data-default="Genesis"></label>
+  <div class="hx"><span>Previous</span><code data-role="prev">0000000000000000000000000000000000000000000000000000000000000000</code></div>
+  <div class="hx"><span>Hash</span><code data-role="hash" data-expect="d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c">d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c</code></div>
+  <p class="blk-s" data-role="status">linked</p>
+</li><li class="blk" data-i="1">
+  <div class="blk-h">Block 1</div>
+  <label>Data <input type="text" value="Ada pays Ben 5" data-role="data" data-default="Ada pays Ben 5"></label>
+  <div class="hx"><span>Previous</span><code data-role="prev">d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c</code></div>
+  <div class="hx"><span>Hash</span><code data-role="hash" data-expect="9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4">9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4</code></div>
+  <p class="blk-s" data-role="status">linked</p>
+</li><li class="blk" data-i="2">
+  <div class="blk-h">Block 2</div>
+  <label>Data <input type="text" value="Ben pays Cy 2" data-role="data" data-default="Ben pays Cy 2"></label>
+  <div class="hx"><span>Previous</span><code data-role="prev">9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4</code></div>
+  <div class="hx"><span>Hash</span><code data-role="hash" data-expect="8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f">8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f</code></div>
+  <p class="blk-s" data-role="status">linked</p>
+</li><li class="blk" data-i="3">
+  <div class="blk-h">Block 3</div>
+  <label>Data <input type="text" value="Cy pays Ada 1" data-role="data" data-default="Cy pays Ada 1"></label>
+  <div class="hx"><span>Previous</span><code data-role="prev">8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f</code></div>
+  <div class="hx"><span>Hash</span><code data-role="hash" data-expect="2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9">2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9</code></div>
+  <p class="blk-s" data-role="status">linked</p>
+</li></ol>
+    <button type="button" data-role="relink">Re-link the chain</button>
+    <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network, the other validators keep the original chain, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>
+
+  <h2 id="merkle">3 · Merkle trees</h2>
+  <p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
+  <div class="demo" data-demo="merkle">
+    <ol class="txs"><li><input type="text" value="Ada pays Ben 5" data-role="tx" aria-label="Transaction 1"><code data-role="leaf">2280cb6de1c8…</code></li><li><input type="text" value="Ben pays Cy 2" data-role="tx" aria-label="Transaction 2"><code data-role="leaf">1d2b11b4b4b1…</code></li><li><input type="text" value="Cy pays Ada 1" data-role="tx" aria-label="Transaction 3"><code data-role="leaf">d61045a0a743…</code></li><li><input type="text" value="Ada pays Cy 3" data-role="tx" aria-label="Transaction 4"><code data-role="leaf">e75d92ed432b…</code></li></ol>
+    <ol class="pairs"><li><code data-role="pair">d5a646a96efb…</code></li><li><code data-role="pair">320a971dbf5f…</code></li></ol>
+    <p class="hx big"><span>Merkle root</span><code data-role="root" data-expect="e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18">e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18</code></p>
+  </div>
+  <p class="docs">Further: <a href="https://bitcoin.org/bitcoin.pdf">the Bitcoin paper</a>, where hash chains and Merkle trees first met · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a></p>
+</article>
+</main>
+<footer class="foot">
+  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>

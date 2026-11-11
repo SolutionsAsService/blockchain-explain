@@ -1,0 +1,46 @@
+{
+ "h1": "ef7797e13d3a75526946a3bcf00daec9fc9c9c4d51ddc7cc5df888f74dd434d1",
+ "h2": "625da44e4eaf58d61cf048d168aa6f5e492dea166d8bb54ec06c30de07db57e1",
+ "diff": 62,
+ "chain": [
+  {
+   "i": 0,
+   "data": "Genesis",
+   "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+   "hash": "d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c"
+  },
+  {
+   "i": 1,
+   "data": "Ada pays Ben 5",
+   "prev": "d01184f3cd8548b1e5bc7695c3716b54623e11652e2101b1e71939962e535f2c",
+   "hash": "9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4"
+  },
+  {
+   "i": 2,
+   "data": "Ben pays Cy 2",
+   "prev": "9bd3bb6e30d2b700435dca3323c2c7d331339614565924ce0437f0edd9bd85e4",
+   "hash": "8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f"
+  },
+  {
+   "i": 3,
+   "data": "Cy pays Ada 1",
+   "prev": "8daa007721ad60d08d4b957c2af823d0aae3166e1139a0310296a6af4ecb771f",
+   "hash": "2768724a429aa5e25cadd624fd350f5f996bc0ebc948953e2d65d07343c8aee9"
+  }
+ ],
+ "merkle": [
+  [
+   "2280cb6de1c8abc670b2d732dbc097dcdc6de20865b66be1a472ede287b371e0",
+   "1d2b11b4b4b1e9142a8eb9291a5a288897b4dcfd5ad0bd4f4db699a378e2990f",
+   "d61045a0a743c270fb322ef05161d0b0827f3b9a9f0e8a2e2bb661161aab05af",
+   "e75d92ed432bced1fedb364066db9c69939827970eae63f36a3c619d306c741c"
+  ],
+  [
+   "d5a646a96efbdbeae107c55f63dfd9e532f4c8efc73d2a9975f6749b387cd6a4",
+   "320a971dbf5facb6d58cee44de2326f59c67aa01aef217b254bb7204c51b4bd2"
+  ],
+  [
+   "e39a9c57cc74ced2f9c3970d9dee7b59d5b2cd991b20e8b81cb63229936c5b18"
+  ]
+ ]
+}

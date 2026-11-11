@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Execution: the EVM · Blockchain, explained</title>
+<meta name="description" content="The Ethereum Virtual Machine runs small programs, smart contracts, exactly the same way on every validator, so they all reach the same result.">
+<meta property="og:title" content="Execution: the EVM · Blockchain, explained">
+<meta property="og:description" content="The Ethereum Virtual Machine runs small programs, smart contracts, exactly the same way on every validator, so they all reach the same result.">
+<meta property="og:image" content="https://blockchain-explain.shadw.app/og.png">
+<meta name="theme-color" content="#f6f7f4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="5" class="lg-frame"/><g class="lg-base"><polygon points="8,27 20,32 20,35 8,30" class="sl-l"/><polygon points="20,32 32,27 32,30 20,35" class="sl-r"/><polygon points="8,27 20,22 32,27 20,32" class="sl-t"/></g><g class="lg-mid"><polygon points="8,19.5 20,24.5 20,27.5 8,22.5" class="sl-l"/><polygon points="20,24.5 32,19.5 32,22.5 20,27.5" class="sl-r"/><polygon points="8,19.5 20,14.5 32,19.5 20,24.5" class="sl-t"/></g><g class="lg-top"><polygon points="8,12 20,17 20,20 8,15" class="sl-l"/><polygon points="20,17 32,12 32,15 20,20" class="sl-r"/><polygon points="8,12 20,7 32,12 20,17" class="sl-t"/></g><path d="M20 5.5V35" class="lg-path"/></svg><span>Blockchain, <em>explained</em></span></a>
+  <nav class="nav-wide" aria-label="Site"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html" aria-current="page">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav>
+  <details class="nav-menu"><summary>Menu</summary><nav aria-label="Site menu"><ul><li><a href="index.html">Home</a></li><li><a href="blockchain-basics.html">Basics</a></li><li><a href="consensus.html">Consensus</a></li><li><a href="cosmos-sdk.html">Cosmos SDK</a></li><li><a href="evm.html" aria-current="page">EVM</a></li><li><a href="layer0.html">Layer 0</a></li><li><a href="autheo.html">Autheo</a></li><li><a href="glossary.html">Glossary</a></li></ul></nav></details>
+</header>
+<main id="main">
+<article class="wrap">
+  <p class="kicker">Layer 3 of 4, and the apps on top</p>
+  <h1>Execution: the EVM</h1>
+  <nav class="lstrip" aria-label="The stack, top to bottom"><ol><li class="ls-execution on"><a href="evm.html" aria-current="true"><span>EVM</span><small>Execution</small></a></li><li class="ls-framework"><a href="cosmos-sdk.html"><span>Cosmos SDK</span><small>Application framework</small></a></li><li class="ls-consensus"><a href="consensus.html"><span>CometBFT</span><small>Consensus</small></a></li></ol></nav>
+  <p class="lede">The Ethereum Virtual Machine runs small programs, smart contracts, exactly the same way on every validator, so they all reach the same result.</p>
+  <h2>Smart contracts</h2><p>A smart contract is a program stored on the chain. Anyone can call it, and every validator runs the call and must reach the same new state. Contracts for the EVM are usually written in Solidity and compiled to EVM bytecode.</p>
+<p>An EVM can run as a module inside a Cosmos SDK chain, as Evmos does. Contracts written for Ethereum then run there, on top of CometBFT consensus.</p><h2>Applications</h2><p id="apps">On top sit the things people use. <em>Wallets</em> hold the keys that sign transactions. <em>Decentralized apps</em> are web pages that call contracts through a wallet. An application never touches consensus directly: it sends a signed transaction and waits for a block that includes it.</p>
+  <p class="docs">Further: <a href="https://ethereum.org/en/developers/docs/evm/">The EVM (ethereum.org)</a> · <a href="https://docs.soliditylang.org/">Solidity documentation</a></p>
+</article>
+</main>
+<footer class="foot">
+  <p>Every hash on this site is SHA-256, computed by the build and recomputed in your browser. <a href="about.html">About</a> · <a href="https://github.com/SolutionsAsService/blockchain-explain">Source</a> · MIT licence.</p>
+</footer>
+</body>
+</html>
