@@ -91,13 +91,16 @@
 
   // 5. proof of work: smallest nonce with SHA-256(data|nonce) starting with k zeros
   document.querySelectorAll('[data-demo="pow"]').forEach(function (d) {
-    var btn = q(d, "mine"), busy = false;
+    var btn = q(d, "mine"), busy = false, stopped = false;
+    q(d, "stop").addEventListener("click", function () { stopped = true; });
     if (!canHash) return;
     btn.addEventListener("click", function () {
       if (busy) return;
       busy = true; btn.disabled = true;
-      var data = q(d, "data").value, k = Math.max(1, Math.min(5, Math.floor(+q(d, "zeros").value) || 1)), target = "0".repeat(k), n = 0;
-      q(d, "out").textContent = "Mining…"; btn.textContent = "Mining…"; d.classList.add("mining");
+      var data = q(d, "data").value, k = Math.max(1, Math.min(4, Math.floor(+q(d, "zeros").value) || 1)), target = "0".repeat(k), n = 0;
+      stopped = false; q(d, "data").disabled = true; q(d, "zeros").disabled = true; q(d, "stop").hidden = false;
+      function done() { busy = false; btn.disabled = false; btn.textContent = "Mine"; d.classList.remove("mining"); q(d, "data").disabled = false; q(d, "zeros").disabled = false; q(d, "stop").hidden = true; }
+      q(d, "out").textContent = k === 4 ? "Mining… 4 zeros takes about 65,000 guesses: a few seconds." : "Mining…"; btn.textContent = "Mining…"; d.classList.add("mining");
       function batch() {
         var tries = [];
         for (var b = 0; b < 256; b++) tries.push(sha(data + "|" + (n + b)));
@@ -107,9 +110,10 @@
               q(d, "nonce").textContent = n + b; q(d, "hash").textContent = hs[b];
               var same = data === q(d, "data").defaultValue && k === +q(d, "zeros").defaultValue && String(n + b) === q(d, "nonce").dataset.build;
               q(d, "out").textContent = "Found after " + (n + b + 1).toLocaleString("en") + " guesses for " + k + " zero" + (k > 1 ? "s" : "") + "." + (same ? " The same nonce the build found." : "") + " Each extra zero needs about 16 times as many.";
-              busy = false; btn.disabled = false; btn.textContent = "Mine"; d.classList.remove("mining"); return;
+              done(); return;
             }
           }
+          if (stopped) { q(d, "out").textContent = "Stopped after " + (n + hs.length).toLocaleString("en") + " guesses, with no match yet."; done(); return; }
           n += hs.length;
           q(d, "nonce").textContent = n; q(d, "hash").textContent = hs[hs.length - 1];
           setTimeout(batch, 0);

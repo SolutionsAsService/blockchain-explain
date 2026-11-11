@@ -212,6 +212,31 @@ Intent: one template for every inner page (a sidebar map of the stack with the c
 
 Step 2g re-measure after R6: 16 pages at 1280x800, 375x812, 390x844 and 320x640, light and dark: no overflow, smallest text 12.6 px, no target under 44 px, no SVG label clipped or under 12 px, demo self-checks ok; every demo exercised in Playwright with no script errors.
 
+### Panel, WHOLE, round R7 (re-check of R6; verdicts in panel/R7-v2/)
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Formalist (Greenberg) | Modernist Painting (Clement Greenberg): the medium earns its authority by being exactly itself, so the flat plane, the grid and the type have to be exact. | Most of my R6 items are fixed and hold up on the live build. There is one content edge (x=80) on every page. Nav links no longer move between pages. The guide-card titles share one line (670 px). Hashes split 32/32. Figures are 360 px with 15 px labels. The Basics label is whole, the Contracts arrowheads are separate, and the sidebar has one active style. The Risks figure and the glossary template are done. However, the new Consensus opening figure brings back exactly the defect class R6 was about: "A CHEATER'S REWRIT" is cut off where it runs into the Block 3′ box, at 1280 and at 375. `measure.cjs` misses it because it checks the label against the SVG edge, not against other shapes. Smaller leftovers: two left edges in the sign demo, a mini-map connector that stops short of the Bridges box, cramped figure boxes, and an unchanged phone hero. | OBJECT | Fix item 1 (one line in `fork_fig`). Extend `measure.cjs` to flag any `<text>` that overlaps a `<rect>` it is not inside. Then items 2-8. After that this seat expects to PASS. |
+| Critic: Usability (Krug) | Don't Make Me Think (Steve Krug): self-evident navigation, "you are here", clear feedback, no question marks | I re-tested all nine R6 items at 1280x800 and 375x812 with touch, with no script errors. Seven are fixed and two leave something behind (items 1 and 2 below). Fixed: "Step n of 8" kickers match the pager. "Keys & wallets" is named the same everywhere. The map labels "Bridges" and points at the current layer with ▶. On phones the sidebar is hidden, so there is no duplicate chip. The Basics figure label is no longer cut off. Re-link is disabled as "Nothing to repair" and names the block to repair. Merkle shows the old root as "Was" and marks the changed pair. The sign demo shows "Changed", ✓ Valid and ✗ Invalid, and hints under disabled buttons. The mine demo is blank until pressed and shows the live trial hash while mining. The calculator rejects 0, empty and 5000 and echoes the count. The Consensus page now opens with the competing-histories figure. | OBJECT | Fix the overlapping label in the new Consensus lead figure, and give long mining runs a Stop button and a time warning. |
+| Critic: Evidence (Tufte) | The Visual Display of Quantitative Information (Edward Tufte): data-ink, graphical integrity, labels placed on the data, no claim without evidence | Re-checked all 8 figures and the sidebar map live at 1280, 375 and 320, light and dark, with getBBox. All 10 R6 fixes are in and correct: the chain label fits, faulty validators are hollow, the keys and rollup wording is true to the text, contracts has four separate arrowheads and a "before" state, the bridge link is attached, ▶ marks the current page, and labels are 15 px (14.3 px at 375, 12 px at 320). Nothing is clipped. The two new figures have defects. In fork_fig the heading "A CHEATER'S REWRITE" (x 8–197) runs into the Block 3′ box (x 184) and is cut to "REWRIT" at every width. The figure also shows the rewrite level with the honest chain while the text says it must outpace it. risks_fig's caption makes a frequency and scale claim that neither the figure nor the page supports. | OBJECT | The 5 fixes below, all in `_src/figures.py`. |
+
+#### Resolutions, round R7
+| Finding | Resolution |
+|---|---|
+| Tufte + Greenberg + Krug: "'A cheater's rewrite' is covered by the Block 3′ box" | ADAPT: the label is on two lines left of the rewrite; `measure.cjs` now flags any figure label that overlaps a box it is not inside |
+| Tufte: "the rewrite is as long as the chain: a tie, not a race" | ADAPT: four honest blocks, a one-block rewrite; the three-line caption names both methods |
+| Greenberg: "chain arrows are all head; boxes too tight" | ADAPT: 74-unit boxes with 12-unit arrows; bridge boxes 128 and 60 wide with 12-unit arrows |
+| Tufte: "the risks caption claims frequency and size; the arrows mean nothing; energy is not a loss" | ADAPT: neutral caption; arrows removed; "majority attacks, halts and reorgs" |
+| Greenberg: "the risk level boxes don't match; Bridges reads as selected" | ADAPT: 140 wide, Bridges filled like the bedrock |
+| Greenberg: "two left edges in the sign demo" | ADAPT: numbered labels, one edge |
+| Greenberg: "the map connector looks detached" | ADAPT: solid 1.5 px |
+| Greenberg: "'well-/known' breaks" | ADAPT: non-breaking hyphen |
+| Greenberg: "the phone hero says other words than the desktop; Chain B a rotated tab" | ADAPT: the same "Bridges →" and bedrock wording; Chain B a level box with a horizontal label; the pill moved to clear space |
+| Greenberg: "glossary letters indented; mixed fonts in the state box" | ADAPT |
+| Greenberg: "Autheo and About have no pager" | DEFERRED: they are outside the reading order |
+| Krug: "mining 5 zeros takes a minute with no way to stop" | ADAPT: 1 to 4 zeros; a Stop button; the inputs are locked while mining; tested |
+
+Step 2g re-measure after R7: 128 combinations, no overflow, no small text or target, no SVG label clipped, overlapping a box, or under 12 px.
+
 ## Stop test
 - **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
 - **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**

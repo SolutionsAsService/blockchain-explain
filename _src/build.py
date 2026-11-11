@@ -397,8 +397,8 @@ def pow_demo(ex):
     return f"""<div class="demo" data-demo="pow" id="pow"><p class="demo-h">Try it · mine a block</p>
 <p class="demo-note">The hash is SHA-256 of the data, a bar, and the nonce: <code>data|nonce</code>. The browser tries nonces 0, 1, 2… until the hash starts with enough zeros.</p>
 <div class="fields"><label>Block data <input type="text" value="{e(K.POW_DEFAULT)}" data-role="data"></label>
-<label class="narrow">Zeros needed <input type="number" min="1" max="5" value="{K.POW_ZEROS}" data-role="zeros"></label></div>
-<div class="btns"><button type="button" data-role="mine">Mine</button></div>
+<label class="narrow">Zeros needed (1–4) <input type="number" min="1" max="4" value="{K.POW_ZEROS}" data-role="zeros"></label></div>
+<div class="btns"><button type="button" data-role="mine">Mine</button><button type="button" data-role="stop" hidden>Stop</button></div>
 <p class="hx"><span>Nonce</span><code data-role="nonce" data-build="{pw["nonce"]}">not yet</code></p>
 <p class="hx big"><span>Hash</span><code data-role="hash" data-build="{pw["hash"]}">not yet</code></p>
 <p class="demo-out" data-role="out" role="status">Press Mine to start guessing. (The build found it at nonce {pw["nonce"]:,}.)</p></div>"""
