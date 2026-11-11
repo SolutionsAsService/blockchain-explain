@@ -52,7 +52,7 @@ def chain_fig(blocks):
         parts.append(box(40, y, 280, 78, [(f"Block {b['i']}: {b['data']}", "t"), (f"previous {b['prev'][:10]}…", "m"), (f"hash {b['hash'][:10]}…", "m")],
                          "fg-key" if i == 0 else "fg-box"))
         if i < 2:
-            parts.append(arrow(fid, 180, y + 78, 180, y + 112, "becomes the next “previous”", 190, y + 100))
+            parts.append(arrow(fid, 180, y + 78, 180, y + 112, "is the next “previous”", 190, y + 100))
         y += 112
     return svg(fid, y - 26, "Three blocks, each holding the previous block's hash", "".join(parts)), \
         "The first three blocks of the chain demo below. Each block stores the previous block's hash, so the blocks are chained by their fingerprints."
@@ -65,9 +65,9 @@ def keys_fig():
          box(60, 108, 240, 58, [("Public key", "t"), ("anyone may see it", "s")]),
          arrow(fid, 180, 166, 180, 206, "hashed and shortened", 190, 192),
          box(60, 208, 240, 58, [("Address", "t"), ("where people send to", "s")]),
-         box(10, 300, 160, 58, [("Transaction", "t"), ("+ private key", "s")], "fg-box"),
+         box(10, 300, 160, 58, [("Transaction", "t"), ("signed by private key", "s")], "fg-box"),
          arrow(fid, 170, 329, 196, 329),
-         box(198, 300, 152, 58, [("Signature", "t"), ("anyone can check it", "s")], "fg-key")]
+         box(198, 300, 152, 58, [("Signature", "t"), ("public key checks it", "s")], "fg-box")]
     return svg(fid, 366, "From private key to public key to address, and how a transaction is signed", "".join(p)), \
         "One key pair. Going down the arrows is quick; going back up, from an address to the private key, is not practical."
 
@@ -82,22 +82,22 @@ def votes_fig(n, f, q):
         cls = "fg-bad" if k >= n - f else "fg-good"
         p.append(f'<rect x="{x0 + c * (cell + gap)}" y="{y0 + r * (cell + gap)}" width="{cell}" height="{cell}" rx="4" class="{cls}"/>')
     yb = y0 + 10 * (cell + gap) + 14
-    p.append(f'<rect x="{x0}" y="{yb}" width="16" height="16" rx="3" class="fg-good"/><text x="{x0 + 24}" y="{yb + 13}" class="fg-s">honest: {q} must sign (more than ⅔)</text>')
-    p.append(f'<rect x="{x0}" y="{yb + 26}" width="16" height="16" rx="3" class="fg-bad"/><text x="{x0 + 24}" y="{yb + 39}" class="fg-s">faulty: up to {f} survived (under ⅓)</text>')
-    return svg(fid, yb + 50, f"{n} validators: {q} needed to finalize, up to {f} faulty survived", "".join(p)), \
+    p.append(f'<rect x="{x0}" y="{yb}" width="16" height="16" rx="3" class="fg-good"/><text x="{x0 + 24}" y="{yb + 13}" class="fg-s">{q} needed to finalize (more than ⅔)</text>')
+    p.append(f'<rect x="{x0}" y="{yb + 26}" width="16" height="16" rx="3" class="fg-bad"/><text x="{x0 + 24}" y="{yb + 39}" class="fg-s">{f} faulty at most (fewer than ⅓)</text>')
+    return svg(fid, yb + 50, f"{n} validators: {q} votes needed to finalize, at most {f} faulty tolerated", "".join(p)), \
         f"{n} validators with equal voting power. A block is final once {q} sign it; the chain stays safe while no more than {f} are faulty. Computed by the build."
 
 
 def contract_fig():
     fid = "f-call"
-    p = [box(60, 8, 240, 52, [("Your call", "t"), ("send(Ben, 5)", "m")], "fg-key")]
+    p = [box(60, 8, 240, 52, [("Ada's call", "t"), ("send(Ben, 5)", "m")], "fg-key")]
     xs = [12, 98, 184, 270]
     for i, x in enumerate(xs):
         p.append(arrow(fid, 180, 60, x + 39, 108))
         p.append(box(x, 110, 78, 58, [(f"Node {i + 1}", "t"), ("runs it", "s")]))
-        p.append(arrow(fid, x + 39, 168, 180, 216))
-    p.append(box(40, 218, 280, 58, [("The same new state", "t"), ("Ada 95 · Ben 105", "m")], "fg-key"))
-    return svg(fid, 284, "One call, run by every node, giving the same new state", "".join(p)), \
+        p.append(arrow(fid, x + 39, 168, 100 + i * 53, 216))
+    p.append(box(40, 218, 280, 72, [("The same new state", "t"), ("Ada 95 · Ben 105", "m"), ("was Ada 100 · Ben 100", "s")], "fg-key"))
+    return svg(fid, 298, "One call, run by every node, giving the same new state", "".join(p)), \
         "Every node runs the same code on the same inputs, so they all reach the same result without trusting each other."
 
 
@@ -109,10 +109,10 @@ def rollup_fig():
     p.append('<text x="180" y="56" text-anchor="middle" class="fg-s">many transactions</text>')
     p.append(arrow(fid, 180, 64, 180, 96))
     p.append(box(50, 98, 260, 58, [("Rollup", "t"), ("runs them and packs one batch", "s")], "fg-box"))
-    p.append(arrow(fid, 180, 156, 180, 204, "one batch + proof", 190, 184))
+    p.append(arrow(fid, 180, 156, 180, 204, "one batch (+ proof if ZK)", 190, 184))
     p.append(slab(180, 240, 130, 30, 14, "s-consensus"))
     p.append('<text x="180" y="247" text-anchor="middle" class="fg-t on">Layer 1</text>')
-    p.append('<text x="180" y="304" text-anchor="middle" class="fg-s">publishes the data and judges disputes</text>')
+    p.append('<text x="180" y="304" text-anchor="middle" class="fg-s">keeps the data; checks the proof or a challenge</text>')
     return svg(fid, 314, "Many transactions packed by a rollup into one batch, posted to layer 1", "".join(p)), \
         "A rollup does the work off the main chain and posts compact batches to it; the main chain is the judge."
 
@@ -137,22 +137,68 @@ def bridge_fig():
 
 
 def mini_stack(levels, active):
-    """The sidebar map: four levels on the bedrock, with a bridge, the current page in colour. Each part is a link."""
-    cx, hw, hh, t, gap, base = 92, 68, 25, 10, 40, 182
-    out = ['<svg class="mini" viewBox="0 0 200 268" role="group" aria-label="Where this page sits in the stack">']
+    """The sidebar map: four levels on the bedrock, with a bridge; the current page in colour, outlined and pointed at."""
+    cx, hw, hh, t, gap, base = 100, 68, 25, 10, 40, 182
+    out = ['<svg class="mini" viewBox="0 0 240 268" role="group" aria-label="Where this page sits in the stack">']
+    ptr = None
     on = active == "bedrock"
     out.append(f'<a href="blockchain-basics.html" aria-label="Basics, the bedrock"{" aria-current=\"page\"" if on else ""}>'
-               f'<rect x="10" y="{base + 32}" width="164" height="44" rx="4" class="mn-bed{" on" if on else ""}"/>'
-               f'<text x="92" y="{base + 59}" text-anchor="middle" class="mn-t">Basics</text></a>')
+               f'<rect x="18" y="{base + 32}" width="164" height="44" rx="4" class="mn-bed{" on" if on else ""}"/>'
+               f'<text x="100" y="{base + 59}" text-anchor="middle" class="mn-t">Basics</text></a>')
+    if on:
+        ptr = (4, base + 59)
     for k, (key, href, name, role, line) in enumerate(levels):
         y = base - k * gap
         on = key == active
         out.append(f'<a href="{href}" aria-label="{e(role)}: {e(name)}"{" aria-current=\"page\"" if on else ""}>{slab(cx, y, hw, hh, t, ("s-" + key) if on else "mn-off")}'
                    f'<text x="{cx}" y="{y + 5}" text-anchor="middle" class="mn-t{" on" if on else ""}{" light" if on and key == "consensus" else ""}">{e(name)}</text></a>')
+        if on:
+            ptr = (4, y + 5)
     on = active == "bridge"
     yb = base - gap
     out.append(f'<a href="bridges.html" aria-label="Bridges, between chains"{" aria-current=\"page\"" if on else ""}>'
-               f'<path d="M{cx + hw},{yb + 6} L194,{yb + 6}" class="mn-br{" on" if on else ""}"/>'
-               f'<rect x="164" y="{yb - 40}" width="34" height="34" rx="6" class="mn-bx{" on" if on else ""}"/><text x="181" y="{yb - 18}" text-anchor="middle" class="mn-t">↔</text></a>')
+               f'<path d="M{cx + hw},{yb + 6} L206,{yb + 6} L206,{yb - 4}" class="mn-br{" on" if on else ""}"/>'
+               f'<rect x="176" y="{yb - 48}" width="60" height="44" rx="6" class="mn-bx{" on" if on else ""}"/><text x="206" y="{yb - 21}" text-anchor="middle" class="mn-t{" on" if on else ""}">Bridges</text></a>')
+    if ptr:
+        out.append(f'<text x="{ptr[0]}" y="{ptr[1]}" class="mn-ptr" aria-hidden="true">▶</text>')
+    elif on:
+        out.append(f'<text x="206" y="{yb - 54}" text-anchor="middle" class="mn-ptr" aria-hidden="true">▼</text>')
     out.append("</svg>")
     return "".join(out)
+
+
+def fork_fig():
+    """Two competing histories: the honest chain, and a rewrite that must out-build it."""
+    fid = "f-fork"
+    p = ['<text x="8" y="22" class="fg-s fg-h">the chain everyone has</text>']
+    xs = [8, 96, 184, 272]
+    for i, x in enumerate(xs):
+        p.append(box(x, 32, 80, 44, [(f"Block {i + 1}", "t")], "fg-key"))
+        if i:
+            p.append(arrow(fid, x - 8, 54, x - 2, 54))
+    p.append('<text x="8" y="155" class="fg-s fg-h">a cheater’s rewrite</text>')
+    p.append(arrow(fid, 136, 76, 190, 126, dashed=True))
+    for i, x in enumerate(xs[2:]):
+        p.append(box(x, 128, 80, 44, [(f"Block {i + 3}′", "t")], "fg-bad-box"))
+    p.append(arrow(fid, 264, 150, 270, 150))
+    p.append('<text x="180" y="198" text-anchor="middle" class="fg-s">to win, the rewrite must outpace everyone else:</text>')
+    p.append('<text x="180" y="218" text-anchor="middle" class="fg-s">more work (proof of work) or a deposit at risk</text>')
+    p.append('<text x="180" y="238" text-anchor="middle" class="fg-s">(proof of stake)</text>')
+    return svg(fid, 248, "The honest chain and a cheater’s rewrite branching from block 2", "".join(p)), \
+        "Consensus decides which history counts. Each method makes rewriting it cost more than a cheater can pay."
+
+
+def risks_fig():
+    """Where each risk sits on the stack."""
+    fid = "f-risk"
+    rows = [("Keys & wallets", ("lost keys, phishing,", "wrong address"), "s-apps"), ("Smart contracts", ("bugs that anyone", "can trigger"), "s-execution"),
+            ("Bridges", ("big pools of", "locked tokens"), "s-bridge"), ("Consensus", ("majority attacks,", "energy use"), "s-consensus")]
+    p, y = [], 8
+    for name, risk, cls in rows:
+        p.append(f'<rect x="8" y="{y}" width="130" height="52" rx="8" class="fg-lv {cls}"/>')
+        p.append(f'<text x="73" y="{y + 31}" text-anchor="middle" class="fg-t{" light" if cls == "s-consensus" else ""}">{e(name)}</text>')
+        p.append(arrow(fid, 140, y + 26, 158, y + 26))
+        p.append(box(160, y, 192, 52, [(risk[0], "s"), (risk[1], "s")], "fg-warn"))
+        y += 64
+    return svg(fid, y, "Where each risk sits: keys, contracts, bridges and consensus", "".join(p)), \
+        "Most losses happen at the top, with keys and wallets; the deeper levels fail more rarely, but at a larger scale."

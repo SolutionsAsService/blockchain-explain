@@ -10,13 +10,13 @@ BASICS_IDEA = "A blockchain is a shared list where every entry carries the finge
 
 # The general stack of one chain, bottom to top. Used in the hero, the home list and the strip on each layer page.
 LAYERS = [
-    ("consensus", "consensus.html", "Consensus", "Level 1 of 4",
+    ("consensus", "consensus.html", "Consensus", "Bottom level",
      "Many computers agree on one history: proof of work, proof of stake and BFT voting."),
-    ("execution", "contracts.html", "Smart contracts", "Level 2 of 4",
+    ("execution", "contracts.html", "Smart contracts", "Second level",
      "Programs stored on the chain, run by every node with the same result."),
-    ("layer2", "layer2.html", "Layer 2", "Level 3 of 4",
+    ("layer2", "layer2.html", "Layer 2", "Third level",
      "Rollups and channels: work done off the chain, settled on it."),
-    ("apps", "keys.html", "Wallets & apps", "Level 4 of 4",
+    ("apps", "keys.html", "Keys & wallets", "Top level",
      "Keys that sign transactions, and the apps people use."),
 ]
 
@@ -27,7 +27,7 @@ PAGES = {
     "keys": {
         "idea": "Your private key is your identity: it signs, everyone can check, and nobody can reset it.",
         "title": "Keys, wallets and transactions",
-        "kicker": "Level 4 of 4, where people start",
+        "kicker": "Where people start",
         "lede": "On the chain itself nobody has an account with a password. You hold a private key, and anything you sign with it, the whole network can check.",
         "sections": [
             ("Keys", """<p>A <em>private key</em> is a very large random number that only you know. From it, software computes a <em>public key</em> that anyone may see, and an <em>address</em> (a shortened hash of the public key) that people send to. Going forward is easy; going back, from address to private key, is not practical with today's computers.</p>
@@ -42,7 +42,7 @@ PAGES = {
     "consensus": {
         "idea": "Rewriting history must cost more than a cheater can pay: in electricity (work) or in deposits (stake).",
         "title": "Consensus: agreeing without trust",
-        "kicker": "Level 1 of 4, the bottom",
+        "kicker": "The bottom",
         "lede": "Thousands of computers that do not trust each other must agree on one list of transactions. There are two main families, proof of work and proof of stake, and many proof-of-stake chains finalize blocks by BFT voting.",
         "sections": [
             ("Proof of work", """<p>Bitcoin's answer: to add a block, a computer must find a number (a <em>nonce</em>) that makes the block's hash start with enough zeros. The only way is to guess, billions of times. Whoever finds one first adds the block and is paid for it. Rewriting history would mean redoing that work faster than everyone else combined.</p>
@@ -51,6 +51,7 @@ PAGES = {
             ("Proof of stake", """<p>Instead of spending electricity, validators lock up the chain's own tokens as <em>stake</em>: a deposit they lose if they cheat. The protocol picks who proposes each block, and other validators vote on it. Ethereum switched from proof of work to proof of stake in September 2022.</p>"""),
             ("BFT voting, and how many can fail", """<p>Some proof-of-stake chains, like those built on CometBFT, vote in rounds. A block is <em>final</em>, settled for good, once validators holding more than two thirds of the voting power sign it. As long as fewer than a third are faulty, there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>
 <p>It stays safe as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together. That is the limit for any protocol of this kind, called Byzantine fault tolerance. On a real chain, voting power follows stake, so the third is a third of the stake, not of the machines.</p>
+{VOTES_FIG}
 {BFT_TABLE}
 {BFT_DEMO}"""),
         ],
@@ -59,7 +60,7 @@ PAGES = {
     "contracts": {
         "idea": "A smart contract is a program every node runs, so everyone agrees on the result without trusting anyone.",
         "title": "Smart contracts",
-        "kicker": "Level 2 of 4",
+        "kicker": "",
         "lede": "Some chains store programs as well as payments. Anyone can call them, and every node runs the call and must reach the same result.",
         "sections": [
             ("Programs everyone runs", """<p>A <em>smart contract</em> is a program saved on the chain at its own address. Calling it is a transaction: every node runs the code with the same inputs, so they all reach the same new state. Nobody can change a contract's code once it is deployed, unless the code itself allows it.</p>
@@ -72,7 +73,7 @@ PAGES = {
     "layer2": {
         "idea": "Do the work off the chain, post the results to it, and let the chain judge.",
         "title": "Layer 2: scaling on top",
-        "kicker": "Level 3 of 4",
+        "kicker": "",
         "lede": "If every node must run every transaction, a chain must choose between speed and letting ordinary computers check it. Layer 2 systems do most of the work elsewhere and use the chain as the judge.",
         "sections": [
             ("Rollups", """<p>A <em>rollup</em> runs transactions off the main chain, then posts them in compressed batches back to it. The main chain (layer 1) publishes the data for everyone, so anyone who downloads it can rebuild the rollup's state and check it.</p>

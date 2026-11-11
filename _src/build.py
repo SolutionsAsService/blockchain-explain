@@ -141,9 +141,9 @@ def hero_wide(ex):
          f'<text x="205" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="575" y="{ys[-1] - hh - 18}" text-anchor="middle" class="ch">Chain B</text>',
          # the transaction path down chain A
-         f'<path d="M100,{ys[-1] - 2} L100,{base + 60}" class="tx" marker-end="url(#ah)"/>',
-         f'<text x="92" y="{ys[-1] - 14}" text-anchor="end" class="tx-t">a transaction</text>',
-         f'<text x="92" y="{ys[-1] + 4}" text-anchor="end" class="tx-t">travels down</text>',
+         f'<path d="M100,{ys[-1] - 6} L100,{base + 60}" class="tx" marker-end="url(#ah)"/>',
+         f'<text x="6" y="{ys[-1] - 32}" class="tx-t">a transaction</text>',
+         f'<text x="6" y="{ys[-1] - 12}" class="tx-t">travels down</text>',
          '</svg>']
     return "".join(s)
 
@@ -248,11 +248,15 @@ LEVEL_OF = {"blockchain-basics": "bedrock", "keys": "apps", "consensus": "consen
 WHERE = {"bedrock": "The bedrock, under every level", "bridge": "Between chains", None: "Beyond the stack"}
 
 
-def doc(path, title, kicker, lede, idea, sections, docs="", figure=None, demos=False, level=None, desc=None):
+def doc(path, title, kicker, lede, idea, sections, docs="", figure=None, demos=False, level=None, desc=None, numbered=True, toc_title="On this page"):
     """Every inner page: a sidebar map of the stack with the page's contents, then the article."""
-    toc = "".join(f'<li><a href="#{sid}"><span>{i + 1:02d}</span>{e(t)}</a></li>' for i, (sid, t, _) in enumerate(sections))
+    guide = [h for h, _ in NAV if h != "glossary.html"]
+    if path in guide:
+        step = f"Step {guide.index(path) + 1} of {len(guide)}"
+        kicker = f"{step} · {kicker}" if kicker else step
+    toc = "".join(f'<li><a href="#{sid}"><span>{f"{i + 1:02d}" if numbered else ""}</span>{e(t)}</a></li>' for i, (sid, t, _) in enumerate(sections))
     where = next((f"{role}: {name}" for k, _, name, role, _ in K.LAYERS if k == level), WHERE.get(level, WHERE[None]))
-    secs = "".join(f'<section class="sec" aria-labelledby="{sid}"><h2 id="{sid}"><span class="num">{i + 1:02d}</span>{e(t)}</h2>{h}</section>'
+    secs = "".join(f'<section class="sec" aria-labelledby="{sid}"><h2 id="{sid}">{f"<span class=num>{i + 1:02d}</span>" if numbered else ""}{e(t)}</h2>{h}</section>'
                    for i, (sid, t, h) in enumerate(sections))
     fig = ""
     if figure:
@@ -262,7 +266,7 @@ def doc(path, title, kicker, lede, idea, sections, docs="", figure=None, demos=F
   <aside class="side" aria-label="Where you are">
     <p class="side-where"><span>You are here</span>{e(where)}</p>
     {FIG.mini_stack(K.LAYERS, level)}
-    {f'<nav class="side-toc" aria-label="On this page"><p>On this page</p><ol>{toc}</ol></nav>' if len(sections) > 1 else ''}
+    {f'<nav class="side-toc" aria-label="{toc_title}"><p>{toc_title}</p><ol>{toc}</ol></nav>' if len(sections) > 1 else ''}
   </aside>
   <article class="doc-main">
     <header class="doc-head">
@@ -349,16 +353,17 @@ def build_basics(ex):
   <p class="cmp-n">{64 - ex["diff"]} of 64 digits match; {ex["diff"]} differ.</p></div>"""),
         ("chain", "Blocks chained by their hashes", f"""<p>Each block's hash covers its number, its data and the previous block's hash: <code>SHA-256(number | previous | data)</code>. Change any old block and its hash changes, so the next block's “previous” no longer matches.</p>
 <div class="demo" data-demo="chain"><p class="demo-h">Try it · break the chain</p>
-  <p class="demo-note">Edit a block's data. The link after it snaps. “Re-link” repairs one block at a time, and each repair moves the break down the chain.</p>
+  <p class="demo-note">Edit a block's data. The link after it snaps. “Re&#8209;link” repairs one block at a time, and each repair moves the break down the chain.</p>
   <ol class="chain">{chain_html}</ol>
   <p class="sr-only" data-role="live" aria-live="polite"></p>
-  <div class="btns"><button type="button" data-role="relink">Re-link the broken block</button></div>
+  <div class="btns"><button type="button" data-role="relink" disabled>Re-link the broken block</button></div>
   <p class="relinked" data-role="count" role="status"></p>
   <p class="demo-note">Re-linking is easy here because one person holds every copy. On a real network the other computers keep the original, and <a href="consensus.html">consensus</a> decides which one counts.</p></div>"""),
         ("merkle", "Merkle trees: one hash for many", f"""<p>A block's header does not list every transaction. It holds one <em>Merkle root</em>: hash each transaction, hash the hashes in pairs, and repeat until one is left. A short path of hashes then proves that one transaction is in the block, without the whole list.</p>
 <div class="demo" data-demo="merkle"><p class="demo-h">Try it · change a transaction, watch the root</p>
   <div class="mk-tree">{groups}</div>
   <p class="hx big mk-root"><span>Root</span><code data-role="root" data-expect="{lv[-1][0]}">{lv[-1][0]}</code></p>
+  <p class="hx mk-was" hidden><span>Was</span><code>{lv[-1][0]}</code></p>
 </div>"""),
     ]
     docs = '<a href="https://bitcoin.org/bitcoin.pdf">The Bitcoin paper</a>, which put hash chains and Merkle trees to work in a currency, citing Haber and Stornetta (1991) · <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">FIPS 180-4, the SHA-256 standard</a>'
@@ -376,7 +381,7 @@ def bft_table():
 def bft_demo():
     f, q = bft(10)
     return f"""<div class="demo" data-demo="bft"><p class="demo-h">Try it · any number of validators</p><label>Validators <input type="number" min="1" max="1000" value="10" data-role="n"></label>
-<p class="demo-out" role="status">Needed to finalize (more than ⅔): <strong data-role="q">{q}</strong> · faulty it can survive (fewer than ⅓): <strong data-role="f">{f}</strong></p></div>"""
+<p class="demo-out" role="status">With <strong data-role="nn">10</strong> validators: <strong data-role="q">{q}</strong> needed to finalize (more than ⅔) · up to <strong data-role="f">{f}</strong> faulty (fewer than ⅓).</p></div>"""
 
 
 def pow_search(data, zeros):
@@ -395,18 +400,18 @@ def pow_demo(ex):
 <div class="fields"><label>Block data <input type="text" value="{e(K.POW_DEFAULT)}" data-role="data"></label>
 <label class="narrow">Zeros needed <input type="number" min="1" max="5" value="{K.POW_ZEROS}" data-role="zeros"></label></div>
 <div class="btns"><button type="button" data-role="mine">Mine</button></div>
-<p class="hx"><span>Nonce</span><code data-role="nonce" data-expect="{pw["nonce"]}">{pw["nonce"]}</code></p>
-<p class="hx big"><span>Hash</span><code data-role="hash" data-expect="{pw["hash"]}">{pw["hash"]}</code></p>
-<p class="demo-out" data-role="out" role="status">{pw["nonce"] + 1:,} guesses. Each extra zero needs about 16 times as many.</p></div>"""
+<p class="hx"><span>Nonce</span><code data-role="nonce" data-build="{pw["nonce"]}">not yet</code></p>
+<p class="hx big"><span>Hash</span><code data-role="hash" data-build="{pw["hash"]}">not yet</code></p>
+<p class="demo-out" data-role="out" role="status">Press Mine to start guessing. (The build found it at nonce {pw["nonce"]:,}.)</p></div>"""
 
 
 def sign_demo():
     return """<div class="demo" data-demo="sign"><p class="demo-h">Try it · sign and check a transaction</p>
 <ol class="steps">
 <li><label>Transaction <input type="text" value="Ada pays Ben 5" data-role="msg"></label>
-<div class="btns"><button type="button" data-role="keys">Make a key pair</button><button type="button" data-role="sign" disabled>Sign it</button></div></li>
+<div class="btns"><button type="button" data-role="keys">Make a key pair</button><button type="button" data-role="sign" disabled>Sign it</button></div><p class="hint" data-role="hint1">Make a key pair first.</p></li>
 <li><label>Change the transaction if you like, then check <input type="text" value="Ada pays Ben 5" data-role="check"></label>
-<div class="btns"><button type="button" data-role="verify" disabled>Check the signature</button></div></li>
+<div class="btns"><button type="button" data-role="verify" disabled>Check the signature</button></div><p class="hint" data-role="hint2">Sign it first.</p></li>
 </ol>
 <p class="hx"><span>Public key</span><code data-role="pub">none yet</code></p>
 <p class="hx"><span>Signature</span><code data-role="sig">none yet</code></p>
@@ -422,12 +427,13 @@ def chains_table():
 def build_topic(key, ex):
     P = K.PAGES[key]
     f100, q100 = bft(100)
-    figs = {"keys": FIG.keys_fig(), "consensus": FIG.votes_fig(100, f100, q100), "contracts": FIG.contract_fig(),
+    figs = {"keys": FIG.keys_fig(), "consensus": FIG.fork_fig(), "contracts": FIG.contract_fig(), "risks": FIG.risks_fig(),
             "layer2": FIG.rollup_fig(), "bridges": FIG.bridge_fig()}
     sections = []
     for t, h in P["sections"]:
         sid = {"BFT voting, and how many can fail": "bft"}.get(t, slug(t))
-        h = (h.replace("{BFT_TABLE}", bft_table()).replace("{BFT_DEMO}", bft_demo()).replace("{POW_DEMO}", pow_demo(ex))
+        vf = FIG.votes_fig(100, f100, q100)
+        h = (h.replace("{VOTES_FIG}", f'<figure class="fig">{vf[0]}<figcaption>{e(vf[1])}</figcaption></figure>').replace("{BFT_TABLE}", bft_table()).replace("{BFT_DEMO}", bft_demo()).replace("{POW_DEMO}", pow_demo(ex))
              .replace("{SIGN_DEMO}", sign_demo()).replace("{CHAINS_TABLE}", chains_table()))
         sections.append((sid, t, h))
     docs = " · ".join(f'<a href="{u}">{e(n)}</a>' for n, u in P["docs"])
@@ -447,19 +453,10 @@ def build_glossary():
     groups = {}
     for t, d in sorted(K.GLOSSARY, key=lambda x: x[0].lower()):
         groups.setdefault(t[0].upper(), []).append((t, d))
-    html_ = "".join(f'<div class="gl-group"><h2 id="g-{L.lower()}" class="gl-l">{L}</h2><dl>' +
-                    "".join(f'<div class="gl" id="{slug(t)}"><dt>{e(t)}</dt><dd>{e(d)}</dd></div>' for t, d in items) + "</dl></div>"
-                    for L, items in groups.items())
-    letters = "".join(f'<a href="#g-{L.lower()}">{L}</a>' for L in groups)
-    body = f"""<div class="doc doc-wide">
-  <article class="doc-main">
-    <header class="doc-head"><p class="kicker">{len(K.GLOSSARY)} terms, in plain words</p><h1>Glossary</h1></header>
-    <nav class="letters" aria-label="Jump to a letter">{letters}</nav>
-    <div class="glossary">{html_}</div>
-    {pager("glossary.html")}
-  </article>
-</div>"""
-    page("glossary.html", "Glossary", body, "The terms this site uses, in plain words.", active="glossary.html")
+    sections = [(f"g-{L.lower()}", L, "<dl>" + "".join(f'<div class="gl" id="{slug(t)}"><dt>{e(t)}</dt><dd>{e(d)}</dd></div>' for t, d in items) + "</dl>")
+                for L, items in groups.items()]
+    doc("glossary.html", "Glossary", f"{len(K.GLOSSARY)} terms, in plain words", "Every term the guide uses, in plain words. Each is explained where it first appears, too.",
+        None, sections, numbered=False, toc_title="Letters", desc="The terms this site uses, in plain words.")
 
 
 def build_about(ex):

@@ -171,6 +171,47 @@ Lesson: an R0 objection about framing ("vendor copy") is answered by the structu
 | Cairo: "Bitcoin also uses Schnorr since 2021" | ADAPT |
 | Cairo: "'three main ways' counts BFT twice" | ADAPT: two families, with BFT voting as a way proof-of-stake chains finalize |
 
+## Move M6: Every page redone (owner grade B-: "only a B minus and needs all pages, very sloppy")
+The owner graded the general guide B- and called every page sloppy. Diagnosis from full-page screenshots of all 16 pages: text-only topic pages in a narrow column, three-line headings, a clumsy chip strip for the levels, cramped demo controls, a dead gap and two left edges on the home page, the hero's dotted path through the labels.
+Intent: one template for every inner page (a sidebar map of the stack with the current level coloured and pointed at, "On this page"; kicker with the step in reading order; title; lede; an "In one line" idea; one drawn figure per topic from `_src/figures.py`; numbered sections; "Try it" demo panels; read-further links; pager). Home: guide cards numbered in reading order and three computed facts as cards. Glossary on the same template, by letter. `measure.cjs` now also checks every SVG label for clipping and for rendered size under 12 px.
+
+### Panel, WHOLE, round R6 (the redo; verdicts in panel/R6-v2/)
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Formalist (Greenberg) | Modernist Painting (Clement Greenberg): each medium earns its authority by being purely itself, which here means the flat plane, the grid and the type are exact. A page that is "nearly aligned" has not committed to its own surface. | The template is a real advance: one column at 364-1068 px, numbered sections, a single green-ramp vocabulary and calm 8 px radii. It still is not exact. On the live build the Basics figure clips its own label. The Contracts arrowheads pile into a black blob. The home page has two left edges (40 and 80 px). The guide-card titles sit at three different heights (694/704/715 px). The sidebar map has three different "you are here" styles and one label that collides with its outline. Hashes wrap to 1-2 character orphans. Figure type renders larger than body text on desktop. Also, the evidence screenshots are stale: they show copy ("needed to finalize") and an unclipped Basics label that the served site no longer has. | OBJECT | Fix defects 1-8 below. Each is a one-line change in _src/figures.py or site/css/site.css. Then reshoot the evidence from the live build. |
+| Critic: Usability (Krug) | Don't Make Me Think (Steve Krug): self-evident navigation, "you are here", obvious clickables, no question marks | Home passes the five-second test (title, lede, one green "Start with the basics" button, cards in reading order). The pager reads start to finish at 1280 and 375 (Basics > Keys > Consensus > Contracts > Layer 2 > Bridges > Chains > Risks > Glossary), with no console errors. The chain-break demo is clear. But the sidebar map gives each page a "Level N of 4" number that contradicts the reading order. The Consensus figure shows the wrong idea. Three demos show stale or silent feedback: mine, sign and the validator calculator. | OBJECT | Fix items 1 to 9 below. Items 1, 3, 4, 5 and 6 come first. |
+| Critic: Evidence (Tufte) | The Visual Display of Quantitative Information (Edward Tufte): data-ink, graphical integrity, labels placed on the data, the same mark means the same thing everywhere | Six figures plus the sidebar map, checked live at 1280 and 375 in light and dark, with text measured by getBBox. Four defects matter. (1) The chain figure clips its own arrow label. (2) In light mode, honest and faulty validators differ only by red against green, at a luminance contrast of 1.06:1. (3) The keys figure can be read as "the private key travels with the transaction". (4) The rollup figure mixes ZK proofs with optimistic disputes. Also: four arrowheads pile up in one point on the contracts figure, the bridge link in the sidebar map is not attached to anything, and figure text is 12.3 px at 375 (below the 13 px that the figures.py docstring promises). The bridges figure passes. | OBJECT | Apply the 10 fixes below. All but two are one-line value changes in _src/figures.py. |
+
+#### Resolutions, round R6
+| Finding | Resolution |
+|---|---|
+| Krug: "Level N of 4 fights the reading order" | ADAPT: kickers say "Step n of 8"; the levels are named Top, Third, Second and Bottom level |
+| Krug + Greenberg: "the map names things three ways; the current page is marked three ways" | ADAPT: "Keys & wallets" everywhere; the bridge box says "Bridges"; the current part is coloured and pointed at (▶), no outlines |
+| Krug: "the consensus figure is the BFT grid, out of place" | ADAPT: the page opens with two competing histories (the chain and a cheater's rewrite); the grid moved into the BFT section |
+| Krug: "the mine demo is pre-solved" | ADAPT: blank until Mine; a muted trial hash and "Mining…" while searching; "the same nonce the build found" on a match |
+| Krug: "the calculator fails silently" | ADAPT: 1 to 1000 enforced with a message; the result echoes the number |
+| Krug: "the sign demo keeps stale verdicts" | ADAPT: "Changed" on any edit; ✓ Valid in green, ✗ Invalid in red; hints under disabled buttons |
+| Krug: "Re-link is always clickable" | ADAPT: disabled with "Nothing to repair" while the chain is whole; names the block to repair |
+| Krug: "the Merkle demo gives nothing to compare" | ADAPT: the old root is shown as "Was"; the changed pair and the root are marked |
+| Krug: "a duplicate 'you are here' chip on phones" | ADAPT: the sidebar is hidden under 860 px; the kicker carries the step |
+| Tufte + Greenberg: "a clipped label in the chain figure" | ADAPT, and `measure.cjs` now catches any clipped SVG label |
+| Tufte: "red against green only in the validator grid" | ADAPT: faulty cells are hollow with a red outline |
+| Tufte: "the grid legend reads as an event and mixes counts" | ADAPT: "67 needed to finalize (more than ⅔)", "33 faulty at most (fewer than ⅓)", the table's wording |
+| Tufte: "'Transaction + private key' implies the key is sent; the signature looks secret" | ADAPT: "signed by private key"; the signature box is neutral, "public key checks it" |
+| Tufte: "the rollup figure mixes ZK and optimistic" | ADAPT: "one batch (+ proof if ZK)"; "keeps the data; checks the proof or a challenge" |
+| Tufte + Greenberg: "the contract arrowheads merge" | ADAPT: four separate arrowheads; the caller is named and the starting balances shown |
+| Tufte + Greenberg: "figure text 12.3 px on phones, 17 px on desktop" | ADAPT: figures capped at 360 px wide, labels 15 px, full-bleed under 420 px; measured: no SVG label under 12 px at 320 px |
+| Greenberg: "two left edges on the home page and header" | ADAPT: header, hero, sections and footer share one 1120 px content edge |
+| Greenberg: "card titles at different heights, four badge borders" | ADAPT |
+| Greenberg: "the nav shifts because the current link is bold" | ADAPT: underline only |
+| Greenberg: "hashes wrap leaving 1–2 characters" | ADAPT: hash lines capped at 32ch; label sizes matched |
+| Greenberg: "three left edges in the sign demo; a second button family" | ADAPT |
+| Greenberg: "awkward breaks" | ADAPT: text-wrap pretty and balance; a non-breaking hyphen in Re-link |
+| Greenberg: "Chains, Risks, Autheo and About have no figure" | ADAPT for Risks (where each risk sits on the stack); DEFERRED for Chains (the table is the figure), Autheo and About |
+| Greenberg: "the glossary is off the template" | ADAPT: the glossary uses the template, letters in the sidebar |
+
+Step 2g re-measure after R6: 16 pages at 1280x800, 375x812, 390x844 and 320x640, light and dark: no overflow, smallest text 12.6 px, no target under 44 px, no SVG label clipped or under 12 px, demo self-checks ok; every demo exercised in Playwright with no script errors.
+
 ## Stop test
 - **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
 - **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**
