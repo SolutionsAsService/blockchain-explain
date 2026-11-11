@@ -163,11 +163,11 @@ def hero_narrow():
          f'<text x="180" y="{base + 120}" text-anchor="middle" class="br-t">and Merkle trees → Basics</text></a>',
          a,
          f'<a href="bridges.html" class="bridge" aria-label="Bridges: how chains pass messages and tokens">'
-         f'<path d="M{150 + hw - 4},{fy + 4} L296,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
-         f'<rect x="298" y="{fy - 22}" width="60" height="56" rx="8" class="stub"/>'
-         f'<text x="328" y="{fy + 2}" text-anchor="middle" class="stub-t">Chain</text><text x="328" y="{fy + 22}" text-anchor="middle" class="stub-t">B</text>'
-         f'<rect x="262" y="{fy + 42}" width="96" height="44" rx="22" class="br-pill"/>'
-         f'<text x="310" y="{fy + 70}" text-anchor="middle" class="br-pt">Bridges →</text></a>',
+         f'<path d="M{150 + hw - 4},{fy + 4} L284,{fy + 4}" class="br-line" marker-end="url(#ahn)"/>'
+         f'<rect x="286" y="{fy - 18}" width="72" height="44" rx="8" class="stub"/>'
+         f'<text x="322" y="{fy + 10}" text-anchor="middle" class="stub-t">Chain B</text>'
+         f'<rect x="272" y="{fy + 42}" width="86" height="44" rx="22" class="br-pill"/>'
+         f'<text x="315" y="{fy + 70}" text-anchor="middle" class="br-pt">Bridges →</text></a>',
          f'<path d="M80,{ys[-1] - hh + 22} L80,{base + 66}" class="tx" marker-end="url(#ahn)"/>',
          f'<text x="150" y="{ys[-1] - hh - 14}" text-anchor="middle" class="ch">Chain A</text>',
          f'<text x="8" y="{ys[-1] - hh - 2}" class="tx-t">a transaction</text>',

@@ -368,3 +368,8 @@ h1,h2,.card-t{text-wrap:balance}
 .mn-br{stroke-dasharray:none;stroke-width:1.5}
 .fg-lv.s-bridge{fill:var(--bed);stroke:none}
 .side-toc a{justify-content:flex-start}
+/* R8 polish */
+.fg-lv.s-bridge{fill:var(--panel);stroke:var(--ink);stroke-width:1.5}
+.stub-t{font-size:16px}
+.side-toc ol:not(:has(span)){display:grid;grid-template-columns:repeat(4,44px);gap:6px}
+.side-toc ol:not(:has(span)) a{justify-content:center;border:1px solid var(--rule);border-radius:8px;font-weight:700}

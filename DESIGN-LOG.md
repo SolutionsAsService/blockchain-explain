@@ -237,12 +237,28 @@ Step 2g re-measure after R6: 16 pages at 1280x800, 375x812, 390x844 and 320x640,
 
 Step 2g re-measure after R7: 128 combinations, no overflow, no small text or target, no SVG label clipped, overlapping a box, or under 12 px.
 
+### Panel, WHOLE, round R8 (final pass; verdicts in panel/R8-v2/)
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Formalist (Greenberg) | Modernist Painting (Clement Greenberg): the medium earns its authority by being exactly itself, so the flat plane, the grid and the type have to be exact. | Checked on the live build. All eight R7 items are resolved. The Consensus figure sets "A CHEATER'S / REWRITE" on two lines clear of the Block 3′ box, and its chain arrows are 12 units with room around them (1280 and 375). The sign demo has one left edge, with numbered labels, inputs, buttons and hints all at the same x. The mini-map connector is solid and reaches the Bridges box. The Bridges figure boxes have clear margins. The Risks level boxes share one width and style, and Bridges no longer reads as selected. The Chains lede uses a non-breaking hyphen ("well‑known"). The glossary letters sit on the sidebar edge. The Contracts state box is set in one typeface. The phone hero uses the same "Bridges →" and bedrock wording as desktop. Together with the R6 fixes (one content edge, a stable nav, aligned cards, 32/32 hashes, 15 px figure labels), nothing left is something a careful designer would refuse to ship. | PASS | Optional polish only (below). The Autheo/About pager deferral is accepted: those pages sit outside the reading order. |
+| Critic: Usability (Krug) | Don't Make Me Think (Steve Krug): self-evident navigation, clear feedback, no question marks | I re-tested at 1280x800 and 375x812 with touch, with no script errors. **Consensus figure:** "A cheater's rewrite" is on two lines, left of "Block 3′", and nothing covers it at either width. A programmatic check found no text box overlapping a shape. **Mine demo:** Zeros needed is limited to 1–4. During mining, Block data, Zeros and Mine are locked and a Stop button appears (it is hidden when idle). Stop gives "Stopped after 23,808 guesses, with no match yet" and unlocks the inputs. Four zeros take about 1.1 s and end with "Found after 44,765 guesses for 4 zeros". All R6 and R7 items are now resolved. | PASS | None blocking. One optional polish: if someone types 5 into Zeros needed, the box keeps showing 5 while the demo mines for 4 zeros (the result does say "for 4 zeros"). Snap the box to 4 on blur, or show "1 to 4 zeros" the way the validator calculator does. |
+| Critic: Evidence (Tufte) | The Visual Display of Quantitative Information (Edward Tufte): data-ink, graphical integrity, labels placed on the data, no claim without evidence | Re-checked all 8 figures and the sidebar map live at 1280, 375 and 320, light and dark, measuring text with getBBox. No label is clipped or overlaps a box, and the smallest label is 14.3 px at 375 (12 px at 320). fork_fig now matches its text: four honest blocks, and a dashed rewrite that branches from Block 2 and is one block behind. The heading on two lines clears the Block 3′ box (x 8–117 against 188), and the two methods read as parallel lines. In risks_fig the arrows are gone, "halts and reorgs" replaces "energy use", and the caption claims only what is drawn. The R6 fixes all still hold: chain, keys, validator grid (hollow red for faulty), contracts, rollup, bridges, and the map's ▶/▼ pointers and attached bridge line. | PASS | None required. One optional point below. |
+
+#### Resolutions, round R8
+| Finding | Resolution |
+|---|---|
+| Krug: "the zeros box can show 5 while mining 4" | ADAPT: the field snaps to the value mined |
+| Tufte: "Bridges in the risks figure uses the bedrock grey" | ADAPT: panel fill with an ink outline, as on the map |
+| Greenberg: "the phone pill touches the Consensus slab; 'Chain / B' reads as an accident" | ADAPT: pill moved; "Chain B" on one line in a 72-unit box |
+| Greenberg: "the glossary letters make a tall sparse column" | ADAPT: a four-column grid of 44 px cells |
+
 ## Stop test
-- **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
-- **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**
-- **S3 NOT met**: every round produced changes.
-- **S4** met: the M2 break (two stacks bridged across the grid) stayed the landing graphic through every round, and R3 Shklovsky passed it as "not stock crypto imagery".
-- **S5**: `wcag -.-> albers` applied: the slab ramp was chosen by value and then corrected by measurement (R1, #1a7d47).
+For the redo (M6, R6 to R8), after the owner's B- on the R0–R5 site:
+- **S1** met: every finding is ADAPT, or DEFERRED with a reason (no figure on Chains, where the table is the figure, nor on Autheo and About; no pager on the two pages outside the reading order).
+- **S2** met for the redo panel: Greenberg, Krug and Tufte all PASS in R8, each after re-checking their own earlier objections on the live build. The R0–R5 seats did not sit again after M6; their findings were carried into the redo unchanged.
+- **S3** met in R8 for blocking findings: the R8 changes were optional polish named by the passing seats.
+- **S4**: the stack-and-bridge landing graphic was kept through the redo; the push in M6 went to legibility (one figure per page), not ink.
+- **S5**: `wcag -.-> albers` applied again: the validator grid stopped relying on red against green (R6).
 
 ## Compliance Check
 - [x] Traversal plan, seed anchors with exact labels, Frontier, moves M1–M4 with anchors
