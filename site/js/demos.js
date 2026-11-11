@@ -21,7 +21,7 @@
 
   // 2. chain: hash = SHA-256(number|previous|data)
   document.querySelectorAll('[data-demo="chain"]').forEach(function (d) {
-    var blocks = Array.prototype.slice.call(d.querySelectorAll(".blk"));
+    var blocks = Array.prototype.slice.call(d.querySelectorAll(".blk")), rewritten = 0;
     function status() {
       var live = q(d, "live"), first = -1;
       blocks.forEach(function (b, i) {
@@ -37,8 +37,7 @@
       var i = +b.dataset.i;
       return sha(i + "|" + q(b, "prev").textContent + "|" + q(b, "data").value).then(function (h) { q(b, "hash").textContent = h; });
     }
-    blocks.forEach(function (b) { q(b, "data").addEventListener("input", function () { rehash(b).then(status); }); });
-    var rewritten = 0;
+    blocks.forEach(function (b) { q(b, "data").addEventListener("input", function () { q(d, "count").textContent = ""; rewritten = 0; rehash(b).then(status); }); });
     q(d, "relink").addEventListener("click", function () {
       var i = blocks.findIndex(function (b) { return b.classList.contains("broken"); });
       var out = q(d, "count");

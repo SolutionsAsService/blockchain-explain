@@ -198,4 +198,4 @@ p{margin:0 0 1em}
 /* R3 (Greenberg): one radius, no shadow, even footer lines */
 .demo,.cmp,.pager a,.lstrip a,.demo input,.toc a,.blk,.mk-pair{border-radius:8px}
 .nav-menu[open] nav{box-shadow:none}
-.foot a{display:inline;padding:12px 0;min-height:0}
+.foot a{display:inline;padding:15px 0;min-height:0}

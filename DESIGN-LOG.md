@@ -50,16 +50,16 @@ From `pick_panel.py --mode adaptive --run-type full --project blockchain-explain
 #### Resolutions, round R1
 | Finding | Resolution |
 |---|---|
-| Cairo: "white on the consensus green is 4.36:1" | ADOPT: `--s-cons` is #1a7d47 in both themes (5.16:1; the small strip text 4.55:1) |
-| Cairo: "ML-KEM is not a signature scheme" | ADOPT: ML-KEM for key exchange; ML-DSA and SLH-DSA for signatures |
-| Cairo: "the Bitcoin paper did not first combine hash chains and Merkle trees" | ADOPT: credited with putting them to work in a currency, citing Haber and Stornetta (1991) |
-| Krug: "no way on from the bottom of a page" | ADOPT: a previous/next pager on every page but home, in nav order |
-| Krug: "the phone hero loses its labels; the IBC arrow points at nothing" | ADOPT: "Chain A" and "a transaction travels down" kept at 375; the arrow ends on a dashed "Chain B" stub |
-| Krug: "Re-link repairs everything at once and hides the lesson" | ADOPT: the button re-links one broken block at a time and reports, in a live status line, that the break moved and how many blocks were rewritten |
-| Krug (note): "Layer 1 of 4" over a strip of 3 | ADOPT: the strip shows all four layers |
-| Krug (note): "computed as you read" is jargon | ADOPT: "Every hash on the site is real, and you can change the input yourself." |
-| Sharp: "the favicon is a green blob at 16 px" | ADOPT: the favicon is written by the build with solid fills on the dark ground, bigger slabs and no path; `brand/logo-v2*.svg` are written by the same function with solid fills, so there is one master |
-| Sharp: "og:image points at a missing og.png" | ADOPT: `_src/og.cjs` captures the 1200x630 first screen to `site/og.png`, and the build fails if it is missing; `og:site_name` added and the name is in the footer |
+| Cairo: "white on the consensus green is 4.36:1" | ADAPT: `--s-cons` is #1a7d47 in both themes (5.16:1; the small strip text 4.55:1) |
+| Cairo: "ML-KEM is not a signature scheme" | ADAPT: ML-KEM for key exchange; ML-DSA and SLH-DSA for signatures |
+| Cairo: "the Bitcoin paper did not first combine hash chains and Merkle trees" | ADAPT: credited with putting them to work in a currency, citing Haber and Stornetta (1991) |
+| Krug: "no way on from the bottom of a page" | ADAPT: a previous/next pager on every page but home, in nav order |
+| Krug: "the phone hero loses its labels; the IBC arrow points at nothing" | ADAPT: "Chain A" and "a transaction travels down" kept at 375; the arrow ends on a dashed "Chain B" stub |
+| Krug: "Re-link repairs everything at once and hides the lesson" | ADAPT: the button re-links one broken block at a time and reports, in a live status line, that the break moved and how many blocks were rewritten |
+| Krug: "Layer 1 of 4" over a strip of 3 | ADAPT: the strip shows all four layers |
+| Krug: "computed as you read" is jargon | ADAPT: "Every hash on the site is real, and you can change the input yourself." |
+| Sharp: "the favicon is a green blob at 16 px" | ADAPT: the favicon is written by the build with solid fills on the dark ground, bigger slabs and no path; `brand/logo-v2*.svg` are written by the same function with solid fills, so there is one master |
+| Sharp: "og:image points at a missing og.png" | ADAPT: `_src/og.cjs` captures the 1200x630 first screen to `site/og.png`, and the build fails if it is missing; `og:site_name` added and the name is in the footer |
 
 Step 2g re-measure after R1: every page at 1280x800, 375x812 and 390x844, light and dark: no overflow, smallest text 13 px, no target under 44 px, demo self-check ok, hero bottom 571 / 807 / 829.
 
@@ -74,14 +74,14 @@ Step 2g re-measure after R1: every page at 1280x800, 375x812 and 390x844, light 
 | Finding | Resolution |
 |---|---|
 | Debord: "the Autheo self-description cites nothing" | ADAPT: autheo.com is outside this session's network, so no dated Autheo page could be read. The page now names its real source (version 1 of this site, written from Autheo's materials, linked at its commit) and says it is not a quotation |
-| Debord: "IBC is drawn as Autheo's without Autheo saying so" | ADOPT: the hero's Chain B is generic; the case study is its own row in the stack list. The IBC line on autheo.html is attributed to Autheo's materials, as version 1 listed it |
-| Tufte: "the Merkle demo is a list, and pairs sit under the wrong leaves" | ADOPT: each pair is a box holding its two transactions and its hash, labelled H(1+2) and H(3+4), with the root below; one column on a phone, each pair still boxed |
-| Tufte: "62 of 64 is asserted, not shown" | ADOPT: both 64-digit hashes stacked in monospace, the 2 matching digits marked, the count computed |
-| Tufte (note): numbers and wording in the BFT table and calculator | ADOPT: numeric columns right-aligned; the calculator uses the table's "more than ⅔" and "fewer than ⅓" |
-| Mace: "every page overflows at 320 px" | ADOPT: the brand may shrink and wrap below 360 px; `measure.cjs` now also runs 320x640 |
-| Mace: "demo results are not announced; four inputs all named Data" | ADOPT: the BFT result is a status region; the chain demo has a polite live line naming the first broken block; each input is named "Block n data" |
-| Mace (note): og:description still says "computed as you read" | ADOPT |
-| Mace (note): Escape does not close the menu | REJECT for now: the native details element behaves as designed, and the focus ring stays visible (2.4.11 met); carried forward |
+| Debord: "IBC is drawn as Autheo's without Autheo saying so" | ADAPT: the hero's Chain B is generic; the case study is its own row in the stack list. The IBC line on autheo.html is attributed to Autheo's materials, as version 1 listed it |
+| Tufte: "the Merkle demo is a list, and pairs sit under the wrong leaves" | ADAPT: each pair is a box holding its two transactions and its hash, labelled H(1+2) and H(3+4), with the root below; one column on a phone, each pair still boxed |
+| Tufte: "62 of 64 is asserted, not shown" | ADAPT: both 64-digit hashes stacked in monospace, the 2 matching digits marked, the count computed |
+| Tufte: numbers and wording in the BFT table and calculator | ADAPT: numeric columns right-aligned; the calculator uses the table's "more than ⅔" and "fewer than ⅓" |
+| Mace: "every page overflows at 320 px" | ADAPT: the brand may shrink and wrap below 360 px; `measure.cjs` now also runs 320x640 |
+| Mace: "demo results are not announced; four inputs all named Data" | ADAPT: the BFT result is a status region; the chain demo has a polite live line naming the first broken block; each input is named "Block n data" |
+| Mace: og:description still says "computed as you read" | ADAPT |
+| Mace: Escape does not close the menu | DEFERRED: the native details element behaves as designed, and the focus ring stays visible (2.4.11 met); carried forward |
 
 Step 2g re-measure after R2: every page at 1280x800, 375x812, 390x844 and 320x640, light and dark: no overflow, smallest text 13 px, no target under 44 px, demo self-check ok, Merkle root recomputed in the browser after an edit.
 
@@ -95,14 +95,28 @@ Step 2g re-measure after R2: every page at 1280x800, 375x812, 390x844 and 320x64
 #### Resolutions, round R3
 | Finding | Resolution |
 |---|---|
-| Shklovsky: "the drawn link between blocks never breaks" | ADOPT: above a broken block the link becomes a short red dashed stub, leaving a gap where the text says the chain broke |
-| Holmes: "stake, fork and hexadecimal are never explained" | ADOPT: stake and fork defined where used on consensus.html and added to the glossary (16 terms); "hexadecimal digits (the digits 0–9 and the letters a–f)" |
-| Greenberg: "five corner radii" | ADOPT: one 8 px radius for boxes, inputs, chips and cards |
-| Greenberg: "the menu's drop shadow is the one piece of fake depth" | ADOPT: removed; the 1 px rule separates it |
-| Greenberg: "uneven footer line spacing at 375" | ADOPT: footer links are inline with 12 px vertical padding |
-| Greenberg (note): the bedrock is in perspective under isometric slabs; two left edges on the home page | Carried forward |
+| Shklovsky: "the drawn link between blocks never breaks" | ADAPT: above a broken block the link becomes a short red dashed stub, leaving a gap where the text says the chain broke |
+| Holmes: "stake, fork and hexadecimal are never explained" | ADAPT: stake and fork defined where used on consensus.html and added to the glossary (16 terms); "hexadecimal digits (the digits 0–9 and the letters a–f)" |
+| Greenberg: "five corner radii" | ADAPT: one 8 px radius for boxes, inputs, chips and cards |
+| Greenberg: "the menu's drop shadow is the one piece of fake depth" | ADAPT: removed; the 1 px rule separates it |
+| Greenberg: "uneven footer line spacing at 375" | ADAPT: footer links are inline with 12 px vertical padding |
+| Greenberg: the bedrock is in perspective under isometric slabs; two left edges on the home page | DEFERRED: carried forward |
 
 Step 2g re-measure after R3: 80 page-size-scheme combinations (10 pages; 1280x800, 375x812, 390x844, 320x640; light and dark): no overflow, smallest text 12.6 px, no target under 44 px, demo self-check ok; hero bottom 571 / 807 / 829 (726 at 320x640). og.png recaptured.
+
+### Panel, WHOLE, round R4 (re-check of the R3 objectors; verdicts in panel/R4-v2/)
+| Critic | Anchor used | Observed in the work | Verdict PASS/OBJECT | Requested change |
+|---|---|---|---|---|
+| Critic: Inclusion (Holmes) | Mismatch (Kat Holmes): design for the excluded reader, solve for one and extend to many | Checked on the live site. consensus.html now defines stake where it is used ("the chain's tokens a validator has locked up as a deposit it can lose if it cheats") and replaces the idiom with "a second, competing version of the chain (a fork) that you have to wait to see settled". The glossary now has Stake and Fork, so the Validator entry is no longer circular. blockchain-basics.html now explains hexadecimal as "the digits 0–9 and the letters a–f". | PASS | None required. |
+| Critic: Provocateur (Shklovsky) | Art as Device (Shklovsky): defamiliarization, making the familiar strange so it is seen, not recognised | The R3 fix works. In Playwright I changed Block 1 to "Ada pays Ben 500". The joint above Block 2 is now a short red dashed stub with a gap (`.blk.broken::before`, site.css line 197), so the link itself is seen to tear. Re-link moves the tear down to Block 3. After the last re-link every joint is solid green again, and "Every link holds again: 2 blocks rewritten" makes the cost felt. The stub also works in dark mode. New defect at the same spot: the re-link message (`data-role=count`) is only rewritten on a click, never on an edit. After the chain is fully re-linked, a new edit (Block 2 changed to "x") tears the link above Block 3, but the old "Every link holds again: 2 blocks rewritten to hide your edit." stays under the demo. The page says the chain holds while it shows the chain torn, which cancels out the tear. | OBJECT | In site/js/demos.js, chain demo: clear the message and reset the rewrite tally on every edit, e.g. in the block `input` listener add `q(d,"count").textContent=""; rewritten=0;` before `rehash(b).then(status)`. Change nothing else. The stub device itself passes. |
+| Critic: Formalist (Greenberg) | Modernist Painting (Clement Greenberg): each medium purified to what is proper to it; flatness, the integrity of the surface | Re-checked on the live site at 1280 and 375 (index, blockchain-basics, consensus, glossary). (1) Radii: computed `border-radius` on every element now takes only two values, 8px for all boxes, pills, inputs, buttons, blocks and pager, and 2px for the inline `.cmp mark`. The Basics demo, its blocks and its inputs now nest at one radius. (2) The open mobile menu's `box-shadow` computes to `none`, and its 1px rule alone separates it from the hero. The surface is flat everywhere. (3) Footer: the links are `display:inline`, and at 375 the line tops are 2202, 2224 and 2247 (an even 22-23px pitch), so the leading is fixed. One regression comes from the value I prescribed in R3: `.foot a` now measures 39px tall (14px text plus 12px+12px padding). That is below the site's own 44px target floor recorded in EVIDENCE/measure.json. | OBJECT | Change the padding only: `.foot a{padding:15px 0}`, which makes each link about 45px tall. Vertical padding on an inline element does not change the line box, so the even footer leading is kept. No other change is needed. |
+
+#### Resolutions, round R4
+| Finding | Resolution |
+|---|---|
+| Shklovsky: "after a full re-link, a new edit leaves 'Every link holds again' under a broken block" | ADAPT: any edit clears the re-link message and resets the count; tested: edit, re-link twice, edit again (message cleared, live line names block 3), re-link (count restarts at 1) |
+| Greenberg: "footer links are 39 px tall after the R3 change" | ADAPT: 15 px vertical padding; measured 45 px, line spacing unchanged |
+| Holmes: the glossary's Hash entry says "hex digits" | ADAPT: "hexadecimal digits (0–9 and a–f)" |
 
 ## Frontier
 | Candidate | Reached via | From anchor | Status |
@@ -133,3 +147,20 @@ Intent: stone-white paper, near-black ink, the logo's green deepened for text co
 
 ## Move M4: One topic per page (KEEP-THE-RULE)
 Depends on: M2. Pages: home; Basics (blocks, hashes, the chain, Merkle trees: the bedrock); Consensus (CometBFT); Cosmos SDK; EVM; Layer 0 (IBC); Autheo (case study, attributed); Glossary; About; 404. The old URLs `blockchain-basics.html`, `layer0.html` and `autheo.html` are kept.
+
+## Stop test
+- **S1** met: every objection in R0–R4 is ADOPT or ADAPT, or carried forward with a reason (Escape on the menu, the bedrock's projection, the two left edges, the Autheo source page).
+- **S2** met in part. Last verdicts: Holmes PASS (R4). Shklovsky and Greenberg OBJECT in R4, each on a single regression that was fixed and measured after. Cairo, Krug and Sharp OBJECT in R1, and Debord, Tufte and Mace in R2; every finding was applied and re-measured, but those seats did not sit again. No round had every seat pass. **Not fully met.**
+- **S3 NOT met**: every round produced changes.
+- **S4** met: the M2 break (two stacks bridged across the grid) stayed the landing graphic through every round, and R3 Shklovsky passed it as "not stock crypto imagery".
+- **S5**: `wcag -.-> albers` applied: the slab ramp was chosen by value and then corrected by measurement (R1, #1a7d47).
+
+## Compliance Check
+- [x] Traversal plan, seed anchors with exact labels, Frontier, moves M1–M4 with anchors
+- [x] Panel R0–R4, one agent per reference, at most three at a time, each verdict filed in `panel/`
+- [x] Resolution table after every round; Step 2g re-measure after every round of fixes
+- [x] First screen at 1280x800 and 375x812 holds the whole landing graphic (571 and 807 px)
+- [x] Mobile floor: 44 px targets, 12 px minimum text, 16 px body, one breakpoint, hover gated, no overflow down to 320 px
+- [x] Website rule: `vercel.json` (outputDirectory site), `site/vercel.json`, `fluid.json`, root redirect, `.vercelignore`, absolute og:image on blockchain-explain.shadw.app; the build fails without them
+- [x] No grade in this repository; the run is recorded in the dada-changes ledger
+- [ ] S2 not fully met, and S3 not met (see Stop test)

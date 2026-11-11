@@ -88,7 +88,7 @@ PAGES = {
 
 GLOSSARY = [
     ("Block", "A batch of transactions, with a header that includes the previous block's hash."),
-    ("Hash", "A fixed-length fingerprint of some data, here SHA-256's 64 hex digits. It is collision-resistant: finding two inputs with the same hash is infeasible, though not impossible in principle."),
+    ("Hash", "A fixed-length fingerprint of some data, here SHA-256's 64 hexadecimal digits (0–9 and a–f). It is collision-resistant: finding two inputs with the same hash is infeasible, though not impossible in principle."),
     ("Merkle root", "One hash that commits to a whole list of transactions, so a short proof can show that one transaction is in the list."),
     ("Stake", "Tokens a validator locks up as a deposit. Its voting power grows with its stake, and it can lose some of the stake for breaking the rules."),
     ("Fork", "Two competing versions of a chain's history. Some chains wait for one to win; CometBFT never produces one."),
