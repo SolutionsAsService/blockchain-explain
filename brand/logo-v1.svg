@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="160" height="160">
+  <!-- Logo v1: the "Autheo, explained" mark from the 2026-10 site, kept as it was. -->
+  <rect width="40" height="40" fill="#0b0d0c"/>
+  <rect x="2" y="2" width="36" height="36" rx="3" fill="none" stroke="#e8ede9" stroke-opacity=".35"/>
+  <rect x="8" y="25" width="24" height="5" fill="#3cff6e"/>
+  <rect x="8" y="18" width="24" height="5" fill="#e8ede9" opacity=".55"/>
+  <rect x="8" y="11" width="24" height="5" fill="#e8ede9" opacity=".3"/>
+</svg>
