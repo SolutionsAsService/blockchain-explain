@@ -304,7 +304,7 @@ def build_basics(ex):
   <nav class="toc" aria-label="On this page"><a href="#hash">1 · Hashes</a><a href="#chain">2 · The chain</a><a href="#merkle">3 · Merkle trees</a></nav>
 
   <h2 id="hash">1 · A hash is a fingerprint</h2>
-  <p>SHA-256 turns any text into 64 hexadecimal digits. The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
+  <p>SHA-256 turns any text into 64 hexadecimal digits (the digits 0–9 and the letters a–f). The same input always gives the same hash, and the smallest change gives a completely different one. It is <em>collision-resistant</em>: nobody knows how to find two inputs with the same hash.</p>
   <div class="demo" data-demo="hash">
     <label>Type anything <input type="text" value="{e(K.HASH_INPUT)}" data-role="in"></label>
     <p class="hx big"><span>SHA-256</span><code data-role="out" data-expect="{ex["h1"]}">{ex["h1"]}</code></p>

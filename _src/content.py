@@ -25,9 +25,9 @@ PAGES = {
         "lede": "Many computers must agree on one history without trusting each other. CometBFT is the consensus engine Cosmos chains use for that.",
         "sections": [
             ("What consensus decides", """<p>Every validator (a computer that takes part in agreeing) sees transactions arrive in a different order. Consensus decides <em>one</em> order, groups it into a block, and decides when that block is <em>final</em>: settled for good.</p>
-<p>CometBFT (formerly Tendermint Core) works in rounds. One validator proposes a block. The others vote twice, first a <em>prevote</em> and then a <em>precommit</em>. A block is final as soon as validators holding more than two thirds of the voting power have precommitted it. There are no forks to wait out.</p>"""),
+<p>CometBFT (formerly Tendermint Core) works in rounds. One validator proposes a block. The others vote twice, first a <em>prevote</em> and then a <em>precommit</em>. A block is final as soon as validators holding more than two thirds of the voting power have precommitted it. So there is never a second, competing version of the chain (a <em>fork</em>) that you have to wait to see settled.</p>"""),
             ("How many can fail", """<p>The guarantee holds as long as validators with <strong>fewer than one third</strong> of the voting power are faulty: crashed, lying or working together against the rest. That is the limit for any protocol of this kind, called Byzantine fault tolerance.</p>
-<p>The table assumes every validator has equal voting power. On a real chain, power is proportional to stake, so the third is a third of the stake, not of the machines.</p>
+<p>The table assumes every validator has equal voting power. On a real chain, power is proportional to <em>stake</em>: the chain's tokens a validator has locked up as a deposit it can lose if it cheats. So the third is a third of the stake, not of the machines.</p>
 {BFT_TABLE}
 {BFT_DEMO}"""),
         ],
@@ -90,6 +90,8 @@ GLOSSARY = [
     ("Block", "A batch of transactions, with a header that includes the previous block's hash."),
     ("Hash", "A fixed-length fingerprint of some data, here SHA-256's 64 hex digits. It is collision-resistant: finding two inputs with the same hash is infeasible, though not impossible in principle."),
     ("Merkle root", "One hash that commits to a whole list of transactions, so a short proof can show that one transaction is in the list."),
+    ("Stake", "Tokens a validator locks up as a deposit. Its voting power grows with its stake, and it can lose some of the stake for breaking the rules."),
+    ("Fork", "Two competing versions of a chain's history. Some chains wait for one to win; CometBFT never produces one."),
     ("Validator", "A computer that takes part in consensus, with voting power in proportion to its stake."),
     ("Finality", "The point after which a block cannot be reversed. In CometBFT, the moment more than two thirds of the voting power precommit it."),
     ("Byzantine fault", "A failure where a participant may do anything, including lie. BFT protocols survive these from fewer than a third of the voting power."),
