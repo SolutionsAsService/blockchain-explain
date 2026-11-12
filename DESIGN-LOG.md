@@ -252,6 +252,9 @@ Step 2g re-measure after R7: 128 combinations, no overflow, no small text or tar
 | Greenberg: "the phone pill touches the Consensus slab; 'Chain / B' reads as an accident" | ADAPT: pill moved; "Chain B" on one line in a 72-unit box |
 | Greenberg: "the glossary letters make a tall sparse column" | ADAPT: a four-column grid of 44 px cells |
 
+## Move M7: One hue per level (owner, A-: "very good but falling into the same colour trap")
+The four levels were four steps of one green, so the stack read as one colour. Each level now has its own hue, still ordered light to dark: amber (keys & wallets), sky (layer 2), violet (smart contracts) and the logo's green (consensus); the bedrock stays stone. The logo keeps its greens (its own variables). Re-measured: no overflow, no small text or target, no figure label problem.
+
 ## Stop test
 For the redo (M6, R6 to R8), after the owner's B- on the R0–R5 site:
 - **S1** met: every finding is ADAPT, or DEFERRED with a reason (no figure on Chains, where the table is the figure, nor on Autheo and About; no pager on the two pages outside the reading order).
