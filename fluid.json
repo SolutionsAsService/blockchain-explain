@@ -1,8 +1,5 @@
 {
   "project": "blockchain-explain",
   "static_dir": "site",
-  "routes": [
-    {"src": "/", "dest": "/index.html"},
-    {"src": "/(.*)", "dest": "/$1"}
-  ]
+  "routes": [{ "pattern": "/", "target": "static" }]
 }

@@ -491,7 +491,8 @@ def check_deploy():
     except (OSError, ValueError) as err:
         return [f"deploy config: {err}"]
     ok = (root.get("outputDirectory") == "site" and root.get("fluid") and inner.get("outputDirectory") == "."
-          and fluid.get("static_dir") == "site" and SITE_URL.endswith(".shadw.app"))
+          and fluid.get("static_dir") == "site" and SITE_URL.endswith(".shadw.app")
+          and fluid.get("routes") == [{"pattern": "/", "target": "static"}])  # Shadw rejects any other route shape
     return [] if ok else ["deploy config: vercel.json, site/vercel.json and fluid.json must all serve site/"]
 
 
